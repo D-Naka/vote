@@ -41,7 +41,7 @@ app.get(/\/vote\/index\/search/, routes.index_search);
 app.get(/\/vote\/all\/detail\/data/, routes.detail_data);
 
 app.post(/\/vote\/register\/data/, routes.register_data);
-app.post('/vote/index/info', routes.index_info);
+//app.post('/vote/index/info', routes.index_info);
 
 
 // catch 404 and forward to error handler

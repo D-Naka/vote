@@ -116,7 +116,7 @@
 	method: POST
 	url: /vote/register/data
 	sendData:  {
-			       username: {用户名},
+			       proposal_name: {提案名称},
 				   mobile: {手机号码},
 				   descrption: {描述},
 				   gender: {性别},
