@@ -43,28 +43,38 @@ $(document).ready(function($) {
 		userStr: function(objs) {
 			var str = '';
 			for(var i=0; i<objs.length; i++) {
+				console.log(i);
 				str += '<li>'        
 	                + '<div class="head">'
 	                + '<a href="/vote/detail/' + objs[i].id + '">'
-	                + '<img src="' + objs[i].head_icon + '" alt="">'
+	                + '<img src="' + "/images/boy.png" + '" alt="">'
 	                + '</a>'
 	                + '</div>'
 	                + '<div class="up">'
 	                + '<div class="vote">'
-	                + '<span>' + objs[i].vote + '票</span>'
-	                + '</div>'
+	                + '<span>' + objs[i].voteNumYes + '票</span>'
+					+ '</div>'
 	                + '<div class="btn" id=' + objs[i].id + '>'
-	                + '投TA一票'
-	                + '</div>'
+	                + '赞成'
+					+ '</div>'
+					+ '<div class="vote">'
+	                + '<span>' + objs[i].voteNumNo + '票</span>'
+					+ '</div>'
+	                + '<div class="btn" id=' + objs[i].id + '>'
+	                + '反对'
+					+ '</div>'
+					
 	                + '</div>'
 	                + '<div class="descr">'
 	                + '<a href="/vote/detail/' + objs[i].id + '">'
 	                + '<div>'
-	                + '<span>' + objs[i].username + '</span>'
+	                + '<span>' + objs[i].proposal_name + '</span>'
 	                + '<span>|</span>'
-	                + '<span>编号#' + objs[i].id + '</span>'
+	                + '<span>编号#' + objs[i].proposal_index + '</span>'
 	                + '</div>'
-	                + '<p>' + objs[i].descrption + '</p>'
+					+ '<p>' +"提案链接："+objs[i].proposal_link + '</p>'
+					+ '<p>' +"钱包地址："+ objs[i].addr + '</p>'
+					+ '<p>' +"资助数量："+ objs[i].applyAmount +"                  发放周期："+ objs[i].sendPeriod + '</p>'				
 	                + '</a>'
 	                + '</div>'
 	               	+ '</li>';
@@ -83,7 +93,7 @@ $(document).ready(function($) {
 					+'<img src="' + obj.head_icon + '" alt="">'
 					+'</div>'
 					+'<div class="p_descr">'
-					+'<p>' + obj.username + '</p>'
+					+'<p>' + obj.proposal_name + '</p>'
 					+'<p>编号#' + obj.id + '</p>'
 					+'</div>'
 				    +'</div>'
@@ -94,7 +104,7 @@ $(document).ready(function($) {
 					+'</div>'
 				    +'</div>'
 				    +'<div class="motto">'
-					+'' + obj.descrption + ''
+					+'' + obj.proposal_link + ''
 					+'</div>';
 			return str;
 		},
@@ -117,7 +127,7 @@ $(document).ready(function($) {
 				    +'</div>'
 				    +'</div>'
 				    +'<div class="descr">'
-				    +'<h3>' + objs[i].username + '</h3>'
+				    +'<h3>' + objs[i].proposal_name + '</h3>'
 				    +'<p>编号#' + objs[i].id + '</p>'
 				    +'</div>'
 				    +'</li>'
@@ -150,50 +160,36 @@ $(document).ready(function($) {
 			});
 		},
 
-		/**
-		 * [登入操作]
-		 * @return {Boolean} [是否成功登入状态]
-		 */
-		signIn: function() {
-			$('.subbtn').click(function(event) {
-				var password = $('.mask .user_password').attr("pword");
-				var id = $('.mask .usernum').val();
-				if(!/^\d*$/.test(id)) {
-					alert('请输入数字的编号');
-					return false;
-				}
-				voteUser = {
-					password: password,
-					id: id
-				}
-				$.ajax({
-					url: '/vote/index/info',
-					type: 'POST',
-					data: voteUser,
-					success: function(data) {
-						data = JSON.parse(data);
-						if(data.errno === 0) {
-							voteUser.username = data.user.username;
-							voteFn.setStorage('voteUser', voteUser);
-							alert('登入成功');
-							window.location = url;
-						} else {
-							alert(data.msg);
-						}
-					}
-				})
-			});
-		},
 
 		/**
 		 * [投票事件绑定]
 		 */
 		userPoll: function() {
+			console.log("userPoll4");
+			$('.btn').off();
+			$('.btn').click(function(event) {
+				var _this = this;
+				var id = $(this).attr('id');
+				console.log("id"+id);
+				var voteUser = voteFn.getStorage('voteUser');
+				window.location.href="register?vote=0";
+				if (voteUser) {
+					voteFn.voteRequest(id, voteUser.id, this);
+				}else {
+					$('.mask').show();
+					voteFn.signIn();
+				}
+				
+			});
+		},
+
+		userOppose: function() {
 			$('.btn').off();
 			$('.btn').click(function(event) {
 				var _this = this;
 				var id = $(this).attr('id');
 				var voteUser = voteFn.getStorage('voteUser');
+				window.location.href="register?vote=0";
 				if (voteUser) {
 					voteFn.voteRequest(id, voteUser.id, this);
 				}else {
@@ -205,149 +201,52 @@ $(document).ready(function($) {
 		},
 
 		/**
-		 * [密码显示处理]
-		 * @param  {String} className [类名]
-		 */
-		passwordDiaplay: function(className) {
-			var passwordReg = /^\**([A-Za-z0-9])$/;
-			var passwordInputs = document.querySelectorAll('.' + className);
-			var currenLength = 0;
-			Array.prototype.forEach.call(passwordInputs, function(el, index) {
-				el.oninput = function(event) {
-					if(this.passwordStr === undefined) {
-						this.passwordStr = ''
-					}
-					if(this.starStr === undefined) {
-						this.starStr = ''
-					}
-					if(this.previousLength === undefined) {
-						this.previousLength = 0;
-					}
-					currenLength = this.value.split('').length;
-					if(currenLength < this.previousLength) {  
-						this.passwordStr = this.passwordStr.split('');
-						this.passwordStr.length--;
-						this.passwordStr = this.passwordStr.join('');
-						$(this).attr('pword', this.passwordStr);
-						this.starStr = '';
-						for(var i=0; i<currenLength; i++) {
-							this.starStr += '*';
-						}
-					}else if(currenLength === this.previousLength) {
-						console.log('0');
-					}else {
-						if($(this).val()) {
-							this.starStr += '*';
-							if(passwordReg.test($(this).val())) {
-								this.passwordStr += passwordReg.exec($(this).val())[1];
-								$(this).attr('pword', this.passwordStr);
-								$(this).val(this.starStr);
-							}else {
-								alert('密码只能是阿拉伯数字数字或者英文字母');
-							}				
-						}
-					}
-					this.previousLength = currenLength;
-				}
-			})
-		},
-
-		/**
-		 * [两次输入密码确认]
-		 */
-		passwordConfirm: function() {
-			$('.confirm_password').blur(function(event) {
-				if($(this).attr('pword') != $('.initial_password').attr('pword')) {
-					alert('两次输入的密码不一致！');
-				}
-			});
-		},
-
-		/**
-		 * [获取报名数据]
+		 * [获取提案数据]
 		 * @return {Boolean} [数据是否合法]
 		 */
+
 		getRegisterData: function() {
-			var username = $('.username').val();
-			var mobile = $('.mobile').val();
-			var descrption = $('.descrption').val();
-			var password = $('.initial_password').attr('pword');
-			var gender = "";
-			$('.gender input').each(function(index, el) {
-				if($(this).attr('select') === 'yes') {
-					gender = index == 0 ? 'boy' : 'girl'
-				}
-			});
-			if(!username) {
-				alert("请填写用户名称");
+			var proposal_name = $('.proposal_name').val();
+			var proposal_link = $('.proposal_link').val();
+			var addr 	  	= $('.addr').val();
+			var applyAmount    = $('.applyAmount').val();
+			var sendPeriod     = $('.sendPeriod').val();
+
+			if(!proposal_name) {
+				alert("请填写提案名称");
 				return false;
 			}
-			if(!/^\d{11}$/.test(mobile)) {
-				alert("请填写正确格式的手机号码");
+			if(!proposal_link) {
+				alert("请填写提案链接地址");
 				return false;
 			}
-			if(!descrption) {
-				alert("请填写自我描述内容");
+			if(!addr) {
+				alert("请填写接收资助钱包地址");
+				return false;
+			}
+			if(!applyAmount) {
+				alert("请填写资助数量");
+				return false;
+			}
+			if(!sendPeriod) {
+				alert("请填资助发放周期");
 				return false;
 			}
 			return {
-				username: username,
-				mobile: mobile,
-				descrption: descrption,
-				gender: gender,
-				password: password
+				proposal_name: proposal_name,
+				proposal_link: proposal_link,
+				addr: addr,
+				applyAmount: applyAmount,
+				sendPeriod: sendPeriod
 			}
 		},
 
-		/**
-		 * [登入遮罩层事件绑定]
-		 */
-		maskDeal: function() {
-			$('.mask').click(function(event) {
-				voteFn.passwordDiaplay('user_password');
-				if(event.target.className === 'mask') {
-					$('.mask').hide();
-				}
-			});
-		},
-
-		/**
-		 * [提交登入信息事件绑定]
-		 */
-		signInAction: function() {
-			$('.sign_in').click(function(event) {
-				$('.mask').show();
-				var voteUser = voteFn.getStorage('voteUser');
-				if(voteUser) {
-					$('.no_signed').hide();
-					$('.signed .username').html(voteUser.username);
-					$('.signed .dropout').click(function(event) {
-						voteFn.delteStorage('voteUser');
-						window.location = url;
-					});
-					return false;
-				}
-				voteFn.signIn();
-			});
-		}
 	};
 
 	if(indexReg.test(url)) {
 		/*主页*/
 		var voteUser = voteFn.getStorage('voteUser');
 
-		voteFn.maskDeal();
-		voteFn.signInAction();
-
-		if(!voteUser) {
-			/**/
-		}else {
-			$('.register').html('个人主页');
-			$('.register').click(function(event) {
-				var userDetailUrl = /(.*)index/.exec(url)[1] + 'detail/' + voteUser.id;
-				window.location = userDetailUrl;
-			});
-		}
 		$.ajax({
 			url: '/vote/index/data?limit=10&offset=0',
 			type: 'GET',
@@ -355,7 +254,10 @@ $(document).ready(function($) {
 				offset += limit;
 				data = JSON.parse(data);
 				$('.coming').append(voteFn.userStr(data.data.objects));
+				console.log("userPoll2");
 				voteFn.userPoll();
+				//$('.coming').append(voteFn.userStr(data.data.objects));
+				//voteFn.userOppose();
 			}
 		});
 		loadMore({       
@@ -366,12 +268,14 @@ $(document).ready(function($) {
 		            success: function(data) {
 		                data = JSON.parse(data);
 		                var total = data.data.total;
-		                var objs = data.data.objects;
+						var objs = data.data.objects;
+						console.log("offset"+offset);
 		                if (offset < total) {                    
 		                    setTimeout(function(){
 		                    	offset += limit;
 		                        $('.coming').append(voteFn.userStr(objs));
-		                        voteFn.userPoll();
+								voteFn.userPoll();
+								voteFn.userOppose();
 		                        load.reset();  
 		                    }, 1000)
 		                }else {
@@ -392,11 +296,8 @@ $(document).ready(function($) {
 		});
 
 	} else if(registerReg.test(url)) {
-		/*报名页*/
+		/*提交提案*/
 		var rebtnFlag = true;
-
-		voteFn.passwordDiaplay('password');
-		voteFn.passwordConfirm('password');
 
 		$('.gender input').click(function(event) {
 			$(this).attr('select', 'yes').parent('div').siblings('div').children('input').attr('select', 'no'); 
@@ -421,13 +322,11 @@ $(document).ready(function($) {
 						var id = data.id;
 						var reg = /(.*)register/;
 						var voteUser = {
-							username: registerData.username,
-							password: registerData.password,
-							id: id
+							proposal_name: registerData.proposal_name
 						}
 						voteFn.setStorage('voteUser', voteUser);
 						alert(data.msg);
-						window.location = reg.exec(url)[1] + 'index';
+						//window.location = reg.exec(url)[1] + 'index';
 					} else {
 						alert('报名失败');
 					}
@@ -439,9 +338,6 @@ $(document).ready(function($) {
 		/*搜索页*/
 		var searchContent = voteFn.getStorage('searchContent');
 
-		voteFn.maskDeal();
-		voteFn.signInAction();
-
 		$.ajax({
 			url: '/vote/index/search?content=' + searchContent,
 			type: 'GET',
@@ -449,7 +345,9 @@ $(document).ready(function($) {
 				data = JSON.parse(data);
 				if(data.data.length) {
 					$('.coming').html(voteFn.userStr(data.data));
+					console.log("userPoll3");
 					voteFn.userPoll();
+					voteFn.userOppose();
 				}else {
 					$('.nodata').show();
 				}

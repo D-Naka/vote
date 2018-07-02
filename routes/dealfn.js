@@ -117,11 +117,11 @@ let dealFn = {
 
 	cloneUser: (obj) => {
 		return {
-            "username": obj.username,
-            "mobile": obj.mobile,
-            "descrption": obj.descrption,
-            "gender": obj.gender,
-            "password": obj.password,
+            "proposal_name": obj.proposal_name,
+            "proposal_link": obj.proposal_link,
+            "addr": obj.addr,
+            "applyAmount": obj.applyAmount,
+            "sendPeriod": obj.sendPeriod,
             "head_icon": obj.head_icon,
             "id": obj.id,
             "vote": obj.vote,

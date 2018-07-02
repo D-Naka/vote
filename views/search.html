@@ -4,7 +4,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
 	<title>搜索结果页</title>
-	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <style>
+    .lists {margin-top: 5px;}
+  </style>
 </head>
 <body>
 	<div class="content">
@@ -38,8 +41,13 @@
         <div class="nodata">
             没有搜索的内容～
         </div>
+        <div style="margin: 0 auto;text-align: center;">
+          <a href="index">
+              <button class="rulebtn">返回首页</button>
+          </a>
+        </div>
 	</div>
-    <div class="mask">
+    <!-- <div class="mask">
       <div class="submit_info">
         <div class="sub_title">
           <span>请输入用户信息进行验证</span>
@@ -60,7 +68,7 @@
           </a>
         </div>
       </div>
-    </div>
+    </div> -->
 </body>
 <script src="/javascripts/zepto.min.js"></script>
 <script src="/javascripts/vote.js"></script>

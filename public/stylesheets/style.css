@@ -32,7 +32,7 @@ html {
 }
 
 body {
-    background-color: #eef9fe;
+    background:url(../images/bj.png) repeat;
     font-size: 1.2em;
     font-family: Helvetica, sans-serif;
 }
@@ -48,9 +48,8 @@ a {
 }
 
 .header {
-    height: 330px;
-    background-color: #75bef1;
-    border-bottom: 2px solid #44a1e2;
+    height: 50%;
+    background:url(../images/bj.png) repeat;
     padding: 1px;
     position: relative;
 }
@@ -68,9 +67,23 @@ a {
 }
 
 .rule span, .sign_in span {
-    border-bottom: 1px solid #004779;
+    border-bottom: 1px solid #ffffff;
     font-size: 16px;
-    color: #004779;
+    color: #ffffff;
+}
+
+.rulebtn{
+    height: 36px;
+	line-height: 0.36px;
+	width: 120px;
+	background: #008eea;
+	border-radius: 6px;
+	border: 0;
+	margin: 0.2rem auto 0.5rem;
+	text-align: center;
+	color: #FFFFFF;
+	font-size: 16px;
+	cursor: pointer;
 }
 
 .title {
@@ -79,13 +92,13 @@ a {
     font-weight: bolder;
     color: #FFE027;
     text-shadow: 8px 4px 3px #fff;
-    margin: 25px auto -15px auto;
+    margin: 50px auto 0;
     width: 250px;
 }
 
 .title img {
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: auto;
 }
 
 .register {
@@ -95,15 +108,15 @@ a {
     text-align: center;
     font-size: 20px;
     color: #fff;
-    margin: 12px auto 15px auto;
-    background-color: #ff8b62;
+    margin: 10% auto 2%;
+    background-color: #008eea;
     border-radius: 50px;
     box-shadow: 0 4px rgba(49, 49, 49, 0.13);
 }
 
 .search {
-    width: 80%;
-    height: 35px;
+    width: 30%;
+    height: 36px;
     margin: 10px auto;
     border: 1px solid #44a1e2;
     border-radius: 40px;
@@ -114,7 +127,7 @@ a {
 .search input {
     border: 0;
     height: 100%;
-    width: 80%;
+    width: 75%;
     font-size: 16px;
     color: #333;
     text-indent: 15px;
@@ -124,7 +137,7 @@ a {
 
 .search span {
     display: inline-block;
-    width: 20%;
+    width: 25%;
     height: 100%;
     line-height: 35px;
     font-size: 18px;
@@ -136,11 +149,13 @@ a {
 
 .lists {
     margin-top: 5px;
+    width: 50%;
+    margin: 100px auto 0;
 }
 
 .lists li {
     list-style: none;
-    height: 90px;
+    height: 150px;
     padding: 17px 10px;
     box-sizing: border-box;
     border-bottom: 1px solid #e3e3e3;
@@ -184,7 +199,7 @@ a {
 
 .descr {
     width: 100%;
-    height: 56px;
+    height: 96px;
     color: #999;
     margin-left: 66px;
     padding-right: 137px;
@@ -226,9 +241,9 @@ a {
     font-size: 14px;
     margin: 9px 0 2px 0;
     height: 18px;
-    overflow: hidden;
+    /* overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; 
+    white-space: nowrap;  */
     color: #999;
 }
 
@@ -612,13 +627,15 @@ a {
 
 .rulec {
     padding: 18px 20px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .rulec div {
     font-size: 16px;
     text-align: center;
     margin: 20px;
-    color: #333;
+    color: #ffffff;
 }
 
 .bounceIn {
@@ -746,7 +763,7 @@ a {
     margin: 20px;
     text-align: center;
     font-size: 18px;
-    color: #999;
+    color: #ccc;
     display: none;
 }
 
@@ -776,3 +793,15 @@ a {
     box-shadow: 0 2px rgba(127, 212, 245, 0.37);
 }
 
+@media screen and (max-width:760px) {
+    
+    .register{
+        margin: 30% auto;
+    }
+    .search {
+        width: 80%;
+    }
+    .lists {
+        width: 100%;
+    }
+}

@@ -1,58 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
-	<title>投票报名</title>
-	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-</head>
-<body>
-	<div class="content">
-		<div class="register_header">
-			<div class="title tada">
-				<img src="/images/title.png" alt="">
-			</div>	
-		</div>
-		<div class="register_item">
-			<div class="reitems">
-				<p class="refont">用户名:</p>
-				<input type="text" class="reinput username" placeholder="请填写用户名">
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta name="renderer" content="webkit">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+
+		<title>以太零投票-ETZ_Vote</title>
+
+		<!--  icon start   -->
+
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+		<!--  icon end  -->
+
+		<!-- Custom styles for our template -->
+
+		<link rel="stylesheet " href=" /stylesheets/main.min.css ">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+	    <script src=" js/html5shiv.js "></script>
+	    <script src=" js/respond.min.js "></script>
+	    <![endif]-->
+	    <style>
+	    	html{font-size: 100px}
+	    </style>
+
+
+	</head>
+
+	<body>
+		<div class="content">
+			<div class="menu">
+			<div class="header-fix">
+				<p class="logo">
+					<a href="index"><img src="/images/logo_min.png" /> </a>
+				</p>
 			</div>
-			<div class="reitems">
-				<p class="refont">密码:</p>
-				<input type="text" class="reinput password initial_password" placeholder="数字或字母不超过10个长度" maxlength="10">
+			<a href="javascript:;" class="mobnav-btn"><span></span><span></span><span></span></a>
+
+			<!--<div class="dropdown ">
+				<a href="# " class="dropdown-toggle " data-toggle="dropdown ">语言<b class="caret "></b></a>
+				<ul class="dropdown-menu ">
+					<li>
+						<a onclick="en()">English</a>
+					</li>
+					<li class="active">
+						<a onclick="zh()">中文</a>
+					</li>
+				</ul>
+			</div>-->
 			</div>
-			<div class="reitems">
-				<p class="refont">确认密码:</p>
-				<input type="text" class="reinput password confirm_password" placeholder="数字或字母不超过10个长度" maxlength="10">
+			
+			
+			<div class="con_left header-nav" style="display: block;">
+				<img src="/images/logo.png" class="logo_img" />
+				<ul>
+					<img src="/images/line.png" class="line" />
+					<a href="#">
+					<li class="active">
+						<p id="create" onclick="create()">创建提案</p>
+					</li>
+					</a>
+					<img src="/images/line.png" class="line" />
+					<a href="#">
+					<li>
+						<p id="command" onclick="command()">钱包命令</p>
+					</li>
+					</a>
+					<img src="/images/line.png" class="line" />
+					<!-- <a href="#">
+					<li>
+						<p id="info" onclick="info()">投票详情</p>
+					</li>
+					</a>
+					<img src="/images/line.png" class="line" />
+					<a href="#">
+					<li>
+						<p id="list" onclick="list()">提案列表</p>
+					</li>
+					</a>
+					<img src="/images/line.png"  class="line" /> -->
+				</ul>
 			</div>
-			<div class="reitems">
-				<p class="refont">手机号码:</p>
-				<input type="text" class="reinput mobile" placeholder="请填写正确格式的手机号码">
+			<div class="con_right" id="create_con">
+				<div class="title">
+					<h4>创建提案</h4>
+				</div>
+				<div class="create_con">
+					<p class="create_con_info">在提案创建页面，输入提案详情，点击“创建提案”按钮后，将生成data数据，然后复制data到任意支持以太零的钱包，都可以发起交易创建一个提案，完成调用运行智能合约，这一过程需要支付50个ETZ。</p>
+					<li>
+						<p>提案名称</p>
+						<input type="text" class="reinput proposal_name"/>
+					</li>
+					<li>
+						<p>提案链接地址</p>
+						<input type="text"  class="reinput proposal_link"/>
+					</li>
+					<li>
+						<p>支付地址</p>
+						<input type="text"  class="reinput addr" maxlength="64"/>
+					</li>
+					<li style="overflow: hidden;">
+						<div>
+							<p>资助数量</p>
+							<input type="text"  class="reinput applyAmount" maxlength="8" />
+						</div>
+						<div>
+							<p>资助发放方式</p>
+							<input type="text"  class="reinput sendPeriod"  maxlength="1" />
+						</div>
+					</li>
+					<li class="create_btn">
+						<button class="rebtn" onclick="rebtn">创建提案</button>
+					</li>
+				</div>
+				
 			</div>
-			<div class="reitems">
-				<p class="refont">自我描述:</p>
-				<input type="text" class="reinput descrption" placeholder="请填写自我描述（20字以内）" maxlength="20">
-			</div>
-			<div class="reitems">
-				<p class="refont">性别:</p>
-				<div class="gender">
-					<div>
-						<input type="radio" name="name" checked select="yes"/><span>男</span>
-					</div>
-				  	<div>
-				  		<input type="radio" name="name" select="no"/><span>女</span>
-				  	</div>
+			<div class="con_right" id="command_con" style="display: none;">
+				<div class="title">
+					<h4>钱包命令</h4>
+				</div>
+				<div class="command_con">
+					<h4>准备提案命令：</h4>
+					<p>将以下内容粘贴到钱包控制台中，以50ETZ的成本生成提案。</p>
+					
+					<textarea id="txta">test</textarea>     
+					<script type="text/javascript">     
+						var txt;      
+						txt = document.getElementById('txta').value; //获取textarea的值    
+						document.write (txt);     
+						document.getElementById('txta').value = data_command;  //设置textarea的值            
+					</script>
+
+
+					<a href="index"><button>返回首页</button></a>
+					<!-- <h4>交易ID：</h4>
+					<p>粘贴生成的事务标识以移至下一步。</p>
+					<textarea class="comand_textarea2" onpaste="paste()"></textarea> -->
 				</div>
 			</div>
-			<div class="rebtn">
-				提交
+			<div class="con_right" id="info_con" style="display: none;">
+				<div class="title">
+					<h4>提案</h4>
+				</div>
+				<div class="info_con">
+					<ul>
+						<li>
+							<div>标题</div>
+							<div>标题</div>
+						</li>
+						<li>
+							<div>提案者</div>
+							<div>提案者</div>
+						</li>
+						<li>
+							<div>支付地址</div>
+							<div>支付地址</div>
+						</li>
+						<li>
+							<div>资助金额</div>
+							<div>资助金额</div>
+						</li>
+						<li>
+							<div>资助发放方式</div>
+							<div>资助发放方式</div>
+						</li>
+						<li>
+							<div>票数</div>
+							<div>票数</div>
+						</li>
+						<li>
+							<div>你的意见</div>
+							<div>你的意见</div>
+						</li>
+					</ul>
+					<p>每个投票周期第一个区块时的活跃主节点获得该周期内的投票权。</p>
+					<p>对于每个提案，上述选民都具有一票投票权，赞成反对或弃权。</p>
+					<li class="info_btn">
+						<button>同意</button>
+						<!-- <button>弃权</button> -->
+						<button>反对</button>
+					</li>
+				</div>
+			</div>
+			<div class="con_right" id="list_con" style="display: none;">
+				<div class="title">
+					<h4>提案列表</h4>
+					<div class="lists">
+							<div class="coming-box">
+									<ul class="coming">
+									</ul>
+							</div>
+					</div>
+				</div>
 			</div>
 		</div>
+	
+<!--<div class="bottom">
+	<p>Copyright © 2018 EtherZero. All Rights Reserved.</p>
+</div>-->
 		
-	</div>
-</body>
+		<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+		<script type="text/javascript" src="/javascripts/jquery.min.js "></script>
+		<script type="text/javascript" src="/javascripts/layout.js"></script>
+		<script type="text/javascript">			
+           window.onload = window.onresize = function() {
+           var w = window.innerWidth;
+	       w = (w > 640) ? 640 : w;
+	       w = (w < 320) ? 320 : w;
+		   document.documentElement.style.fontSize = (w / 640) * 100 + "px";
+		   
+		   var vote = GetQueryString('vote');	
+		   if(vote == '0'){	
+			   $('#create_con').hide();
+			   $('#command_con').show();
+			   $('.con_left li').removeClass('active');
+			   $('#create').parent('li').addClass('active');
+			}
+	                   
+	       }          
+		</script>
+
+	</body>
 <script src="/javascripts/prefixfree.min.js"></script>
 <script src="/javascripts/zepto.min.js"></script>
 <script src="/javascripts/vote.js"></script>
+<script src="/javascripts/rote_app.js"></script>
 </html>
