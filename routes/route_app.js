@@ -4,7 +4,7 @@ let fs = require('fs');
 let url = require('url');
 let iconv = require('iconv-lite');   
 let dealFn = require('./dealfn.js');
-
+let web3;
 let database = null;
 let maxVoteTimes = 5;
 
