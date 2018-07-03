@@ -24,20 +24,6 @@ data =vote_contract.methods.proposalSubmit("x1" ,"p1", 2, 1, "0x9194a2F58EE5673B
 //data =vote_contract.methods.vote(1,1).encodeABI();
 console.log(data)
 
-/* web3.eth.accounts.signTransaction({
-    to:  '0xc1e47b18030d373c6c21106a63c5621972621461',
-    data: data,
-    gas: 1500000,
-  },'0x9d686f8e28f12b2e95b1405819b7a61fc687c34f201d9d4e0ede47b3c4569ac9',function(err,result){
-    console.log("rawTransaction:"+result.rawTransaction)
-    console.log("web3.eth.accounts:"+web3.eth.accounts[0])
-    web3.eth.sendSignedTransaction(result.rawTransaction,function(errs,results){
-     console.log("errs:",errs);
-     console.log("result:",results)
-   });
- });*/
-
-
 dealFn.readFileData('database.json').then((data) => {
     database = data;
     database.data.total = database.data.objects.length;
