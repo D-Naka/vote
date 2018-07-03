@@ -35,7 +35,7 @@
 	    <style>
 	    	html{font-size: 100px}
 	    </style>
-			<script type="text/javascript" src="/javascripts/web3.min.js"></script>
+		<script type="text/javascript" src="/javascripts/web3.min.js"></script>	
 
 
 	</head>
@@ -123,13 +123,8 @@
 						</div>
 					</li>
 					<li class="create_btn">
-<<<<<<< HEAD
-						<!-- onclick="rebtn" -->
-						<button class="rebtn" >创建提案</button>
-=======
 						<button class="rebtn" >创建提案</button>
 						<a href="index"><button>返回首页</button></a>
->>>>>>> a0a4e78f21cef3e9a05583fb43efcdf3bed886fd
 					</li>
 					
 				</div>
@@ -142,16 +137,6 @@
 				<div class="command_con">
 					<h4>准备提案命令：</h4>
 					<p>将以下内容粘贴到钱包控制台中，以50ETZ的成本生成提案。</p>
-<<<<<<< HEAD
-
-					<textarea id="txta">test</textarea>
-					<!-- <script type="text/javascript">
-						var txt;
-						txt = document.getElementById('txta').value; //获取textarea的值
-						document.write (txt);
-						document.getElementById('txta').value = data_command;  //设置textarea的值
-					</script> -->
-=======
 					
 					<textarea id="txta">test</textarea>     
 					<script type="text/javascript">     
@@ -160,7 +145,6 @@
 						document.write (txt);     
 						document.getElementById('txta').value = 22222223;  //设置textarea的值            
 					</script>
->>>>>>> a0a4e78f21cef3e9a05583fb43efcdf3bed886fd
 
 
 					<a href="index"><button>返回首页</button></a>
@@ -237,9 +221,9 @@
 		window.addEventListener('load', function() {
 		console.log('33333');
 			// Checking if Web3 has been injected by the browser (Mist/MetaMask)
-			if (typeof web3 !== 'undefined') {
+			if (typeof web3_etz !== 'undefined') {
 				// Use Mist/MetaMask's provider
-				web3 = new Web3(Web3.givenProvider)
+				web3 = new Web3(web3_etz.currentProvider)
 				web3.eth.getCoinbase(console.log)
 				// web3js.eth.signTransaction({from: web3js.eth.getCoinbase(), to: '0xc1e47b18030d373c6c21106a63c5621972621461',gas: 2000000, value: 10000000000000} , console.log)
 			} else {
