@@ -99,7 +99,7 @@
 					<h4>创建提案</h4>
 				</div>
 				<div class="create_con">
-					<p class="create_con_info">在提案创建页面，输入提案详情，点击“创建提案”按钮后，将生成data数据，然后复制data到任意支持以太零的钱包，都可以发起交易创建一个提案，完成调用运行智能合约，这一过程需要支付50个ETZ。</p>
+					<p class="create_con_info">在提案创建页面，输入提案详情，点击“创建提案”按钮后，将生成data数据，然后调用MetaMask可以发起交易创建一个提案，完成调用运行智能合约，这一过程需要支付50个ETZ。</p>
 					<li>
 						<p>提案名称</p>
 						<input type="text" class="reinput proposal_name"/>
@@ -123,9 +123,15 @@
 						</div>
 					</li>
 					<li class="create_btn">
+<<<<<<< HEAD
 						<!-- onclick="rebtn" -->
 						<button class="rebtn" >创建提案</button>
+=======
+						<button class="rebtn" >创建提案</button>
+						<a href="index"><button>返回首页</button></a>
+>>>>>>> a0a4e78f21cef3e9a05583fb43efcdf3bed886fd
 					</li>
+					
 				</div>
 
 			</div>
@@ -136,6 +142,7 @@
 				<div class="command_con">
 					<h4>准备提案命令：</h4>
 					<p>将以下内容粘贴到钱包控制台中，以50ETZ的成本生成提案。</p>
+<<<<<<< HEAD
 
 					<textarea id="txta">test</textarea>
 					<!-- <script type="text/javascript">
@@ -144,6 +151,16 @@
 						document.write (txt);
 						document.getElementById('txta').value = data_command;  //设置textarea的值
 					</script> -->
+=======
+					
+					<textarea id="txta">test</textarea>     
+					<script type="text/javascript">     
+						var txt;      
+						txt = document.getElementById('txta').value; //获取textarea的值    
+						document.write (txt);     
+						document.getElementById('txta').value = 22222223;  //设置textarea的值            
+					</script>
+>>>>>>> a0a4e78f21cef3e9a05583fb43efcdf3bed886fd
 
 
 					<a href="index"><button>返回首页</button></a>
@@ -259,5 +276,22 @@
 <script src="/javascripts/prefixfree.min.js"></script>
 <script src="/javascripts/zepto.min.js"></script>
 <script src="/javascripts/vote.js"></script>
+<<<<<<< HEAD
 <!-- <script src="/javascripts/rote_app.js"></script> -->
+=======
+<!--script src="/javascripts/rote_app.js"></script-->
+<script type ="text/javascript">
+
+</script>
+<!--script type="text/javascript">
+
+var abi=[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"proposals","outputs":[{"name":"name","type":"string"},{"name":"link","type":"string"},{"name":"applyAmount","type":"uint256"},{"name":"sendPeriod","type":"uint256"},{"name":"voteNumYes","type":"uint256"},{"name":"voteNumNo","type":"uint256"},{"name":"voteNumAct","type":"uint256"},{"name":"adopted","type":"bool"},{"name":"passed","type":"bool"},{"name":"addr","type":"address"},{"name":"payedTimes","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"MasterAddr","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"VoteIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"setOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"preSend","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"proposalAddr","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"blockOrigin","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"PreVoter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getContractBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sortedProposals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"pname","type":"string"},{"name":"plink","type":"string"},{"name":"papplyAmount","type":"uint256"},{"name":"psendPeriod","type":"uint256"},{"name":"paddr","type":"address"}],"name":"proposalSubmit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"blockStart","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"sortProposal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"cycleIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"voters","outputs":[{"name":"voteType","type":"uint256"},{"name":"proposalIndex","type":"uint256"},{"name":"votedIndex","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"votePeriod","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"index","type":"uint256"},{"name":"voteType","type":"uint256"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"startRefresh","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"start","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"sendApply","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"etzPerProposal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"masterNodeNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getProposalsNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"name","type":"string"},{"indexed":true,"name":"link","type":"string"}],"name":"Submit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"}],"name":"Voteevent","type":"event"}];
+var mycontract = web3.eth.contract(abi).at('0xc1e47b18030d373c6c21106a63c5621972621461');
+
+	$('.rebtn').click(function(event) {
+		mycontract.vote.sendTransaction(1,1,function(){	})
+		 	return;			
+		});
+</script-->
+>>>>>>> a0a4e78f21cef3e9a05583fb43efcdf3bed886fd
 </html>

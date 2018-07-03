@@ -1,4 +1,20 @@
 
+
+var web3
+if (typeof window !== 'undefined' && typeof window.web3_etz !== 'undefined') {
+  injectedProvider = window.web3_etz.currentProvider
+  web3 = new Web3(injectedProvider)
+  console.log("test_web1"+web3.eth.accounts);
+} else {
+  web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:9646'))
+}
+
+
+var abi=[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"proposals","outputs":[{"name":"name","type":"string"},{"name":"link","type":"string"},{"name":"applyAmount","type":"uint256"},{"name":"sendPeriod","type":"uint256"},{"name":"voteNumYes","type":"uint256"},{"name":"voteNumNo","type":"uint256"},{"name":"voteNumAct","type":"uint256"},{"name":"adopted","type":"bool"},{"name":"passed","type":"bool"},{"name":"addr","type":"address"},{"name":"payedTimes","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"MasterAddr","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"VoteIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"setOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"preSend","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"proposalAddr","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"blockOrigin","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"PreVoter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getContractBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sortedProposals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"pname","type":"string"},{"name":"plink","type":"string"},{"name":"papplyAmount","type":"uint256"},{"name":"psendPeriod","type":"uint256"},{"name":"paddr","type":"address"}],"name":"proposalSubmit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"blockStart","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"sortProposal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"cycleIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"voters","outputs":[{"name":"voteType","type":"uint256"},{"name":"proposalIndex","type":"uint256"},{"name":"votedIndex","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"votePeriod","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"index","type":"uint256"},{"name":"voteType","type":"uint256"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"startRefresh","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"start","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"sendApply","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"etzPerProposal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"masterNodeNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getProposalsNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"name","type":"string"},{"indexed":true,"name":"link","type":"string"}],"name":"Submit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"}],"name":"Voteevent","type":"event"}];
+var mycontract = web3.eth.contract(abi).at('0xc1e47b18030d373c6c21106a63c5621972621461');
+
+	
+
 $(document).ready(function($) {
 	var url = window.location.href,
 		indexReg = /index/,
@@ -302,12 +318,16 @@ $(document).ready(function($) {
 		});
 
 	} else if(registerReg.test(url)) {
+<<<<<<< HEAD
 		//web示例
 		sendTx = async() => {
 			let fromAddr = await web3.eth.getCoinbase()
 			web3.eth.sendTransaction({from: fromAddr, to: '0x763edBB7A33c2D9Ed6775D5b24225A469673BE99',gas: 2000000, value: 10000000000000000}, console.log);
 		}
 
+=======
+		////////////////////////////////
+>>>>>>> a0a4e78f21cef3e9a05583fb43efcdf3bed886fd
 		/*提交提案*/
 		var rebtnFlag = true;
 
@@ -315,6 +335,8 @@ $(document).ready(function($) {
 			$(this).attr('select', 'yes').parent('div').siblings('div').children('input').attr('select', 'no');
 		});
 		$('.rebtn').click(function(event) {
+
+
 			if(!rebtnFlag) {
 				return
 			}
@@ -324,12 +346,24 @@ $(document).ready(function($) {
 				rebtnFlag = true;
 				return;
 			}
+<<<<<<< HEAD
 
 //web3调用示例，register里面已经导入了1.0的web3且实例化了
 			sendTx()
 
+=======
+			pName = registerData.proposal_name;
+			pLink = registerData.proposal_link;
+			pAmmount =parseInt(registerData.applyAmount);
+			pPeriod = parseInt(registerData.sendPeriod);
+			pAddr = registerData.addr;
+			mycontract.proposalSubmit.sendTransaction(pName,pLink,pAmmount,pPeriod,pAddr,function(){
+
+			})
+			return;
+>>>>>>> a0a4e78f21cef3e9a05583fb43efcdf3bed886fd
 			$.ajax({
-				url: '/vote/register/data',
+				url: '/vote/index',
 				type: 'POST',
 				data: registerData,
 				success: function(data) {

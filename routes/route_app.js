@@ -5,11 +5,14 @@ let fs = require('fs');
 let url = require('url');
 let iconv = require('iconv-lite');
 let dealFn = require('./dealfn.js');
-
 let database = null;
 let maxVoteTimes = 5;
 let data_test=0;
+var {providerURL, contractAddr, controllerAddr, abi } = require('../eth/web3')
+var {web3,vote_contract}=require('../eth/web3')
+var Web3 = require('web3');
 
+<<<<<<< HEAD
 //引入web3模块
 var {web3, vote_contract} = require('./../eth/web3');
 // let web3 = new Web3();
@@ -29,25 +32,16 @@ var abi = [{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"prop
 
 var mycontract = vote_contract;
 mycontract.methods.votePeriod().call(null,function(error,result){
+=======
+vote_contract.methods.votePeriod().call(null,function(error,result){
+>>>>>>> a0a4e78f21cef3e9a05583fb43efcdf3bed886fd
         console.log("votePeriod "+result);
 });
-
-
-mycontract.events.Voteevent({
-    fromBlock: 0,
-    toBlock:'latest'
-}, function(error, event){
-     console.log("error"+error);
-     console.log("result:\n"+JSON.stringify(event)); })
-.on('data', function(event){
-    console.log(event); // same results as the optional callback above
-});
-
-
-mycontract.methods.getProposalsNum().call().then(function(result){
+vote_contract.methods.getProposalsNum().call().then(function(result){
     console.log(result)
     data_test = result;
 });
+<<<<<<< HEAD
 
 
  var data =mycontract.methods.PreVoter().encodeABI();
@@ -77,6 +71,12 @@ mycontract.methods.getProposalsNum().call().then(function(result){
    // });
  });
 
+=======
+var data =vote_contract.methods.PreVoter().encodeABI();
+data =vote_contract.methods.proposalSubmit("x1" ,"p1", 2, 1, "0x9194a2F58EE5673B578c5577351dcD3bAE062B2d").encodeABI();
+//data =vote_contract.methods.vote(1,1).encodeABI();
+console.log(data)
+>>>>>>> a0a4e78f21cef3e9a05583fb43efcdf3bed886fd
 
 dealFn.readFileData('database.json').then((data) => {
     database = data;
@@ -128,14 +128,14 @@ exports.index_data = async(req, res) => {
 
 
     //读取提案信息
-    var result = await mycontract.methods.getProposalsNum().call();
+    var result = await vote_contract.methods.getProposalsNum().call();
     plength = Number(result);
     let total = database.data.total;
 
     if(plength > database.data.total)
     {
         var pIndex = total;
-        var proposal = await mycontract.methods.proposals(pIndex).call();
+        var proposal = await vote_contract.methods.proposals(pIndex).call();
         let registerData = proposal;
         registerData.id = ++total;
         database.data.total++;
@@ -205,9 +205,15 @@ exports.register_data = (req, res) => {
     let applyAmount = parseInt(registerData.applyAmount);
     let sendPeriod = parseInt(registerData.sendPeriod);
     let addr = registerData.addr;
+<<<<<<< HEAD
 
     data_command =mycontract.methods.proposalSubmit(proposal_name ,proposal_link, applyAmount,sendPeriod,addr).encodeABI();
 
+=======
+            
+    data_command =vote_contract.methods.proposalSubmit(proposal_name ,proposal_link, applyAmount,sendPeriod,addr).encodeABI();  
+ 
+>>>>>>> a0a4e78f21cef3e9a05583fb43efcdf3bed886fd
     /*
     $.ajax({
         url: '/vote/register?vote=0',
