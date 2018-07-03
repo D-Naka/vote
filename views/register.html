@@ -35,6 +35,7 @@
 	    <style>
 	    	html{font-size: 100px}
 	    </style>
+			<script type="text/javascript" src="/javascripts/web3.min.js"></script>
 
 
 	</head>
@@ -61,8 +62,8 @@
 				</ul>
 			</div>-->
 			</div>
-			
-			
+
+
 			<div class="con_left header-nav" style="display: block;">
 				<img src="/images/logo.png" class="logo_img" />
 				<ul>
@@ -122,10 +123,11 @@
 						</div>
 					</li>
 					<li class="create_btn">
-						<button class="rebtn" onclick="rebtn">创建提案</button>
+						<!-- onclick="rebtn" -->
+						<button class="rebtn" >创建提案</button>
 					</li>
 				</div>
-				
+
 			</div>
 			<div class="con_right" id="command_con" style="display: none;">
 				<div class="title">
@@ -134,14 +136,14 @@
 				<div class="command_con">
 					<h4>准备提案命令：</h4>
 					<p>将以下内容粘贴到钱包控制台中，以50ETZ的成本生成提案。</p>
-					
-					<textarea id="txta">test</textarea>     
-					<script type="text/javascript">     
-						var txt;      
-						txt = document.getElementById('txta').value; //获取textarea的值    
-						document.write (txt);     
-						document.getElementById('txta').value = data_command;  //设置textarea的值            
-					</script>
+
+					<textarea id="txta">test</textarea>
+					<!-- <script type="text/javascript">
+						var txt;
+						txt = document.getElementById('txta').value; //获取textarea的值
+						document.write (txt);
+						document.getElementById('txta').value = data_command;  //设置textarea的值
+					</script> -->
 
 
 					<a href="index"><button>返回首页</button></a>
@@ -206,35 +208,56 @@
 				</div>
 			</div>
 		</div>
-	
+
 <!--<div class="bottom">
 	<p>Copyright © 2018 EtherZero. All Rights Reserved.</p>
 </div>-->
-		
+
 		<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 		<script type="text/javascript" src="/javascripts/jquery.min.js "></script>
 		<script type="text/javascript" src="/javascripts/layout.js"></script>
-		<script type="text/javascript">			
+		<script type="text/javascript">
+		window.addEventListener('load', function() {
+		console.log('33333');
+			// Checking if Web3 has been injected by the browser (Mist/MetaMask)
+			if (typeof web3 !== 'undefined') {
+				// Use Mist/MetaMask's provider
+				web3 = new Web3(Web3.givenProvider)
+				web3.eth.getCoinbase(console.log)
+				// web3js.eth.signTransaction({from: web3js.eth.getCoinbase(), to: '0xc1e47b18030d373c6c21106a63c5621972621461',gas: 2000000, value: 10000000000000} , console.log)
+			} else {
+				console.log('No web3? You should consider trying MetaMask!')
+				// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+				web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+			}
+
+			// Now you can start your app & access web3 freely:
+
+		})
+		</script>
+		<script type="text/javascript">
+
+
            window.onload = window.onresize = function() {
            var w = window.innerWidth;
 	       w = (w > 640) ? 640 : w;
 	       w = (w < 320) ? 320 : w;
 		   document.documentElement.style.fontSize = (w / 640) * 100 + "px";
-		   
-		   var vote = GetQueryString('vote');	
-		   if(vote == '0'){	
+		   var vote = GetQueryString('vote');
+		   if(vote == '0'){
 			   $('#create_con').hide();
 			   $('#command_con').show();
 			   $('.con_left li').removeClass('active');
 			   $('#create').parent('li').addClass('active');
 			}
-	                   
-	       }          
+
+	       }
 		</script>
 
 	</body>
+
 <script src="/javascripts/prefixfree.min.js"></script>
 <script src="/javascripts/zepto.min.js"></script>
 <script src="/javascripts/vote.js"></script>
-<script src="/javascripts/rote_app.js"></script>
+<!-- <script src="/javascripts/rote_app.js"></script> -->
 </html>

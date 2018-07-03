@@ -8,6 +8,12 @@ $(document).ready(function($) {
 		limit = 10,
 		offset = 0;
 
+//web3使用示例，要先导入<script type="text/javascript" src="/javascripts/web3.min.js"></script>
+		// var web3 = new Web3(web3.currentProvider);
+		// console.log(web3);
+		// web3.eth.signTransaction({from: web3.eth.getCoinbase(), to: '0xc1e47b18030d373c6c21106a63c5621972621461',gas: 2000000, value: 10000000000000} , console.log)
+
+
 	var voteFn = {
 		/**
 		 * [将数据存储在本地]
@@ -44,7 +50,7 @@ $(document).ready(function($) {
 			var str = '';
 			for(var i=0; i<objs.length; i++) {
 				console.log(i);
-				str += '<li>'        
+				str += '<li>'
 	                + '<div class="head">'
 	                + '<a href="/vote/detail/' + objs[i].id + '">'
 	                + '<img src="' + "/images/boy.png" + '" alt="">'
@@ -63,7 +69,7 @@ $(document).ready(function($) {
 	                + '<div class="btn" id=' + objs[i].id + '>'
 	                + '反对'
 					+ '</div>'
-					
+
 	                + '</div>'
 	                + '<div class="descr">'
 	                + '<a href="/vote/detail/' + objs[i].id + '">'
@@ -74,7 +80,7 @@ $(document).ready(function($) {
 	                + '</div>'
 					+ '<p>' +"提案链接："+objs[i].proposal_link + '</p>'
 					+ '<p>' +"钱包地址："+ objs[i].addr + '</p>'
-					+ '<p>' +"资助数量："+ objs[i].applyAmount +"                  发放周期："+ objs[i].sendPeriod + '</p>'				
+					+ '<p>' +"资助数量："+ objs[i].applyAmount +"                  发放周期："+ objs[i].sendPeriod + '</p>'
 	                + '</a>'
 	                + '</div>'
 	               	+ '</li>';
@@ -179,7 +185,7 @@ $(document).ready(function($) {
 					$('.mask').show();
 					voteFn.signIn();
 				}
-				
+
 			});
 		},
 
@@ -196,7 +202,7 @@ $(document).ready(function($) {
 					$('.mask').show();
 					voteFn.signIn();
 				}
-				
+
 			});
 		},
 
@@ -260,7 +266,7 @@ $(document).ready(function($) {
 				//voteFn.userOppose();
 			}
 		});
-		loadMore({       
+		loadMore({
 			callback: function(load){
 		        $.ajax({
 		            url: '/vote/index/data?limit=' + limit + '&offset=' + offset,
@@ -270,18 +276,18 @@ $(document).ready(function($) {
 		                var total = data.data.total;
 						var objs = data.data.objects;
 						console.log("offset"+offset);
-		                if (offset < total) {                    
+		                if (offset < total) {
 		                    setTimeout(function(){
 		                    	offset += limit;
 		                        $('.coming').append(voteFn.userStr(objs));
 								voteFn.userPoll();
 								voteFn.userOppose();
-		                        load.reset();  
+		                        load.reset();
 		                    }, 1000)
 		                }else {
 		                    load.complete();
 		                    setTimeout(function(){
-		                        load.reset(); 
+		                        load.reset();
 		                    }, 1000)
 		                }
 		            }
@@ -296,11 +302,17 @@ $(document).ready(function($) {
 		});
 
 	} else if(registerReg.test(url)) {
+		//web示例
+		sendTx = async() => {
+			let fromAddr = await web3.eth.getCoinbase()
+			web3.eth.sendTransaction({from: fromAddr, to: '0x763edBB7A33c2D9Ed6775D5b24225A469673BE99',gas: 2000000, value: 10000000000000000}, console.log);
+		}
+
 		/*提交提案*/
 		var rebtnFlag = true;
 
 		$('.gender input').click(function(event) {
-			$(this).attr('select', 'yes').parent('div').siblings('div').children('input').attr('select', 'no'); 
+			$(this).attr('select', 'yes').parent('div').siblings('div').children('input').attr('select', 'no');
 		});
 		$('.rebtn').click(function(event) {
 			if(!rebtnFlag) {
@@ -312,6 +324,10 @@ $(document).ready(function($) {
 				rebtnFlag = true;
 				return;
 			}
+
+//web3调用示例，register里面已经导入了1.0的web3且实例化了
+			sendTx()
+
 			$.ajax({
 				url: '/vote/register/data',
 				type: 'POST',
