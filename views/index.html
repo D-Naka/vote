@@ -6,35 +6,56 @@
 	<title>以太零社区治理</title>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/dropload.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/simplePagination.css" />
 	<style>
 		/* html,body,.content,.header{height: 100%;overflow: hidden;} */
 	</style>
+	<script type="text/javascript" src="/javascripts/web3.min.js"></script>	
 </head>
 <body>
-	<div class="content">
+	<div class="content header_bg">
 		<div class="header">
-			<div class="rule">
+			<!-- <div class="rule">
         <a href="/vote/rule">
           <span>活动规则</span>
         </a>
-			</div>
-			<div class="title tada">
-				<img src="/images/logo.png" alt="">
+			</div> -->
+			<div class="logo tada">
+				<img src="/images/logo_min.png" alt="">
 			</div>	
+			<div class="search">
+				<input type="text" placeholder="请输入提案名称或编号">
+				<span>搜索</span>
+			</div>
 			<div class="register">
 					<a href="/vote/register">
              提交提案
           </a>
-			</div>
-			<div class="search">
-				<input type="text" placeholder="请输入提案名称或编号">
-				<span>搜索</span>
 			</div>
 		</div>
 		<div class="lists">
 				<div class="coming-box">
 						<ul class="coming">
 						</ul>
+						<div class="pagination-holder black clearfix">
+							<ul id="dark-pagination" class="pagination"></ul>						
+						</div>
+				</div>
+				<div class="right_box">
+					<div class="show_box">
+						<div class="num_box">
+							<div>5484198<span>ETZ</span></div>
+							<p>剩余数量</p>
+						</div>
+						<div class="num_box">
+								<div>5894<span>ETZ</span></div>
+								<p>已资助数量</p>
+							</div>						
+					</div>
+					<div class="rule_box">
+						<h4>提案规则</h4>
+						<p>为了防止垃圾提案，提交提案需要消耗100个ETZ，这部分ETZ在智能合约中被作为提案奖励累积。每10万个区块为一个提案的投票周期。提案参与到发起时间所属的投票周期内。在提案创建页面，输入提案详情，点击“创建提案”按钮后，将生成data数据，然后复制data到任意支持以太零的钱包，都可以发起交易创建一个提案，完成调用运行智能合约，这一过程需要支付100个ETZ。提案会被广播到以太零全网，等待主节点进行投票。</p>
+					</div>
 				</div>
 		</div>
         
@@ -44,9 +65,125 @@
     </div>
   </div>
 </body>
+<script type="text/javascript">
+	window.addEventListener('load', function() {
+	console.log('33333');
+		// Checking if Web3 has been injected by the browser (Mist/MetaMask)
+		if (typeof web3_etz !== 'undefined') {
+			// Use Mist/MetaMask's provider
+			web3 = new Web3(web3_etz.currentProvider)
+			web3.eth.getCoinbase(console.log)
+		} else {
+			console.log('No web3? You should consider trying MetaMask!')
+			// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+			web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+		}
+
+		// Now you can start your app & access web3 freely:
+
+	})
+</script>
+
 <script src="/javascripts/zepto.min.js"></script>
 <script src="/javascripts/dropload.js"></script>
-<script src="/javascripts/vote.js"></script>
 <script type="text/javascript" src="/javascripts/jquery.min.js "></script>
+<script src="/javascripts/jquery.simplePagination.js"></script>
 <script type="text/javascript" src="/javascripts/layout.js"></script>
+<script src="/javascripts/vote.js"></script>
+<!--script type="text/javascript">
+var limit=5;
+var offset=0;
+function aa(){
+$.ajax({
+	url: '/vote/index/data',
+	data: {'limit': limit, 'offset': offset },
+	type: 'GET',
+	dataType:'json',
+	success: function(data) {
+		var objs = data.data.objects;
+		// console.log(objs.length);
+		var str = '';
+			for(var i=0; i<objs.length; i++) {
+				str += '<li>'
+	                + '<div class="head">'
+	                + '<a href="/vote/detail/' + objs[i].id + '">'
+	                + '<img src="' + "/images/boy.png" + '" alt="">'
+	                + '</a>'
+					+ '</div>'
+
+	                + '</div>'
+	                + '<div class="descr">'
+	                + '<a href="/vote/detail/' + objs[i].id + '">'
+	                + '<div>'
+	                + '<span>' + objs[i].proposal_name + '</span>'
+	                + '<span>|</span>'
+	                + '<span>编号#' + objs[i].proposal_index + '</span>'
+	                + '</div>'
+					+ '<p>' +"提案链接："+objs[i].proposal_link + '</p>'
+					+ '<p>' +"钱包地址："+ objs[i].addr + '</p>'
+					+ '<p>' +"资助数量："+ objs[i].applyAmount +'</p>'
+					+ '<p>' +"发放周期："+ objs[i].sendPeriod + '</p>'
+	                + '</a>'
+	                + '</div>'
+					
+					+ '<div class="up">'
+					+ '<div class="vote_box">'
+	                + '<div class="vote vote_num">'
+	                + '<span>' + objs[i].voteNumYes + '票</span>'
+					+ '</div>'
+	                + '<div class="btn  btn_vote" id=' + objs[i].id + '>'
+	                + '赞成'
+					+ '</div>'
+					+ '</div>'
+					+ '<div class="vote_box">'
+					+ '<div class="vote vote_num">'
+	                + '<span>' + objs[i].voteNumNo + '票</span>'
+					+ '</div>'
+	                + '<div class="btn btn_vote" id=' + objs[i].id + '>'
+	                + '反对'
+					+ '</div>'
+					+ '</div>'
+					+ '</li>';
+			}
+
+
+		$('.coming').append(str);
+		voteFn.userPoll();
+	}
+});
+}	
+
+$(document).ready(function() {
+	aa();
+});
+var page_index;
+$.ajax({
+	url: '/vote/index/data?limit=1000&offset=0',
+	type: 'GET',
+	dataType:'json',
+	success: function(data) {
+		var item = data.data.objects.length;
+		$('#dark-pagination').pagination({
+			items: item,
+			itemsOnPage:5,
+			cssStyle: 'dark-theme',
+			// onInit: changePage,
+            onPageClick: changePage,
+			displayedPages: 2,
+			edges: 2
+		});
+	}
+});
+	
+
+function changePage(){
+	page_index = $("#dark-pagination").pagination('getCurrentPage');
+	offset = (page_index-1)*5;
+	$(".coming").empty();
+	voteFn.userPoll();
+	aa();
+}
+
+
+</script-->
 </html>

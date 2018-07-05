@@ -47,11 +47,18 @@ a {
     text-decoration: none;
 }
 
+.header,.lists {
+    width: 60%;
+}
+
 .header {
-    height: 50%;
-    background:url(../images/bj.png) repeat;
+    height: 80px;
     padding: 1px;
     position: relative;
+    margin: 0 auto;
+}
+.header_bg{
+    background: #2a2d37;
 }
 
 .rule, .sign_in{
@@ -101,67 +108,142 @@ a {
     height: auto;
 }
 
+.logo{
+    line-height: 80px;
+    float: left;
+}
+
+.logo img {
+    width: 146px;
+    height: auto;
+    vertical-align: middle;
+}
+
 .register {
     width: 130px;
     height: 40px;
     line-height: 40px;
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     color: #fff;
-    margin: 10% auto 2%;
-    background-color: #008eea;
-    border-radius: 50px;
-    box-shadow: 0 4px rgba(49, 49, 49, 0.13);
+    background-image: linear-gradient(0deg, #1f222c 0%, #393d4b 100%);
+    position: absolute;
+    margin: 20px auto;
+    right: 0;
+    top: 0;
 }
 
 .search {
-    width: 30%;
-    height: 36px;
-    margin: 10px auto;
-    border: 1px solid #44a1e2;
-    border-radius: 40px;
-    overflow: hidden;
+    width: 50%;
+    height: 40px;
+    margin: 20px auto;
     font-size: 0px;
+    float: none;
+    text-align: center;
 }
 
 .search input {
     border: 0;
     height: 100%;
-    width: 75%;
+    width: calc(100% - 120px);
     font-size: 16px;
-    color: #333;
+    color: #5b6277;
     text-indent: 15px;
     outline: none;
     vertical-align: middle;
+    background-color: #3b3f4d;
+	box-shadow: 0px 0px 0px 0px 
+		rgba(87, 90, 99, 0.7), 
+		inset 0px 0px 6px 0px 
+		rgba(19, 20, 25, 0.49);
 }
 
 .search span {
     display: inline-block;
-    width: 25%;
+    width: 120px;
     height: 100%;
-    line-height: 35px;
-    font-size: 18px;
+    line-height: 40px;
+    font-size: 16px;
     text-align: center;
     color: #fff;
-    background-color: #44a1e2;
+    background-image: linear-gradient(0deg, 
+    #1f222c 0%, 
+    #393d4b 100%);
     vertical-align: middle;
+    cursor: pointer;
 }
 
 .lists {
-    margin-top: 5px;
-    width: 50%;
-    margin: 100px auto 0;
+    margin: 30px auto 0;
 }
+
 
 .lists li {
     list-style: none;
-    height: 150px;
     padding: 17px 10px;
     box-sizing: border-box;
     border-bottom: 1px solid #e3e3e3;
-    margin-bottom: 5px;
+    margin: 20px auto;
     overflow: hidden;
     background: #fff;
+}
+
+#dark-pagination{
+    margin: 50px auto;
+    width: 100%;
+}
+
+#dark-pagination li{
+    background: none;
+    border: 0;
+}
+
+.coming-box{
+    width: 65%;
+    float: left;
+    margin-right: 20px;
+}
+
+.right_box{
+    width: calc(35% - 20px);
+    float: right;
+}
+
+.show_box,.rule_box{
+    background: #ffffff;
+    padding: 20px;
+    margin: 20px auto;
+}
+
+.show_box .num_box{
+    margin: 20px auto;
+    text-align: center;
+}
+
+.show_box .num_box div{
+    color: #005fa4;
+    font-size: 32px;
+}
+.show_box .num_box span{
+    color: #3a4569;
+    font-size: 16px;
+}
+.show_box .num_box p{
+    color: #3a4569;
+    font-size: 16px;
+}
+
+.rule_box h4{
+    color: #3b3f4d;
+    font-size: 18px;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e5e5e5; 
+}
+
+.rule_box p{
+    color: #999999;
+    font-size: 14px;
 }
 
 .head {
@@ -198,21 +280,17 @@ a {
 }
 
 .descr {
-    width: 100%;
-    height: 96px;
+    /* width: 100%; */
     color: #999;
-    margin-left: 66px;
-    padding-right: 137px;
+    margin-left: 15px;
+    float: left;
+    /* padding-right: 137px; */
 }
 
 .descr div {
     color: #666;
     margin-top: 9px;
     font-size: 0px;
-    width: 50%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .descr div span {
@@ -234,13 +312,14 @@ a {
 
 .descr div span:last-child {
     font-size: 12px;
-    color: #999;
+    color: #95afd2;
 }
 
 .descr p {
     font-size: 14px;
     margin: 9px 0 2px 0;
-    height: 18px;
+    height: auto;
+    word-break: break-all;
     /* overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;  */
@@ -281,13 +360,25 @@ a {
 .up span {
     font-size: 14px;
     vertical-align: middle;
-    color: #ff8b62;
-    width: 70px;
+    color: #7089a9;
+    /* width: 70px; */
 }
 
 .vote {
     margin-top: 8px;
     text-align: center;
+}
+.vote_num {
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    margin-right: 10px;
+    background-color: #e7edf3;
+    border-radius: 14px;
+    /* width: 50px; */
+    color: #7089a9;
+    font-size: 14px;
+    padding: 0 15px;
 }
 
 .btn {
@@ -302,11 +393,20 @@ a {
     background-color: #54ABE8;
     box-shadow: 0 2px rgba(127, 212, 245, 0.37);
 }
+.btn_vote{
+    float: right;
+    width: 66px;
+    font-size: 14px;
+}
+.vote_box{
+    overflow: hidden;
+    margin: 20% auto;
+}
 
-.tada {
+/* .tada {
     -webkit-animation:  tada 1.5s;
     animation: tada 1.5s;
-}
+} */
 
 @-webkit-keyframes tada {
     0% {
@@ -793,15 +893,52 @@ a {
     box-shadow: 0 2px rgba(127, 212, 245, 0.37);
 }
 
-@media screen and (max-width:760px) {
-    
+@media screen and (max-width:1200px) {
+    .logo{
+        float: none;
+        text-align: center;
+        margin: 0 auto;
+    }
     .register{
-        margin: 30% auto;
+        margin: 20px auto;
+        position: inherit;
     }
     .search {
-        width: 80%;
+        width: 100%;
+        margin: 20px auto;
+    }
+    .header{
+        height: auto;
+        width: 90%;
+    }
+    .coming-box,.right_box{
+        float: none;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:760px) {
+    .search input{
+        font-size: 14px;
     }
     .lists {
+        width: 95%;
+    }
+    .vote_box{
+        /* float: left; */
+        margin: 0 auto;
+    }
+    /* .vote_box:nth-child(2){
+        float: right;
+    } */
+    .up{
+        width: 100%;
+    }
+    .descr {
+        padding: 0;
+        width: 75%;
+    }
+    .descr p{
         width: 100%;
     }
 }

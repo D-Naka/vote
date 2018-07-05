@@ -21,8 +21,95 @@ vote_contract.methods.getProposalsNum().call().then(function(result){
 });
 var data =vote_contract.methods.PreVoter().encodeABI();
 data =vote_contract.methods.proposalSubmit("x1" ,"p1", 2, 1, "0x9194a2F58EE5673B578c5577351dcD3bAE062B2d").encodeABI();
-//data =vote_contract.methods.vote(1,1).encodeABI();
+data =vote_contract.methods.vote(1,1).encodeABI();
 console.log(data)
+
+vote_contract.events.submit_event({
+    fromBlock: 0,
+    toBlock:'latest'
+}, function(error, event){
+     console.log("error"+error);
+     console.log(event.returnValues[0]); 
+   
+    //读取提案信息
+     let total = database.data.total;
+     var proposal_name   = event.returnValues[0];
+     var proposal_link   = event.returnValues[1];
+     var applyAmount     = event.returnValues[2];
+     var sendPeriod      = event.returnValues[3];
+     var addr            = event.returnValues[4];
+     registerData1={
+         proposal_name: proposal_name,
+         proposal_link: proposal_link,
+         applyAmount:applyAmount,
+         sendPeriod: sendPeriod,
+         voteNumYes: 0,
+         voteNumNo:0,
+         voteNumAct:0,
+         adopted: false,
+         passed: false,
+         addr:addr,
+         payedTimes:0,
+         proposal_index:total+1
+ 
+     }
+     database.data.objects.push(registerData1);
+     dealFn.writeFileData('database.json', database).then((msg) => {
+         console.log(msg);
+     }, (msg) => {
+         console.log(msg);
+     });
+
+});
+
+vote_contract.getPastEvents('submit_event', {
+    fromBlock: 0,
+    toBlock: 'latest'
+}, function(error, events){ 
+    console.log("length"+events.length);
+    console.log(events[0].returnValues[0]); 
+
+    //读取提案信息
+    let total = database.data.total;
+    var plen = events.length;
+    if (total < plen){
+
+        for(let i=total;i<plen;i++)
+        {
+            var proposal_name   = events[i].returnValues[0];
+            var proposal_link   = events[i].returnValues[1];
+            var applyAmount     = events[i].returnValues[2];
+            var sendPeriod      = events[i].returnValues[3];
+            var addr            = events[i].returnValues[4];
+            registerData1={
+                proposal_name: proposal_name,
+                proposal_link: proposal_link,
+                applyAmount:applyAmount,
+                sendPeriod: sendPeriod,
+                voteNumYes: 0,
+                voteNumNo:0,
+                voteNumAct:0,
+                adopted: false,
+                passed: false,
+                addr:addr,
+                payedTimes:0,
+                proposal_index:total+1        
+            }
+            database.data.objects.push(registerData1);
+            dealFn.writeFileData('database.json', database).then((msg) => {
+                console.log(msg);
+            }, (msg) => {
+                console.log(msg);
+            });
+        }
+        
+    }
+    
+
+});
+
+
+
 
 dealFn.readFileData('database.json').then((data) => {
     database = data;
@@ -73,42 +160,42 @@ exports.index_data = async(req, res) => {
     res.send(JSON.stringify(sendData));
 
 
-    //读取提案信息
-    var result = await vote_contract.methods.getProposalsNum().call();
-    plength = Number(result);
-    let total = database.data.total;
+    // //读取提案信息
+    // var result = await vote_contract.methods.getProposalsNum().call();
+    // plength = Number(result);
+    // let total = database.data.total;
 
-    if(plength > database.data.total)
-    {
-        var pIndex = total;
-        var proposal = await vote_contract.methods.proposals(pIndex).call();
-        let registerData = proposal;
-        registerData.id = ++total;
-        database.data.total++;
-        registerData.head_icon = '/images/boy.png';
+    // if(plength > database.data.total)
+    // {
+    //     var pIndex = total;
+    //     var proposal = await vote_contract.methods.proposals(pIndex).call();
+    //     let registerData = proposal;
+    //     registerData.id = ++total;
+    //     database.data.total++;
+    //     registerData.head_icon = '/images/boy.png';
 
-        registerData1={
-			proposal_name: proposal.name,
-            proposal_link: proposal.link,
-            applyAmount:proposal.applyAmount,
-            sendPeriod: proposal.sendPeriod,
-            voteNumYes: proposal.voteNumYes,
-            voteNumNo:proposal.voteNumNo,
-            voteNumAct:proposal.voteNumAct,
-            adopted: proposal.adopted,
-            passed: proposal.passed,
-            addr:proposal.addr,
-            payedTimes:proposal.payedTimes,
-            proposal_index:pIndex+1
+    //     registerData1={
+	// 		proposal_name: proposal.name,
+    //         proposal_link: proposal.link,
+    //         applyAmount:proposal.applyAmount,
+    //         sendPeriod: proposal.sendPeriod,
+    //         voteNumYes: proposal.voteNumYes,
+    //         voteNumNo:proposal.voteNumNo,
+    //         voteNumAct:proposal.voteNumAct,
+    //         adopted: proposal.adopted,
+    //         passed: proposal.passed,
+    //         addr:proposal.addr,
+    //         payedTimes:proposal.payedTimes,
+    //         proposal_index:pIndex+1
 
-        }
-        database.data.objects.push(registerData1);
-        dealFn.writeFileData('database.json', database).then((msg) => {
-            console.log(msg);
-        }, (msg) => {
-            console.log(msg);
-        });
-    }
+    //     }
+    //     database.data.objects.push(registerData1);
+    //     dealFn.writeFileData('database.json', database).then((msg) => {
+    //         console.log(msg);
+    //     }, (msg) => {
+    //         console.log(msg);
+    //     });
+    // }
 };
 
 exports.index_poll = (req, res) => {
@@ -154,33 +241,6 @@ exports.register_data = (req, res) => {
             
     data_command =vote_contract.methods.proposalSubmit(proposal_name ,proposal_link, applyAmount,sendPeriod,addr).encodeABI();  
  
-    /*
-    $.ajax({
-        url: '/vote/register?vote=0',
-        type: 'GET',
-        success: function(data_command) {
-            data_command = JSON.parse(data_command);
-            if(data_command.errno == 0){
-               // $('.personal').html(voteFn.detailPersonalStr(data.data));
-               var txt;
-               txt = document.getElementById('txta').value; //获取textarea的值
-               document.write (txt);
-               document.getElementById('txta').value = data_command;  //设置textarea的值
-
-            }else {
-                alert(data_command.msg);
-            }
-        }
-    });
-    //window.location.href="register?vote=0"
-
-   registerData.id=1;
-    sendData = {
-        errno: 0,
-        msg: data,
-        id: registerData.id
-    }
-    res.send(JSON.stringify(sendData));*/
 };
 
 

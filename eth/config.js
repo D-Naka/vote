@@ -1,6 +1,6 @@
 const providerURL = 'http://52.74.3.64:9646'
 
-const contractAddr = '0xc1e47b18030d373c6c21106a63c5621972621461'
+const contractAddr = '0xda083bf4bc7297ab739b177cf27dda7b9a05a716'
 
 const controllerAddr = '0x9194a2F58EE5673B578c5577351dcD3bAE062B2d'
 
@@ -9,12 +9,27 @@ const abi = [
 		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": true,
-				"name": "from",
-				"type": "address"
+				"indexed": false,
+				"name": "voteNumYes",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumNo",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumAct",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "adopted",
+				"type": "bool"
 			}
 		],
-		"name": "Voteevent",
+		"name": "vote_event",
 		"type": "event"
 	},
 	{
@@ -97,17 +112,32 @@ const abi = [
 		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": true,
-				"name": "name",
+				"indexed": false,
+				"name": "pname",
 				"type": "string"
 			},
 			{
-				"indexed": true,
-				"name": "link",
+				"indexed": false,
+				"name": "plink",
 				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "papplyAmount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "psendPeriod",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "paddr",
+				"type": "address"
 			}
 		],
-		"name": "Submit",
+		"name": "submit_event",
 		"type": "event"
 	},
 	{

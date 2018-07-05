@@ -1,6 +1,9 @@
 
-abi=[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"proposals","outputs":[{"name":"name","type":"string"},{"name":"link","type":"string"},{"name":"applyAmount","type":"uint256"},{"name":"sendPeriod","type":"uint256"},{"name":"voteNumYes","type":"uint256"},{"name":"voteNumNo","type":"uint256"},{"name":"voteNumAct","type":"uint256"},{"name":"adopted","type":"bool"},{"name":"passed","type":"bool"},{"name":"addr","type":"address"},{"name":"payedTimes","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"MasterAddr","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"VoteIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"setOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"preSend","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"proposalAddr","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"blockOrigin","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"PreVoter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getContractBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sortedProposals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"pname","type":"string"},{"name":"plink","type":"string"},{"name":"papplyAmount","type":"uint256"},{"name":"psendPeriod","type":"uint256"},{"name":"paddr","type":"address"}],"name":"proposalSubmit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"blockStart","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"sortProposal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"cycleIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"voters","outputs":[{"name":"voteType","type":"uint256"},{"name":"proposalIndex","type":"uint256"},{"name":"votedIndex","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"votePeriod","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"index","type":"uint256"},{"name":"voteType","type":"uint256"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"startRefresh","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"start","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"sendApply","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"etzPerProposal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"masterNodeNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getProposalsNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"name","type":"string"},{"indexed":true,"name":"link","type":"string"}],"name":"Submit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"}],"name":"Voteevent","type":"event"}];
+document.write("<script language=javascript src='/javascripts/jquery.min.js'></script>");
 
+document.write("<script language=javascript src='/javascripts/jquery.simplePagination.js'></script>");
+
+abi=[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"proposals","outputs":[{"name":"name","type":"string"},{"name":"link","type":"string"},{"name":"applyAmount","type":"uint256"},{"name":"sendPeriod","type":"uint256"},{"name":"voteNumYes","type":"uint256"},{"name":"voteNumNo","type":"uint256"},{"name":"voteNumAct","type":"uint256"},{"name":"adopted","type":"bool"},{"name":"passed","type":"bool"},{"name":"addr","type":"address"},{"name":"payedTimes","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"MasterAddr","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"VoteIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"setOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"preSend","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"proposalAddr","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"blockOrigin","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"PreVoter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getContractBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sortedProposals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"pname","type":"string"},{"name":"plink","type":"string"},{"name":"papplyAmount","type":"uint256"},{"name":"psendPeriod","type":"uint256"},{"name":"paddr","type":"address"}],"name":"proposalSubmit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"blockStart","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"sortProposal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"cycleIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"voters","outputs":[{"name":"voteType","type":"uint256"},{"name":"proposalIndex","type":"uint256"},{"name":"votedIndex","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"votePeriod","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"index","type":"uint256"},{"name":"voteType","type":"uint256"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"startRefresh","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"start","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"sendApply","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"etzPerProposal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"masterNodeNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getProposalsNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"name","type":"string"},{"indexed":true,"name":"link","type":"string"}],"name":"Submit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"}],"name":"Voteevent","type":"event"}];
 
 $(document).ready(function($) {
 	var url = window.location.href,
@@ -11,7 +14,7 @@ $(document).ready(function($) {
 		limit = 10,
 		offset = 0;
 
-//web3使用示例，要先导入<script type="text/javascript" src="/javascripts/web3.min.js"></script>
+		//web3使用示例，要先导入<script type="text/javascript" src="/javascripts/web3.min.js"></script>
 		// var web3 = new Web3(web3.currentProvider);
 		// console.log(web3);
 		// web3.eth.signTransaction({from: web3.eth.getCoinbase(), to: '0xc1e47b18030d373c6c21106a63c5621972621461',gas: 2000000, value: 10000000000000} , console.log)
@@ -52,25 +55,11 @@ $(document).ready(function($) {
 		userStr: function(objs) {
 			var str = '';
 			for(var i=0; i<objs.length; i++) {
-				console.log(i);
 				str += '<li>'
 	                + '<div class="head">'
 	                + '<a href="/vote/detail/' + objs[i].id + '">'
 	                + '<img src="' + "/images/boy.png" + '" alt="">'
 	                + '</a>'
-	                + '</div>'
-	                + '<div class="up">'
-	                + '<div class="vote">'
-	                + '<span>' + objs[i].voteNumYes + '票</span>'
-					+ '</div>'
-	                + '<div class="btn" id=' + objs[i].id + '>'
-	                + '赞成'
-					+ '</div>'
-					+ '<div class="vote">'
-	                + '<span>' + objs[i].voteNumNo + '票</span>'
-					+ '</div>'
-	                + '<div class="btn" id=' + objs[i].id + '>'
-	                + '反对'
 					+ '</div>'
 
 	                + '</div>'
@@ -83,12 +72,32 @@ $(document).ready(function($) {
 	                + '</div>'
 					+ '<p>' +"提案链接："+objs[i].proposal_link + '</p>'
 					+ '<p>' +"钱包地址："+ objs[i].addr + '</p>'
-					+ '<p>' +"资助数量："+ objs[i].applyAmount +"                  发放周期："+ objs[i].sendPeriod + '</p>'
+					+ '<p>' +"资助数量："+ objs[i].applyAmount +'</p>'
+					+ '<p>' +"发放周期："+ objs[i].sendPeriod + '</p>'
 	                + '</a>'
 	                + '</div>'
-	               	+ '</li>';
+					
+					+ '<div class="up">'
+					+ '<div class="vote_box">'
+	                + '<div class="vote vote_num">'
+	                + '<span>' + objs[i].voteNumYes + '票</span>'
+					+ '</div>'
+	                + '<div class="btn  btn_vote" id=' + objs[i].id + '>'
+	                + '赞成'
+					+ '</div>'
+					+ '</div>'
+					+ '<div class="vote_box">'
+					+ '<div class="vote vote_num">'
+	                + '<span>' + objs[i].voteNumNo + '票</span>'
+					+ '</div>'
+	                + '<div class="btn btn_vote" id=' + objs[i].id + '>'
+	                + '反对'
+					+ '</div>'
+					+ '</div>'
+					+ '</li>';
 			}
 			return str;
+			
 		},
 
 		/**
@@ -180,14 +189,24 @@ $(document).ready(function($) {
 				var _this = this;
 				var id = $(this).attr('id');
 				console.log("id"+id);
-				var voteUser = voteFn.getStorage('voteUser');
+				sendVote();
+				console.log(data);
+
+				voteFn.setStorage('data', data);
+
 				window.location.href="register?vote=0";
-				if (voteUser) {
-					voteFn.voteRequest(id, voteUser.id, this);
-				}else {
-					$('.mask').show();
-					voteFn.signIn();
-				}
+
+				//vote/register?vote=0&id=341&approval=true
+
+				// $.ajax({
+				// 	url: '/vote/index/register?vote=0',
+				// 	type: 'PUT',
+				// 	success: function(data) {
+				// 		// sendVote();
+				// 		// console.log(data);
+
+				// 	}
+				// });
 
 			});
 		},
@@ -197,14 +216,8 @@ $(document).ready(function($) {
 			$('.btn').click(function(event) {
 				var _this = this;
 				var id = $(this).attr('id');
-				var voteUser = voteFn.getStorage('voteUser');
-				window.location.href="register?vote=0";
-				if (voteUser) {
-					voteFn.voteRequest(id, voteUser.id, this);
-				}else {
-					$('.mask').show();
-					voteFn.signIn();
-				}
+
+
 
 			});
 		},
@@ -253,48 +266,91 @@ $(document).ready(function($) {
 	};
 
 	if(indexReg.test(url)) {
+		sendVote = async() => {
+			var mycontract = new web3.eth.Contract(abi,"0xda083bf4bc7297ab739b177cf27dda7b9a05a716");
+			data = mycontract.methods.vote(1,1).encodeABI();
+			}
+
 		/*主页*/
 		var voteUser = voteFn.getStorage('voteUser');
+		var limit=5;
+		var offset=0;
 
-		$.ajax({
-			url: '/vote/index/data?limit=10&offset=0',
-			type: 'GET',
-			success: function(data) {
-				offset += limit;
-				data = JSON.parse(data);
-				$('.coming').append(voteFn.userStr(data.data.objects));
-				console.log("userPoll2");
-				voteFn.userPoll();
-			}
+		function aa(){
+			$.ajax({
+				url: '/vote/index/data',
+				data: {'limit': limit, 'offset': offset },
+				type: 'GET',
+				success: function(data) {
+					offset += limit;
+					data = JSON.parse(data);
+					$('.coming').append(voteFn.userStr(data.data.objects));
+					console.log("userPoll2");
+					voteFn.userPoll();
+				}
+			});
+		}
+
+		$(document).ready(function() {
+			aa();
 		});
-		loadMore({
-			callback: function(load){
-		        $.ajax({
-		            url: '/vote/index/data?limit=' + limit + '&offset=' + offset,
-		            type: 'GET',
-		            success: function(data) {
-		                data = JSON.parse(data);
-		                var total = data.data.total;
-						var objs = data.data.objects;
-						console.log("offset"+offset);
-		                if (offset < total) {
-		                    setTimeout(function(){
-		                    	offset += limit;
-		                        $('.coming').append(voteFn.userStr(objs));
-								voteFn.userPoll();
-								voteFn.userOppose();
-		                        load.reset();
-		                    }, 1000)
-		                }else {
-		                    load.complete();
-		                    setTimeout(function(){
-		                        load.reset();
-		                    }, 1000)
-		                }
-		            }
-		        })
-		    }
+var page_index;
+$.ajax({
+	url: '/vote/index/data?limit=1000&offset=0',
+	type: 'GET',
+	dataType:'json',
+	success: function(data) {
+		var item = data.data.objects.length;
+		$('#dark-pagination').pagination({
+			items: item,
+			itemsOnPage:5,
+			cssStyle: 'dark-theme',
+			// onInit: changePage,
+            onPageClick: changePage,
+			displayedPages: 2,
+			edges: 2
 		});
+	}
+});
+	
+
+function changePage(){
+	page_index = $("#dark-pagination").pagination('getCurrentPage');
+	offset = (page_index-1)*5;
+	$(".coming").empty();
+	aa();
+}
+
+
+
+		// loadMore({
+		// 	callback: function(load){
+		//         $.ajax({
+		//             url: '/vote/index/data?limit=' + limit + '&offset=' + offset,
+		//             type: 'GET',
+		//             success: function(data) {
+		//                 data = JSON.parse(data);
+		//                 var total = data.data.total;
+		// 				var objs = data.data.objects;
+		// 				console.log("offset"+offset);
+		//                 if (offset < total) {
+		//                     setTimeout(function(){
+		//                     	offset += limit;
+		//                         $('.coming').append(voteFn.userStr(objs));
+		// 						voteFn.userPoll();
+		// 						voteFn.userOppose();
+		//                         load.reset();
+		//                     }, 1000)
+		//                 }else {
+		//                     load.complete();
+		//                     setTimeout(function(){
+		//                         load.reset();
+		//                     }, 1000)
+		//                 }
+		//             }
+		//         })
+		//     }
+		// });
 		$('.search span').click(function(event) {
 			var searchContent = $('.search input').val();
 			voteFn.setStorage('searchContent', searchContent);
@@ -303,10 +359,13 @@ $(document).ready(function($) {
 		});
 
 	} else if(registerReg.test(url)) {
+		var data  = voteFn.getStorage('data');
+		document.getElementById('txta').value = data;  //设置textarea的值  
+		console.log(data);
 		/*提交提案*/
 		sendTx = async() => {
 			let fromAddr = await web3.eth.getCoinbase()
-			var mycontract = new web3.eth.Contract(abi,"0xc1e47b18030d373c6c21106a63c5621972621461");
+			var mycontract = new web3.eth.Contract(abi,"0xda083bf4bc7297ab739b177cf27dda7b9a05a716");
 			await mycontract.methods.proposalSubmit(pName,pLink,pAmmount,pPeriod,pAddr).send({from: fromAddr});
 			}
 
