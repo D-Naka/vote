@@ -57,14 +57,12 @@ $(document).ready(function($) {
 			for(var i=0; i<objs.length; i++) {
 				str += '<li>'
 	                + '<div class="head">'
-	                + '<a href="/vote/detail/' + objs[i].id + '">'
 	                + '<img src="' + "/images/boy.png" + '" alt="">'
 	                + '</a>'
 					+ '</div>'
 
 	                + '</div>'
 	                + '<div class="descr">'
-	                + '<a href="/vote/detail/' + objs[i].id + '">'
 	                + '<div>'
 	                + '<span>' + objs[i].proposal_name + '</span>'
 	                + '<span>|</span>'
@@ -82,7 +80,7 @@ $(document).ready(function($) {
 	                + '<div class="vote vote_num">'
 	                + '<span>' + objs[i].voteNumYes + '票</span>'
 					+ '</div>'
-	                + '<div class="btn  btn_vote" id=' + objs[i].id + '>'
+	                + '<div class="btn btn1 btn_vote" id=' + objs[i].proposal_index + '>'
 	                + '赞成'
 					+ '</div>'
 					+ '</div>'
@@ -90,7 +88,7 @@ $(document).ready(function($) {
 					+ '<div class="vote vote_num">'
 	                + '<span>' + objs[i].voteNumNo + '票</span>'
 					+ '</div>'
-	                + '<div class="btn btn_vote" id=' + objs[i].id + '>'
+	                + '<div class="btn btn2 btn_vote" id=' + objs[i].proposal_index + '>'
 	                + '反对'
 					+ '</div>'
 					+ '</div>'
@@ -184,38 +182,28 @@ $(document).ready(function($) {
 		 */
 		userPoll: function() {
 			console.log("userPoll4");
-			$('.btn').off();
-			$('.btn').click(function(event) {
+			$('.btn1').off();
+			$('.btn1').click(function(event) {
 				var _this = this;
 				var id = $(this).attr('id');
-				console.log("id"+id);
-				sendVote();
-				console.log(data);
-
+				var vote_id = parseInt(id);
+				sendVote(vote_id,1);
 				voteFn.setStorage('data', data);
-
 				window.location.href="register?vote=0";
-
-				//vote/register?vote=0&id=341&approval=true
-
-				// $.ajax({
-				// 	url: '/vote/index/register?vote=0',
-				// 	type: 'PUT',
-				// 	success: function(data) {
-				// 		// sendVote();
-				// 		// console.log(data);
-
-				// 	}
-				// });
 
 			});
 		},
 
 		userOppose: function() {
-			$('.btn').off();
-			$('.btn').click(function(event) {
+			$('.btn2').off();
+			$('.btn2').click(function(event) {
 				var _this = this;
 				var id = $(this).attr('id');
+				var vote_id = parseInt(id);
+				sendVote(vote_id,2);
+				console.log("data"+data);
+				voteFn.setStorage('data', data);
+				window.location.href="register?vote=0";
 
 
 
@@ -266,9 +254,9 @@ $(document).ready(function($) {
 	};
 
 	if(indexReg.test(url)) {
-		sendVote = async() => {
+		sendVote = async(vote_id,vote_type) => {
 			var mycontract = new web3.eth.Contract(abi,"0xda083bf4bc7297ab739b177cf27dda7b9a05a716");
-			data = mycontract.methods.vote(1,1).encodeABI();
+			data = mycontract.methods.vote(vote_id,vote_type).encodeABI();
 			}
 
 		/*主页*/
@@ -287,6 +275,7 @@ $(document).ready(function($) {
 					$('.coming').append(voteFn.userStr(data.data.objects));
 					console.log("userPoll2");
 					voteFn.userPoll();
+					voteFn.userOppose();
 				}
 			});
 		}
@@ -322,35 +311,6 @@ function changePage(){
 }
 
 
-
-		// loadMore({
-		// 	callback: function(load){
-		//         $.ajax({
-		//             url: '/vote/index/data?limit=' + limit + '&offset=' + offset,
-		//             type: 'GET',
-		//             success: function(data) {
-		//                 data = JSON.parse(data);
-		//                 var total = data.data.total;
-		// 				var objs = data.data.objects;
-		// 				console.log("offset"+offset);
-		//                 if (offset < total) {
-		//                     setTimeout(function(){
-		//                     	offset += limit;
-		//                         $('.coming').append(voteFn.userStr(objs));
-		// 						voteFn.userPoll();
-		// 						voteFn.userOppose();
-		//                         load.reset();
-		//                     }, 1000)
-		//                 }else {
-		//                     load.complete();
-		//                     setTimeout(function(){
-		//                         load.reset();
-		//                     }, 1000)
-		//                 }
-		//             }
-		//         })
-		//     }
-		// });
 		$('.search span').click(function(event) {
 			var searchContent = $('.search input').val();
 			voteFn.setStorage('searchContent', searchContent);

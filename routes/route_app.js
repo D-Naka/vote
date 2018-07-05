@@ -93,7 +93,7 @@ vote_contract.getPastEvents('submit_event', {
                 passed: false,
                 addr:addr,
                 payedTimes:0,
-                proposal_index:total+1        
+                proposal_index:i+1        
             }
             database.data.objects.push(registerData1);
             dealFn.writeFileData('database.json', database).then((msg) => {
