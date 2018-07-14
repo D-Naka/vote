@@ -1,6 +1,6 @@
 const providerURL = 'http://52.74.3.64:9646'
 
-const contractAddr = '0xda083bf4bc7297ab739b177cf27dda7b9a05a716'
+const contractAddr = '0x5836c15e714962964352c86c82d376a181d47595'
 
 const controllerAddr = '0x9194a2F58EE5673B578c5577351dcD3bAE062B2d'
 
@@ -10,27 +10,26 @@ const abi = [
 		"inputs": [
 			{
 				"indexed": false,
-				"name": "voteNumYes",
+				"name": "pIndex",
 				"type": "uint256"
 			},
 			{
 				"indexed": false,
-				"name": "voteNumNo",
+				"name": "remainTimes",
 				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumAct",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "adopted",
-				"type": "bool"
 			}
 		],
-		"name": "vote_event",
+		"name": "send_event",
 		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "mutiPreSend",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"constant": false,
@@ -109,38 +108,6 @@ const abi = [
 		"type": "function"
 	},
 	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "pname",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "plink",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "papplyAmount",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "psendPeriod",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "paddr",
-				"type": "address"
-			}
-		],
-		"name": "submit_event",
-		"type": "event"
-	},
-	{
 		"constant": false,
 		"inputs": [],
 		"name": "sortProposal",
@@ -168,11 +135,6 @@ const abi = [
 		"type": "function"
 	},
 	{
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "fallback"
-	},
-	{
 		"constant": false,
 		"inputs": [
 			{
@@ -189,6 +151,75 @@ const abi = [
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "pname",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "plink",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "papplyAmount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "psendPeriod",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "paddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "VoteIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "submit_event",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "voteNumYes",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumNo",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumAct",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "adopted",
+				"type": "bool"
+			}
+		],
+		"name": "vote_event",
+		"type": "event"
+	},
+	{
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "fallback"
 	},
 	{
 		"constant": true,
@@ -208,6 +239,20 @@ const abi = [
 		"constant": true,
 		"inputs": [],
 		"name": "blockStart",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "budgetAddedChain",
 		"outputs": [
 			{
 				"name": "",
@@ -391,7 +436,49 @@ const abi = [
 				"type": "address"
 			},
 			{
-				"name": "payedTimes",
+				"name": "remainTimes",
+				"type": "uint256"
+			},
+			{
+				"name": "eachAmount",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "sendProposals",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "sendProposalsNew",
+		"outputs": [
+			{
+				"name": "",
 				"type": "uint256"
 			}
 		],

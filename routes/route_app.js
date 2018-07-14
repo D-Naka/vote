@@ -38,6 +38,7 @@ vote_contract.events.submit_event({
      var applyAmount     = event.returnValues[2];
      var sendPeriod      = event.returnValues[3];
      var addr            = event.returnValues[4];
+     var voteIndex            = event.returnValues[5];
      registerData1={
          proposal_name: proposal_name,
          proposal_link: proposal_link,
@@ -50,8 +51,8 @@ vote_contract.events.submit_event({
          passed: false,
          addr:addr,
          payedTimes:0,
-         proposal_index:total+1
- 
+         proposal_index:total+1,
+         voteIndex:voteIndex
      }
      database.data.objects.push(registerData1);
      dealFn.writeFileData('database.json', database).then((msg) => {
@@ -81,6 +82,7 @@ vote_contract.getPastEvents('submit_event', {
             var applyAmount     = events[i].returnValues[2];
             var sendPeriod      = events[i].returnValues[3];
             var addr            = events[i].returnValues[4];
+            var voteIndex       = events[i].returnValues[5];
             registerData1={
                 proposal_name: proposal_name,
                 proposal_link: proposal_link,
@@ -93,8 +95,10 @@ vote_contract.getPastEvents('submit_event', {
                 passed: false,
                 addr:addr,
                 payedTimes:0,
-                proposal_index:i+1        
+                proposal_index:i+1 ,
+                voteIndex:voteIndex       
             }
+            console.log(registerData1);
             database.data.objects.push(registerData1);
             dealFn.writeFileData('database.json', database).then((msg) => {
                 console.log(msg);

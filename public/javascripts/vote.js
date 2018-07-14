@@ -3,8 +3,9 @@ document.write("<script language=javascript src='/javascripts/jquery.min.js'></s
 
 document.write("<script language=javascript src='/javascripts/jquery.simplePagination.js'></script>");
 
-abi=[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"proposals","outputs":[{"name":"name","type":"string"},{"name":"link","type":"string"},{"name":"applyAmount","type":"uint256"},{"name":"sendPeriod","type":"uint256"},{"name":"voteNumYes","type":"uint256"},{"name":"voteNumNo","type":"uint256"},{"name":"voteNumAct","type":"uint256"},{"name":"adopted","type":"bool"},{"name":"passed","type":"bool"},{"name":"addr","type":"address"},{"name":"payedTimes","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"MasterAddr","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"VoteIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"setOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"preSend","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"proposalAddr","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"blockOrigin","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"PreVoter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getContractBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sortedProposals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"pname","type":"string"},{"name":"plink","type":"string"},{"name":"papplyAmount","type":"uint256"},{"name":"psendPeriod","type":"uint256"},{"name":"paddr","type":"address"}],"name":"proposalSubmit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"blockStart","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"sortProposal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"cycleIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"voters","outputs":[{"name":"voteType","type":"uint256"},{"name":"proposalIndex","type":"uint256"},{"name":"votedIndex","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"votePeriod","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"index","type":"uint256"},{"name":"voteType","type":"uint256"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"startRefresh","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"start","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"sendApply","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"etzPerProposal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"masterNodeNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getProposalsNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"name","type":"string"},{"indexed":true,"name":"link","type":"string"}],"name":"Submit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"}],"name":"Voteevent","type":"event"}];
+abi=[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"proposals","outputs":[{"name":"name","type":"string"},{"name":"link","type":"string"},{"name":"applyAmount","type":"uint256"},{"name":"sendPeriod","type":"uint256"},{"name":"voteNumYes","type":"uint256"},{"name":"voteNumNo","type":"uint256"},{"name":"voteNumAct","type":"uint256"},{"name":"adopted","type":"bool"},{"name":"passed","type":"bool"},{"name":"addr","type":"address"},{"name":"remainTimes","type":"uint256"},{"name":"eachAmount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"MasterAddr","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"VoteIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"setOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"preSend","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sendProposals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"proposalAddr","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"blockOrigin","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"PreVoter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getContractBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sortedProposals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"pname","type":"string"},{"name":"plink","type":"string"},{"name":"papplyAmount","type":"uint256"},{"name":"psendPeriod","type":"uint256"},{"name":"paddr","type":"address"}],"name":"proposalSubmit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"blockStart","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"sortProposal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"cycleIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"voters","outputs":[{"name":"voteType","type":"uint256"},{"name":"proposalIndex","type":"uint256"},{"name":"votedIndex","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"votePeriod","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"mutiPreSend","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"index","type":"uint256"},{"name":"voteType","type":"uint256"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"startRefresh","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"start","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"sendApply","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"etzPerProposal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"budgetAddedChain","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"masterNodeNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sendProposalsNew","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getProposalsNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"pname","type":"string"},{"indexed":false,"name":"plink","type":"string"},{"indexed":false,"name":"papplyAmount","type":"uint256"},{"indexed":false,"name":"psendPeriod","type":"uint256"},{"indexed":false,"name":"paddr","type":"address"},{"indexed":false,"name":"VoteIndex","type":"uint256"}],"name":"submit_event","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"voteNumYes","type":"uint256"},{"indexed":false,"name":"voteNumNo","type":"uint256"},{"indexed":false,"name":"voteNumAct","type":"uint256"},{"indexed":false,"name":"adopted","type":"bool"}],"name":"vote_event","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"pIndex","type":"uint256"},{"indexed":false,"name":"remainTimes","type":"uint256"}],"name":"send_event","type":"event"}];
 
+VoteIndex = 1;
 $(document).ready(function($) {
 	var url = window.location.href,
 		indexReg = /index/,
@@ -54,6 +55,8 @@ $(document).ready(function($) {
 		 */
 		userStr: function(objs) {
 			var str = '';
+			VoteIndex = objs[objs.length-1].voteIndex;	
+			document.getElementById("num").innerHTML = VoteIndex;
 			for(var i=0; i<objs.length; i++) {
 				str += '<li>'
 	                + '<div class="head">'
@@ -68,10 +71,10 @@ $(document).ready(function($) {
 	                + '<span>|</span>'
 	                + '<span>编号#' + objs[i].proposal_index + '</span>'
 	                + '</div>'
-					+ '<p>' +"提案链接："+objs[i].proposal_link + '</p>'
-					+ '<p>' +"钱包地址："+ objs[i].addr + '</p>'
-					+ '<p>' +"资助数量："+ objs[i].applyAmount +'</p>'
-					+ '<p>' +"发放周期："+ objs[i].sendPeriod + '</p>'
+					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"提案链接："+objs[i].proposal_link + '</p>'+'</a>'
+					+ '<p>' +"接收地址："+ objs[i].addr + '</p>'
+					+ '<p>' +"资助数量："+ objs[i].applyAmount  +" &nbsp  &nbsp  发放次数："+ objs[i].sendPeriod + '</p>'
+					+ '<p>' +"投票期数： 第"+ objs[i].voteIndex +"期"+ '</p>'					
 	                + '</a>'
 	                + '</div>'
 					
@@ -239,7 +242,7 @@ $(document).ready(function($) {
 				return false;
 			}
 			if(!sendPeriod) {
-				alert("请填资助发放周期");
+				alert("请填资助发放次数");
 				return false;
 			}
 			return {
@@ -255,7 +258,7 @@ $(document).ready(function($) {
 
 	if(indexReg.test(url)) {
 		sendVote = async(vote_id,vote_type) => {
-			var mycontract = new web3.eth.Contract(abi,"0xda083bf4bc7297ab739b177cf27dda7b9a05a716");
+			var mycontract = new web3.eth.Contract(abi,"0x5836c15e714962964352c86c82d376a181d47595");
 			data = mycontract.methods.vote(vote_id,vote_type).encodeABI();
 			}
 
@@ -266,7 +269,7 @@ $(document).ready(function($) {
 
 		function aa(){
 			$.ajax({
-				url: '/vote/index/data',
+				url: '/index/data',
 				data: {'limit': limit, 'offset': offset },
 				type: 'GET',
 				success: function(data) {
@@ -285,7 +288,7 @@ $(document).ready(function($) {
 		});
 var page_index;
 $.ajax({
-	url: '/vote/index/data?limit=1000&offset=0',
+	url: '/index/data?limit=1000&offset=0',
 	type: 'GET',
 	dataType:'json',
 	success: function(data) {
@@ -325,7 +328,7 @@ function changePage(){
 		/*提交提案*/
 		sendTx = async() => {
 			let fromAddr = await web3.eth.getCoinbase()
-			var mycontract = new web3.eth.Contract(abi,"0xda083bf4bc7297ab739b177cf27dda7b9a05a716");
+			var mycontract = new web3.eth.Contract(abi,"0x5836c15e714962964352c86c82d376a181d47595");
 			await mycontract.methods.proposalSubmit(pName,pLink,pAmmount,pPeriod,pAddr).send({from: fromAddr});
 			}
 
@@ -359,7 +362,7 @@ function changePage(){
 			// })
 			return;
 			$.ajax({
-				url: '/vote/index',
+				url: '/index',
 				type: 'POST',
 				data: registerData,
 				success: function(data) {
@@ -385,7 +388,7 @@ function changePage(){
 		var searchContent = voteFn.getStorage('searchContent');
 
 		$.ajax({
-			url: '/vote/index/search?content=' + searchContent,
+			url: '/index/search?content=' + searchContent,
 			type: 'GET',
 			success: function(data) {
 				data = JSON.parse(data);
@@ -405,7 +408,7 @@ function changePage(){
 		var idReg = /.*?(\d*)$/;
 		var id = idReg.exec(url)[1];
 		$.ajax({
-			url: '/vote/all/detail/data?id=' + id,
+			url: '/all/detail/data?id=' + id,
 			type: 'GET',
 			success: function(data) {
 				data = JSON.parse(data);

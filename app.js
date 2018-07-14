@@ -29,18 +29,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //获得get请求，第一个参数是匹配内容，第二个参数是匹配成功后执行的回调函数
-app.get('/vote/index', routes.index);  
-app.get(/\/vote\/detail/, routes.detail);  
-app.get('/vote/register', routes.register);  
-app.get('/vote/search', routes.search); 
-app.get('/vote/rule', routes.rule);
+app.get('/index', routes.index);  
+app.get(/\/detail/, routes.detail);  
+app.get('/register', routes.register);  
+app.get('/search', routes.search); 
+app.get('/rule', routes.rule);
 
-app.get('/vote/index/data', routes.index_data);
-app.get(/\/vote\/index\/poll/, routes.index_poll);
-app.get(/\/vote\/index\/search/, routes.index_search);
-app.get(/\/vote\/all\/detail\/data/, routes.detail_data);
+app.get('/index/data', routes.index_data);
+app.get(/\/index\/poll/, routes.index_poll);
+app.get(/\/index\/search/, routes.index_search);
+app.get(/\/all\/detail\/data/, routes.detail_data);
 
-app.post(/\/vote\/register\/data/, routes.register_data);
+app.post(/\/register\/data/, routes.register_data);
 //app.post('/vote/index/info', routes.index_info);
 
 
