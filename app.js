@@ -30,8 +30,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //获得get请求，第一个参数是匹配内容，第二个参数是匹配成功后执行的回调函数
 app.get('/index', routes.index);  
+app.get('/indexen', routes.indexen);  
 app.get(/\/detail/, routes.detail);  
 app.get('/register', routes.register);  
+app.get('/registeren', routes.registeren);  
 app.get('/search', routes.search); 
 app.get('/rule', routes.rule);
 

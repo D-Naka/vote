@@ -6,6 +6,24 @@ document.write("<script language=javascript src='/javascripts/jquery.simplePagin
 abi=[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"proposals","outputs":[{"name":"name","type":"string"},{"name":"link","type":"string"},{"name":"applyAmount","type":"uint256"},{"name":"sendPeriod","type":"uint256"},{"name":"voteNumYes","type":"uint256"},{"name":"voteNumNo","type":"uint256"},{"name":"voteNumAct","type":"uint256"},{"name":"adopted","type":"bool"},{"name":"passed","type":"bool"},{"name":"addr","type":"address"},{"name":"remainTimes","type":"uint256"},{"name":"eachAmount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"MasterAddr","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"VoteIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"setOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"preSend","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sendProposals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"proposalAddr","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"blockOrigin","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"PreVoter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getContractBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sortedProposals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"pname","type":"string"},{"name":"plink","type":"string"},{"name":"papplyAmount","type":"uint256"},{"name":"psendPeriod","type":"uint256"},{"name":"paddr","type":"address"}],"name":"proposalSubmit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"blockStart","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"sortProposal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"cycleIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"voters","outputs":[{"name":"voteType","type":"uint256"},{"name":"proposalIndex","type":"uint256"},{"name":"votedIndex","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"votePeriod","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"mutiPreSend","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"index","type":"uint256"},{"name":"voteType","type":"uint256"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"startRefresh","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"start","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"sendApply","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"etzPerProposal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"budgetAddedChain","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"masterNodeNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sendProposalsNew","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getProposalsNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"pname","type":"string"},{"indexed":false,"name":"plink","type":"string"},{"indexed":false,"name":"papplyAmount","type":"uint256"},{"indexed":false,"name":"psendPeriod","type":"uint256"},{"indexed":false,"name":"paddr","type":"address"},{"indexed":false,"name":"VoteIndex","type":"uint256"}],"name":"submit_event","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"voteNumYes","type":"uint256"},{"indexed":false,"name":"voteNumNo","type":"uint256"},{"indexed":false,"name":"voteNumAct","type":"uint256"},{"indexed":false,"name":"adopted","type":"bool"}],"name":"vote_event","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"pIndex","type":"uint256"},{"indexed":false,"name":"remainTimes","type":"uint256"}],"name":"send_event","type":"event"}];
 
 VoteIndex = 1;
+
+// ch_en = 0;
+
+function en(){
+	window.location.href = "indexen?language=en";
+}
+function cn(){
+	window.location.href = "index?language=cn";
+}
+
+function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
+
+// ch_en = 1;
 $(document).ready(function($) {
 	var url = window.location.href,
 		indexReg = /index/,
@@ -19,6 +37,11 @@ $(document).ready(function($) {
 		// var web3 = new Web3(web3.currentProvider);
 		// console.log(web3);
 		// web3.eth.signTransaction({from: web3.eth.getCoinbase(), to: '0xc1e47b18030d373c6c21106a63c5621972621461',gas: 2000000, value: 10000000000000} , console.log)
+
+	var ch_en=GetQueryString('language');
+	if(ch_en == 'en'){
+		$('.register a').attr('href','registeren?language=en');
+	};
 
 
 	var voteFn = {
@@ -55,6 +78,8 @@ $(document).ready(function($) {
 		 */
 		userStr: function(objs) {
 			var str = '';
+			console.log("objs.length"+objs.length);
+			console.log(objs[objs.length-1].voteIndex)
 			VoteIndex = objs[objs.length-1].voteIndex;	
 			document.getElementById("num").innerHTML = VoteIndex;
 			for(var i=0; i<objs.length; i++) {
@@ -93,6 +118,156 @@ $(document).ready(function($) {
 					+ '</div>'
 	                + '<div class="btn btn2 btn_vote" id=' + objs[i].proposal_index + '>'
 	                + '反对'
+					+ '</div>'
+					+ '</div>'
+					+ '</li>';
+			}
+			return str;
+			
+		},
+		userStr_en: function(objs) {
+			var str = '';
+			console.log("objs.length"+objs.length);
+			console.log(objs[objs.length-1].voteIndex)
+			VoteIndex = objs[objs.length-1].voteIndex;	
+			document.getElementById("num").innerHTML = VoteIndex;
+			for(var i=0; i<objs.length; i++) {
+				str += '<li>'
+	                + '<div class="head">'
+	                + '<img src="' + "/images/boy.png" + '" alt="">'
+	                + '</a>'
+					+ '</div>'
+
+	                + '</div>'
+	                + '<div class="descr">'
+	                + '<div>'
+	                + '<span>' + objs[i].proposal_name + '</span>'
+	                + '<span>|</span>'
+	                + '<span>Number#' + objs[i].proposal_index + '</span>'
+	                + '</div>'
+					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"Proposal link："+objs[i].proposal_link + '</p>'+'</a>'
+					+ '<p>' +"Receiving address："+ objs[i].addr + '</p>'
+					+ '<p>' +"Funding amount："+ objs[i].applyAmount  +" &nbsp  &nbsp  Send times："+ objs[i].sendPeriod + '</p>'
+					+ '<p>' +"Voting periods： The"+ objs[i].voteIndex +"phase"+ '</p>'					
+	                + '</a>'
+	                + '</div>'
+					
+					+ '<div class="up">'
+					+ '<div class="vote_box">'
+	                + '<div class="vote vote_num">'
+	                + '<span>' + objs[i].voteNumYes + '&nbsp votes</span>'
+					+ '</div>'
+	                + '<div class="btn btn1 btn_vote" id=' + objs[i].proposal_index + '>'
+	                + 'Agree'
+					+ '</div>'
+					+ '</div>'
+					+ '<div class="vote_box">'
+					+ '<div class="vote vote_num">'
+	                + '<span>' + objs[i].voteNumNo + '&nbsp votes</span>'
+					+ '</div>'
+	                + '<div class="btn btn2 btn_vote" id=' + objs[i].proposal_index + '>'
+	                + 'Against'
+					+ '</div>'
+					+ '</div>'
+					+ '</li>';
+			}
+			return str;
+			
+		},
+
+		/**
+		 * [拼接首页用户信息字符串]
+		 * @param  {Array} objs [用户信息数组]
+		 * @return {String}     [用户信息字符串]
+		 */
+		userStrSearch: function(objs) {
+			var str = '';
+			for(var i=0; i<objs.length; i++) {
+				str += '<li>'
+	                + '<div class="head">'
+	                + '<img src="' + "/images/boy.png" + '" alt="">'
+	                + '</a>'
+					+ '</div>'
+
+	                + '</div>'
+	                + '<div class="descr">'
+	                + '<div>'
+	                + '<span>' + objs[i].proposal_name + '</span>'
+	                + '<span>|</span>'
+	                + '<span>编号#' + objs[i].proposal_index + '</span>'
+	                + '</div>'
+					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"提案链接："+objs[i].proposal_link + '</p>'+'</a>'
+					+ '<p>' +"接收地址："+ objs[i].addr + '</p>'
+					+ '<p>' +"资助数量："+ objs[i].applyAmount  +" &nbsp  &nbsp  发放次数："+ objs[i].sendPeriod + '</p>'
+					+ '<p>' +"投票期数： 第"+ objs[i].voteIndex +"期"+ '</p>'					
+	                + '</a>'
+	                + '</div>'
+					
+					+ '<div class="up">'
+					+ '<div class="vote_box">'
+	                + '<div class="vote vote_num">'
+	                + '<span>' + objs[i].voteNumYes + '票</span>'
+					+ '</div>'
+	                + '<div class="btn btn1 btn_vote" id=' + objs[i].proposal_index + '>'
+	                + '赞成'
+					+ '</div>'
+					+ '</div>'
+					+ '<div class="vote_box">'
+					+ '<div class="vote vote_num">'
+	                + '<span>' + objs[i].voteNumNo + '票</span>'
+					+ '</div>'
+	                + '<div class="btn btn2 btn_vote" id=' + objs[i].proposal_index + '>'
+	                + '反对'
+					+ '</div>'
+					+ '</div>'
+					+ '</li>';
+			}
+			return str;
+			
+		},
+		/**
+		 * [拼接首页用户信息字符串]
+		 * @param  {Array} objs [用户信息数组]
+		 * @return {String}     [用户信息字符串]
+		 */
+		userStrSearch_en: function(objs) {
+			var str = '';
+			for(var i=0; i<objs.length; i++) {
+				str += '<li>'
+	                + '<div class="head">'
+	                + '<img src="' + "/images/boy.png" + '" alt="">'
+	                + '</a>'
+					+ '</div>'
+
+	                + '</div>'
+	                + '<div class="descr">'
+	                + '<div>'
+	                + '<span>' + objs[i].proposal_name + '</span>'
+	                + '<span>|</span>'
+	                + '<span>Number#' + objs[i].proposal_index + '</span>'
+	                + '</div>'
+					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"Proposal link："+objs[i].proposal_link + '</p>'+'</a>'
+					+ '<p>' +"Receiving address："+ objs[i].addr + '</p>'
+					+ '<p>' +"Funding amount："+ objs[i].applyAmount  +" &nbsp  &nbsp  Send times："+ objs[i].sendPeriod + '</p>'
+					+ '<p>' +"Voting periods： The"+ objs[i].voteIndex +"phase"+ '</p>'					
+	                + '</a>'
+	                + '</div>'
+					
+					+ '<div class="up">'
+					+ '<div class="vote_box">'
+	                + '<div class="vote vote_num">'
+	                + '<span>' + objs[i].voteNumYes + '&nbsp votes</span>'
+					+ '</div>'
+	                + '<div class="btn btn1 btn_vote" id=' + objs[i].proposal_index + '>'
+	                + 'Agree'
+					+ '</div>'
+					+ '</div>'
+					+ '<div class="vote_box">'
+					+ '<div class="vote vote_num">'
+	                + '<span>' + objs[i].voteNumNo + '&nbsp votes</span>'
+					+ '</div>'
+	                + '<div class="btn btn2 btn_vote" id=' + objs[i].proposal_index + '>'
+	                + 'Against'
 					+ '</div>'
 					+ '</div>'
 					+ '</li>';
@@ -184,7 +359,6 @@ $(document).ready(function($) {
 		 * [投票事件绑定]
 		 */
 		userPoll: function() {
-			console.log("userPoll4");
 			$('.btn1').off();
 			$('.btn1').click(function(event) {
 				var _this = this;
@@ -204,9 +378,38 @@ $(document).ready(function($) {
 				var id = $(this).attr('id');
 				var vote_id = parseInt(id);
 				sendVote(vote_id,2);
-				console.log("data"+data);
 				voteFn.setStorage('data', data);
 				window.location.href="register?vote=0";
+
+
+
+			});
+		},
+		
+
+
+		userPollen: function() {
+			$('.btn1').off();
+			$('.btn1').click(function(event) {
+				var _this = this;
+				var id = $(this).attr('id');
+				var vote_id = parseInt(id);
+				sendVote(vote_id,1);
+				voteFn.setStorage('data', data);
+				window.location.href="registeren?vote=0";
+
+			});
+		},
+
+		userOpposeen: function() {
+			$('.btn2').off();
+			$('.btn2').click(function(event) {
+				var _this = this;
+				var id = $(this).attr('id');
+				var vote_id = parseInt(id);
+				sendVote(vote_id,2);
+				voteFn.setStorage('data', data);
+				window.location.href="registeren?vote=0";
 
 
 
@@ -225,26 +428,65 @@ $(document).ready(function($) {
 			var applyAmount    = $('.applyAmount').val();
 			var sendPeriod     = $('.sendPeriod').val();
 
-			if(!proposal_name) {
-				alert("请填写提案名称");
-				return false;
+				if(!proposal_name) {
+					alert("请填写提案名称");
+					return false;
+				}
+				if(!proposal_link) {
+					alert("请填写提案链接地址");
+					return false;
+				}
+				if(!addr) {
+					alert("请填写接收资助钱包地址");
+					return false;
+				}
+				if(!applyAmount) {
+					alert("请填写资助数量");
+					return false;
+				}
+				if(!sendPeriod) {
+					alert("请填写资助发放次数");
+					return false;
+				}
+			
+			return {
+				proposal_name: proposal_name,
+				proposal_link: proposal_link,
+				addr: addr,
+				applyAmount: applyAmount,
+				sendPeriod: sendPeriod
 			}
-			if(!proposal_link) {
-				alert("请填写提案链接地址");
-				return false;
-			}
-			if(!addr) {
-				alert("请填写接收资助钱包地址");
-				return false;
-			}
-			if(!applyAmount) {
-				alert("请填写资助数量");
-				return false;
-			}
-			if(!sendPeriod) {
-				alert("请填资助发放次数");
-				return false;
-			}
+		},
+
+		getRegisterData_en: function() {
+			var proposal_name = $('.proposal_name').val();
+			var proposal_link = $('.proposal_link').val();
+			var addr 	  	= $('.addr').val();
+			var applyAmount    = $('.applyAmount').val();
+			var sendPeriod     = $('.sendPeriod').val();
+	
+			var ch_en=GetQueryString('language');
+
+				if(!proposal_name) {
+					alert("Please enter the proposal name");
+					return false;
+				}
+				if(!proposal_link) {
+					alert("Please enter the proposal link");
+					return false;
+				}
+				if(!addr) {
+					alert("Please enter the receiving wallet addres");
+					return false;
+				}
+				if(!applyAmount) {
+					alert("Please enter the funding amount");
+					return false;
+				}
+				if(!sendPeriod) {
+					alert("Please enter the send times");
+					return false;
+				}			
 			return {
 				proposal_name: proposal_name,
 				proposal_link: proposal_link,
@@ -275,10 +517,20 @@ $(document).ready(function($) {
 				success: function(data) {
 					offset += limit;
 					data = JSON.parse(data);
-					$('.coming').append(voteFn.userStr(data.data.objects));
-					console.log("userPoll2");
+					if(ch_en == 'en'){
+						$('.coming').append(voteFn.userStr_en(data.data.objects));
+					}
+					else
+					{
+						$('.coming').append(voteFn.userStr(data.data.objects));
+					}
+
 					voteFn.userPoll();
 					voteFn.userOppose();
+					if(ch_en == 'en'){
+						voteFn.userPollen();
+						voteFn.userOpposeen();
+					};
 				}
 			});
 		}
@@ -314,7 +566,7 @@ function changePage(){
 }
 
 
-		$('.search span').click(function(event) {
+	$('.search span').click(function(event) {
 			var searchContent = $('.search input').val();
 			voteFn.setStorage('searchContent', searchContent);
 			var seaechUrl = /(.*)index/.exec(url)[1] + 'search';
@@ -324,7 +576,6 @@ function changePage(){
 	} else if(registerReg.test(url)) {
 		var data  = voteFn.getStorage('data');
 		document.getElementById('txta').value = data;  //设置textarea的值  
-		console.log(data);
 		/*提交提案*/
 		sendTx = async() => {
 			let fromAddr = await web3.eth.getCoinbase()
@@ -334,17 +585,24 @@ function changePage(){
 
 		var rebtnFlag = true;
 
-		$('.gender input').click(function(event) {
+	$('.gender input').click(function(event) {
 			$(this).attr('select', 'yes').parent('div').siblings('div').children('input').attr('select', 'no');
 		});
-		$('.rebtn').click(function(event) {
-
+	$('.rebtn').click(function(event) {
 
 			if(!rebtnFlag) {
 				return
 			}
 			rebtnFlag = false;
-			var registerData = voteFn.getRegisterData();
+			console.log(ch_en);	
+			if (ch_en == 'en')
+			{
+				var registerData = voteFn.getRegisterData_en();
+			}			
+			else
+			{
+				var registerData = voteFn.getRegisterData();
+			}
 			if(registerData == false) {
 				rebtnFlag = true;
 				return;
@@ -393,10 +651,19 @@ function changePage(){
 			success: function(data) {
 				data = JSON.parse(data);
 				if(data.data.length) {
-					$('.coming').html(voteFn.userStr(data.data));
-					console.log("userPoll3");
+					if(ch_en == 'en'){
+						$('.coming').html(voteFn.userStrSearch_en(data.data));
+					}
+					else
+					{
+						$('.coming').html(voteFn.userStrSearch(data.data));	
+					}
 					voteFn.userPoll();
 					voteFn.userOppose();
+					if(ch_en == 'en'){
+						voteFn.userPollen();
+						voteFn.userOpposeen();
+					};
 				}else {
 					$('.nodata').show();
 				}

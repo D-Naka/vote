@@ -50,7 +50,7 @@ let dealFn = {
 	 */
 	getItem: (id, objs) => {
 		for(var i=0; i<objs.length; i++) {
-			if(objs[i].id === id) {
+			if(objs[i].proposal_index === id) {
 				return objs[i];
 			}
 		}

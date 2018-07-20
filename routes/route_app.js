@@ -22,7 +22,6 @@ vote_contract.methods.getProposalsNum().call().then(function(result){
 var data =vote_contract.methods.PreVoter().encodeABI();
 data =vote_contract.methods.proposalSubmit("x1" ,"p1", 2, 1, "0x9194a2F58EE5673B578c5577351dcD3bAE062B2d").encodeABI();
 data =vote_contract.methods.vote(1,1).encodeABI();
-console.log(data)
 
 vote_contract.events.submit_event({
     fromBlock: 0,
@@ -125,6 +124,10 @@ dealFn.readFileData('database.json').then((data) => {
 exports.index = (req, res) => {
     res.render('index');
 };
+exports.indexen = (req, res) => {
+    // console.log("res")
+    res.render('indexen');
+};
 
 exports.detail = (req, res) => {
     res.render('detail');
@@ -132,6 +135,10 @@ exports.detail = (req, res) => {
 
 exports.register = (req, res) => {
     res.render('register');
+};
+
+exports.registeren = (req, res) => {
+    res.render('registeren');
 };
 
 exports.search = (req, res) => {
@@ -164,42 +171,6 @@ exports.index_data = async(req, res) => {
     res.send(JSON.stringify(sendData));
 
 
-    // //读取提案信息
-    // var result = await vote_contract.methods.getProposalsNum().call();
-    // plength = Number(result);
-    // let total = database.data.total;
-
-    // if(plength > database.data.total)
-    // {
-    //     var pIndex = total;
-    //     var proposal = await vote_contract.methods.proposals(pIndex).call();
-    //     let registerData = proposal;
-    //     registerData.id = ++total;
-    //     database.data.total++;
-    //     registerData.head_icon = '/images/boy.png';
-
-    //     registerData1={
-	// 		proposal_name: proposal.name,
-    //         proposal_link: proposal.link,
-    //         applyAmount:proposal.applyAmount,
-    //         sendPeriod: proposal.sendPeriod,
-    //         voteNumYes: proposal.voteNumYes,
-    //         voteNumNo:proposal.voteNumNo,
-    //         voteNumAct:proposal.voteNumAct,
-    //         adopted: proposal.adopted,
-    //         passed: proposal.passed,
-    //         addr:proposal.addr,
-    //         payedTimes:proposal.payedTimes,
-    //         proposal_index:pIndex+1
-
-    //     }
-    //     database.data.objects.push(registerData1);
-    //     dealFn.writeFileData('database.json', database).then((msg) => {
-    //         console.log(msg);
-    //     }, (msg) => {
-    //         console.log(msg);
-    //     });
-    // }
 };
 
 exports.index_poll = (req, res) => {

@@ -129,7 +129,7 @@ a {
     background-image: linear-gradient(0deg, #1f222c 0%, #393d4b 100%);
     position: absolute;
     margin: 20px auto;
-    right: 0;
+    right: 100px;
     top: 0;
 }
 
@@ -892,12 +892,109 @@ a {
     background-color: #54ABE8;
     box-shadow: 0 2px rgba(127, 212, 245, 0.37);
 }
+/* language */
+.mobnav-btn {
+	display:block;
+	width:25px;
+	height:23px;
+	overflow:hidden;
+	cursor:pointer;
+	position:absolute;
+	top:16px;
+	left:8px;
+}
+.mobnav-btn span {
+	top:50%;
+	margin-top:-2px;
+}
+.mobnav-btn span:first-child {
+	content:"";
+	top:6px;
+	left:0;
+}
+.mobnav-btn span:last-child {
+	content:"";
+	top:auto;
+	bottom:5px;
+	left:0;
+}
+.mobnav-btn span,.mobnav-btn span:first-child,.mobnav-btn span:last-child {
+	left:2px;
+	position:absolute;
+	background:rgba(255,255,255,0.9);
+	-webkit-transition:all 0.5s ease;
+	width:25px;
+	height:2px;
+	border-radius:3px;
+	transition:all 0.5s ease;
+}
+.dropdown {
+	top:0.04rem;
+	top:0;
+	position:absolute;
+	right:0.2rem;
+	padding:0;
+}
+.dropdown-menu {
+	left:-0.5rem;
+	top:0.8rem;
+}
+.dropdown {
+	text-decoration:none;
+	float:right;
+    height:auto;
+    padding-top: 30px;
+    font-size: 16px;
+    width: 80px;
+    text-align: center;
+}
+.dropdown ul{
+    margin-top:5px;
+}
+.dropdown ul .active a{
+    color: #00fdfa;
+}
+.dropdown li{
+    list-style: none;
+    height: 35px;
+    line-height: 35px;
+    background: #1f222c;
+    text-align: center;
+}
+.dropdown li a{
+    color: #487085;
+}
+.dropdown-toggle {
+	color:#00fdfa !important;
+	cursor:pointer;
+	outline:none;
+	border:0 !important;
+}
+.dropdown-toggle:hover,.dropdown-toggle:focus {
+	color:#00fdfa;
+}
+.dropdown a {
+	text-decoration:none;
+	cursor:pointer;
+}
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
 
 @media screen and (max-width:1200px) {
     .logo{
         float: none;
-        text-align: center;
         margin: 0 auto;
+    }
+    .register{
+        right: 0;
     }
     .register{
         margin: 20px auto;
