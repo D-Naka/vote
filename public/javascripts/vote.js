@@ -3,9 +3,530 @@ document.write("<script language=javascript src='/javascripts/jquery.min.js'></s
 
 document.write("<script language=javascript src='/javascripts/jquery.simplePagination.js'></script>");
 
-abi=[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"proposals","outputs":[{"name":"name","type":"string"},{"name":"link","type":"string"},{"name":"applyAmount","type":"uint256"},{"name":"sendPeriod","type":"uint256"},{"name":"voteNumYes","type":"uint256"},{"name":"voteNumNo","type":"uint256"},{"name":"voteNumAct","type":"uint256"},{"name":"adopted","type":"bool"},{"name":"passed","type":"bool"},{"name":"addr","type":"address"},{"name":"remainTimes","type":"uint256"},{"name":"eachAmount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"MasterAddr","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"VoteIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"setOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"preSend","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sendProposals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"proposalAddr","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"blockOrigin","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"PreVoter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getContractBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sortedProposals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"pname","type":"string"},{"name":"plink","type":"string"},{"name":"papplyAmount","type":"uint256"},{"name":"psendPeriod","type":"uint256"},{"name":"paddr","type":"address"}],"name":"proposalSubmit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"blockStart","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"sortProposal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"cycleIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"voters","outputs":[{"name":"voteType","type":"uint256"},{"name":"proposalIndex","type":"uint256"},{"name":"votedIndex","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"votePeriod","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"mutiPreSend","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"index","type":"uint256"},{"name":"voteType","type":"uint256"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"startRefresh","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"start","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"sendApply","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"etzPerProposal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"budgetAddedChain","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"masterNodeNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sendProposalsNew","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getProposalsNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"pname","type":"string"},{"indexed":false,"name":"plink","type":"string"},{"indexed":false,"name":"papplyAmount","type":"uint256"},{"indexed":false,"name":"psendPeriod","type":"uint256"},{"indexed":false,"name":"paddr","type":"address"},{"indexed":false,"name":"VoteIndex","type":"uint256"}],"name":"submit_event","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"voteNumYes","type":"uint256"},{"indexed":false,"name":"voteNumNo","type":"uint256"},{"indexed":false,"name":"voteNumAct","type":"uint256"},{"indexed":false,"name":"adopted","type":"bool"}],"name":"vote_event","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"pIndex","type":"uint256"},{"indexed":false,"name":"remainTimes","type":"uint256"}],"name":"send_event","type":"event"}];
+abi=[
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "pIndex",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "remainTimes",
+				"type": "uint256"
+			}
+		],
+		"name": "send_event",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "voteNumYes",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumNo",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumAct",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "adopted",
+				"type": "bool"
+			}
+		],
+		"name": "vote_event",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "pname",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "plink",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "papplyAmount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "psendPeriod",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "paddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "VoteIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "submit_event",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "delegate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "pname",
+				"type": "string"
+			},
+			{
+				"name": "plink",
+				"type": "string"
+			},
+			{
+				"name": "papplyAmount",
+				"type": "uint256"
+			},
+			{
+				"name": "psendPeriod",
+				"type": "uint256"
+			},
+			{
+				"name": "paddr",
+				"type": "address"
+			}
+		],
+		"name": "proposalSubmit",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"name": "voteType",
+				"type": "uint256"
+			}
+		],
+		"name": "vote",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "blockOrigin",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "blockStart",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "budgetAddedChain",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "cycleIndex",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "delegateVoters",
+		"outputs": [
+			{
+				"name": "addr",
+				"type": "address"
+			},
+			{
+				"name": "isdelegated",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "etzPerProposal",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getContractBalance",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getProposalsNum",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "MasterAddr",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "masterNodeNum",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "proposals",
+		"outputs": [
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "link",
+				"type": "string"
+			},
+			{
+				"name": "applyAmount",
+				"type": "uint256"
+			},
+			{
+				"name": "sendPeriod",
+				"type": "uint256"
+			},
+			{
+				"name": "voteNumYes",
+				"type": "uint256"
+			},
+			{
+				"name": "voteNumNo",
+				"type": "uint256"
+			},
+			{
+				"name": "voteNumAct",
+				"type": "uint256"
+			},
+			{
+				"name": "adopted",
+				"type": "bool"
+			},
+			{
+				"name": "passed",
+				"type": "bool"
+			},
+			{
+				"name": "addr",
+				"type": "address"
+			},
+			{
+				"name": "remainTimes",
+				"type": "uint256"
+			},
+			{
+				"name": "eachAmount",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "proposalsAddr",
+		"outputs": [
+			{
+				"name": "addr",
+				"type": "address"
+			},
+			{
+				"name": "remainTimes",
+				"type": "uint256"
+			},
+			{
+				"name": "eachAmount",
+				"type": "uint256"
+			},
+			{
+				"name": "passed",
+				"type": "bool"
+			},
+			{
+				"name": "voteIndex",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "sortedProposals",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "status",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "VoteIndex",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "votePeriod",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "voters",
+		"outputs": [
+			{
+				"name": "voteType",
+				"type": "uint256"
+			},
+			{
+				"name": "proposalIndex",
+				"type": "uint256"
+			},
+			{
+				"name": "votedIndex",
+				"type": "uint256"
+			},
+			{
+				"name": "isdelegate",
+				"type": "bool"
+			},
+			{
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+VoteIndex = 0;
 
-VoteIndex = 1;
+if (typeof web3_etz !== 'undefined') {
+	// Use Mist/MetaMask's provider
+	web3 = new Web3(web3_etz.currentProvider)
+	web3.eth.getCoinbase(console.log)
+} else {
+	console.log('No web3? You should consider trying MetaMask!')
+	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+	web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+}
+var mycontract = new web3.eth.Contract(abi,"0x4831f0a16e15bbf7765ebf3bbea29482b116c1bd");
 
 // ch_en = 0;
 
@@ -78,10 +599,19 @@ $(document).ready(function($) {
 		 */
 		userStr: function(objs) {
 			var str = '';
+			var data1=11;
 			console.log("objs.length"+objs.length);
 			console.log(objs[objs.length-1].voteIndex)
 			VoteIndex = objs[objs.length-1].voteIndex;	
 			document.getElementById("num").innerHTML = VoteIndex;
+
+			mycontract.methods.getContractBalance().call().then(function(result){
+					console.log("testdata"+result);
+					document.getElementById("numetz").innerHTML = result;
+			});
+			
+			console.log("testdata2"+data1);
+				
 			for(var i=0; i<objs.length; i++) {
 				str += '<li>'
 	                + '<div class="head">'
@@ -500,7 +1030,7 @@ $(document).ready(function($) {
 
 	if(indexReg.test(url)) {
 		sendVote = async(vote_id,vote_type) => {
-			var mycontract = new web3.eth.Contract(abi,"0x5836c15e714962964352c86c82d376a181d47595");
+			var mycontract = new web3.eth.Contract(abi,"0x4831f0a16e15bbf7765ebf3bbea29482b116c1bd");
 			data = mycontract.methods.vote(vote_id,vote_type).encodeABI();
 			}
 
@@ -579,7 +1109,7 @@ function changePage(){
 		/*提交提案*/
 		sendTx = async() => {
 			let fromAddr = await web3.eth.getCoinbase()
-			var mycontract = new web3.eth.Contract(abi,"0x5836c15e714962964352c86c82d376a181d47595");
+			var mycontract = new web3.eth.Contract(abi,"0x4831f0a16e15bbf7765ebf3bbea29482b116c1bd");
 			await mycontract.methods.proposalSubmit(pName,pLink,pAmmount,pPeriod,pAddr).send({from: fromAddr});
 			}
 

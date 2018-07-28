@@ -19,8 +19,7 @@ vote_contract.methods.getProposalsNum().call().then(function(result){
     console.log(result)
     data_test = result;
 });
-var data =vote_contract.methods.PreVoter().encodeABI();
-data =vote_contract.methods.proposalSubmit("x1" ,"p1", 2, 1, "0x9194a2F58EE5673B578c5577351dcD3bAE062B2d").encodeABI();
+var data =vote_contract.methods.proposalSubmit("x1" ,"p1", 2, 1, "0x9194a2F58EE5673B578c5577351dcD3bAE062B2d").encodeABI();
 data =vote_contract.methods.vote(1,1).encodeABI();
 
 vote_contract.events.submit_event({

@@ -1,6 +1,6 @@
 const providerURL = 'http://52.74.3.64:9646'
 
-const contractAddr = '0x5836c15e714962964352c86c82d376a181d47595'
+const contractAddr = '0x4831f0a16e15bbf7765ebf3bbea29482b116c1bd'
 
 const controllerAddr = '0x9194a2F58EE5673B578c5577351dcD3bAE062B2d'
 
@@ -23,134 +23,31 @@ const abi = [
 		"type": "event"
 	},
 	{
-		"constant": false,
-		"inputs": [],
-		"name": "mutiPreSend",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "preSend",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "PreVoter",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
+		"anonymous": false,
 		"inputs": [
 			{
-				"name": "pname",
-				"type": "string"
-			},
-			{
-				"name": "plink",
-				"type": "string"
-			},
-			{
-				"name": "papplyAmount",
+				"indexed": false,
+				"name": "voteNumYes",
 				"type": "uint256"
 			},
 			{
-				"name": "psendPeriod",
+				"indexed": false,
+				"name": "voteNumNo",
 				"type": "uint256"
 			},
 			{
-				"name": "paddr",
-				"type": "address"
-			}
-		],
-		"name": "proposalSubmit",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "sendApply",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "setOwner",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "sortProposal",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "start",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "startRefresh",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "index",
+				"indexed": false,
+				"name": "voteNumAct",
 				"type": "uint256"
 			},
 			{
-				"name": "voteType",
-				"type": "uint256"
+				"indexed": false,
+				"name": "adopted",
+				"type": "bool"
 			}
 		],
-		"name": "vote",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
+		"name": "vote_event",
+		"type": "event"
 	},
 	{
 		"anonymous": false,
@@ -190,31 +87,66 @@ const abi = [
 		"type": "event"
 	},
 	{
-		"anonymous": false,
+		"constant": false,
 		"inputs": [
 			{
-				"indexed": false,
-				"name": "voteNumYes",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumNo",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumAct",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "adopted",
-				"type": "bool"
+				"name": "addr",
+				"type": "address"
 			}
 		],
-		"name": "vote_event",
-		"type": "event"
+		"name": "delegate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "pname",
+				"type": "string"
+			},
+			{
+				"name": "plink",
+				"type": "string"
+			},
+			{
+				"name": "papplyAmount",
+				"type": "uint256"
+			},
+			{
+				"name": "psendPeriod",
+				"type": "uint256"
+			},
+			{
+				"name": "paddr",
+				"type": "address"
+			}
+		],
+		"name": "proposalSubmit",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"name": "voteType",
+				"type": "uint256"
+			}
+		],
+		"name": "vote",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"payable": true,
@@ -276,6 +208,29 @@ const abi = [
 			{
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "delegateVoters",
+		"outputs": [
+			{
+				"name": "addr",
+				"type": "address"
+			},
+			{
+				"name": "isdelegated",
+				"type": "bool"
 			}
 		],
 		"payable": false,
@@ -371,25 +326,6 @@ const abi = [
 		"inputs": [
 			{
 				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "proposalAddr",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
 				"type": "uint256"
 			}
 		],
@@ -453,32 +389,29 @@ const abi = [
 		"inputs": [
 			{
 				"name": "",
-				"type": "uint256"
+				"type": "address"
 			}
 		],
-		"name": "sendProposals",
+		"name": "proposalsAddr",
 		"outputs": [
 			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
+				"name": "addr",
+				"type": "address"
+			},
 			{
-				"name": "",
+				"name": "remainTimes",
 				"type": "uint256"
-			}
-		],
-		"name": "sendProposalsNew",
-		"outputs": [
+			},
 			{
-				"name": "",
+				"name": "eachAmount",
+				"type": "uint256"
+			},
+			{
+				"name": "passed",
+				"type": "bool"
+			},
+			{
+				"name": "voteIndex",
 				"type": "uint256"
 			}
 		],
@@ -499,6 +432,20 @@ const abi = [
 			{
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "status",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"payable": false,
@@ -554,6 +501,14 @@ const abi = [
 			{
 				"name": "votedIndex",
 				"type": "uint256"
+			},
+			{
+				"name": "isdelegate",
+				"type": "bool"
+			},
+			{
+				"name": "addr",
+				"type": "address"
 			}
 		],
 		"payable": false,
