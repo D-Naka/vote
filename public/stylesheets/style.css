@@ -987,6 +987,25 @@ a {
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
 }
+.wallet_add{
+    width: 98%;
+    height: 24px;
+    line-height: 24px;
+    font-size: 14px;
+    padding-left: 1%;
+}
+.entrust{
+    width: 130px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    background-image: linear-gradient(0deg, #1f222c 0%, #393d4b 100%);
+    margin: 20px auto 0;
+    margin-left: 100px;
+}
+
 
 @media screen and (max-width:1200px) {
     .logo{

@@ -52,6 +52,7 @@ vote_contract.events.submit_event({
          proposal_index:total+1,
          voteIndex:voteIndex
      }
+     database.data.total += 1;
      database.data.objects.push(registerData1);
      dealFn.writeFileData('database.json', database).then((msg) => {
          console.log(msg);
@@ -97,6 +98,7 @@ vote_contract.getPastEvents('submit_event', {
                 voteIndex:voteIndex       
             }
             console.log(registerData1);
+            database.data.total += 1;
             database.data.objects.push(registerData1);
             dealFn.writeFileData('database.json', database).then((msg) => {
                 console.log(msg);

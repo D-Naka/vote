@@ -48,29 +48,34 @@
 						</div>
 				</div>
 				<div class="right_box">
-					<div class="show_box">
-						<div class="num_box">
-							<h2>&nbsp 奖励池余额：</h2>
-							<div><h5><span id="numetz"> </span></h5> <h8>ETZ</h8></div>
+						<div class="rule_box">
+							<h4>社区治理规则</h4>
+							<p>
+							<h5>社区治理提案论坛地址：</h5><a target="_blank" style="color: #999999" href="http://remix.etherzero.org/forum/"> http://remix.etherzero.org/forum/ </a>
+							<br/><br/><h5>社区治理合约地址：</h5><a target="_blank" style="color: #999999" href="https://explorer.etherzero.org/addr/0x4831f0a16e15bbf7765ebf3bbea29482b116c1bd"> 0x4831f0a16e15bbf7765ebf3bbea29482b116c1bd </a>
+							<br/><br/><h5>主节点合约地址：</h5><a target="_blank" style="color: #999999" href="https://explorer.etherzero.org/addr/0xba69c148a9332c3af6cad30adb1a09f3a1d1b8f7"> 0xba69c148a9332c3af6cad30adb1a09f3a1d1b8f7 </a>
+							<br/><br/><h5>当前投票期数：</h5>第<span id="num"></span>
+							<!-- <script type="text/javascript"> VoteIndex </script>	 -->
+							期
+							<br/><br/><h5>提案奖励：</h5>每10万个区块为一个提案的投票周期。每提交一个提案需要消耗50个ETZ，这部分ETZ也被作为提案奖励累积。
+							<br/><br/><h5>创建提案：</h5>在提案创建页面输入提案详情，点击“创建提案”按钮后，将调用以太零goETZ钱包，可以调用智能合约创建一个提案。
+							<br/><br/><h5>主节点投票：</h5>点击赞成或反对的按钮，会生成相应调用智能合约的命令数据。符合主节点的地址有投票资格，将命令数据拷贝到任何以太零钱包中可以进行投票。
+	
+						</p>
 						</div>
-								
+	
+						<div class="show_box">
+							<div class="num_box">
+								<h2>&nbsp 奖励池余额：</h2>
+								<div><h5><span id="numetz"> </span></h5> <h8>ETZ</h8></div>
+							</div>
+							<input type="text" class="reinput wallet_add" placeholder="请输入被委托的钱包地址" />
+							<a href="#">
+								<button class="entrust">主节点委托</button>
+							</a>
+									
+						</div>
 					</div>
-					<div class="rule_box">
-						<h4>社区治理规则</h4>
-						<p>
-						<h5>社区治理提案论坛地址：</h5><a target="_blank" style="color: #999999" href="http://remix.etherzero.org/forum/"> http://remix.etherzero.org/forum/ </a>
-						<br/><br/><h5>社区治理合约地址：</h5><a target="_blank" style="color: #999999" href="https://explorer.etherzero.org/addr/0x4831f0a16e15bbf7765ebf3bbea29482b116c1bd"> 0x4831f0a16e15bbf7765ebf3bbea29482b116c1bd </a>
-						<br/><br/><h5>主节点合约地址：</h5><a target="_blank" style="color: #999999" href="https://explorer.etherzero.org/addr/0xba69c148a9332c3af6cad30adb1a09f3a1d1b8f7"> 0xba69c148a9332c3af6cad30adb1a09f3a1d1b8f7 </a>
-						<br/><br/><h5>当前投票期数：</h5>第<span id="num"></span>
-						<!-- <script type="text/javascript"> VoteIndex </script>	 -->
-						期
-						<br/><br/><h5>提案奖励：</h5>每10万个区块为一个提案的投票周期。每提交一个提案需要消耗50个ETZ，这部分ETZ也被作为提案奖励累积。
-						<br/><br/><h5>创建提案：</h5>在提案创建页面输入提案详情，点击“创建提案”按钮后，将调用以太零goETZ钱包，可以调用智能合约创建一个提案。
-						<br/><br/><h5>主节点投票：</h5>点击赞成或反对的按钮，会生成相应调用智能合约的命令数据。符合主节点的地址有投票资格，将命令数据拷贝到任何以太零钱包中可以进行投票。
-
-					</p>
-					</div>
-				</div>
 		</div>
         
 	</div>
@@ -81,21 +86,6 @@
 </body>
 <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
 <script type="text/javascript">
-	window.addEventListener('load', function() {
-		// Checking if Web3 has been injected by the browser (Mist/MetaMask)
-		if (typeof web3_etz !== 'undefined') {
-			// Use Mist/MetaMask's provider
-			web3 = new Web3(web3_etz.currentProvider)
-			web3.eth.getCoinbase(console.log)
-		} else {
-			console.log('No web3? You should consider trying MetaMask!')
-			// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-			web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-		}
-
-		// Now you can start your app & access web3 freely:
-
-	})
 
 $(document).ready(function() {
 	$('.dropdown-menu li').click(function(e) {

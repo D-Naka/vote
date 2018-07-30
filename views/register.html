@@ -135,8 +135,7 @@
 					<h4>钱包命令</h4>
 				</div>
 				<div class="command_con">
-					<h4>提案投票命令：</h4>
-					<p>将以下内容粘贴到钱包附加data中，主节点可以对相应的提案进行投票。</p>
+					<p>将命令内容粘贴到以太零钱包附加data中，发送交易，即可进行投票或者主节点委托。</p>
 					
 					<textarea id="txta" style="width: 80%; height: 150px; margin:0 auto;">test</textarea>     
 					<!--script type="text/javascript">     
@@ -217,23 +216,6 @@
 		<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 		<script type="text/javascript" src="/javascripts/jquery.min.js "></script>
 		<script type="text/javascript" src="/javascripts/layout.js"></script>
-		<script type="text/javascript">
-		window.addEventListener('load', function() {
-			// Checking if Web3 has been injected by the browser (Mist/MetaMask)
-			if (typeof web3_etz !== 'undefined') {
-				// Use Mist/MetaMask's provider
-				web3 = new Web3(web3_etz.currentProvider)
-				web3.eth.getCoinbase(console.log)
-			} else {
-				console.log('No web3? You should consider trying MetaMask!')
-				// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-				web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-			}
-
-			// Now you can start your app & access web3 freely:
-
-		})
-		</script>
 		<script type="text/javascript">
 
 

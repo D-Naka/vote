@@ -599,18 +599,13 @@ $(document).ready(function($) {
 		 */
 		userStr: function(objs) {
 			var str = '';
-			var data1=11;
-			console.log("objs.length"+objs.length);
-			console.log(objs[objs.length-1].voteIndex)
 			VoteIndex = objs[objs.length-1].voteIndex;	
 			document.getElementById("num").innerHTML = VoteIndex;
 
 			mycontract.methods.getContractBalance().call().then(function(result){
-					console.log("testdata"+result);
 					document.getElementById("numetz").innerHTML = result;
 			});
 			
-			console.log("testdata2"+data1);
 				
 			for(var i=0; i<objs.length; i++) {
 				str += '<li>'
@@ -657,8 +652,6 @@ $(document).ready(function($) {
 		},
 		userStr_en: function(objs) {
 			var str = '';
-			console.log("objs.length"+objs.length);
-			console.log(objs[objs.length-1].voteIndex)
 			VoteIndex = objs[objs.length-1].voteIndex;	
 			document.getElementById("num").innerHTML = VoteIndex;
 			for(var i=0; i<objs.length; i++) {
@@ -676,7 +669,7 @@ $(document).ready(function($) {
 	                + '<span>Number#' + objs[i].proposal_index + '</span>'
 	                + '</div>'
 					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"Proposal link："+objs[i].proposal_link + '</p>'+'</a>'
-					+ '<p>' +"Receiving address："+ objs[i].addr + '</p>'
+					+ '<p>' +"Addr："+ objs[i].addr + '</p>'
 					+ '<p>' +"Funding amount："+ objs[i].applyAmount  +" &nbsp  &nbsp  Send times："+ objs[i].sendPeriod + '</p>'
 					+ '<p>' +"Voting periods： The"+ objs[i].voteIndex +"phase"+ '</p>'					
 	                + '</a>'
@@ -777,7 +770,7 @@ $(document).ready(function($) {
 	                + '<span>Number#' + objs[i].proposal_index + '</span>'
 	                + '</div>'
 					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"Proposal link："+objs[i].proposal_link + '</p>'+'</a>'
-					+ '<p>' +"Receiving address："+ objs[i].addr + '</p>'
+					+ '<p>' +"Addr："+ objs[i].addr + '</p>'
 					+ '<p>' +"Funding amount："+ objs[i].applyAmount  +" &nbsp  &nbsp  Send times："+ objs[i].sendPeriod + '</p>'
 					+ '<p>' +"Voting periods： The"+ objs[i].voteIndex +"phase"+ '</p>'					
 	                + '</a>'
@@ -915,6 +908,22 @@ $(document).ready(function($) {
 
 			});
 		},
+		masterChange: function() {
+			$('.entrust').off();
+			$('.entrust').click(function(event) {
+				var _this = this;
+				var NewMasterAddr = $('.wallet_add').val();
+				if((!NewMasterAddr)||(NewMasterAddr.length<40)) {
+					alert("请填主节点委托投票地址");
+					return false;
+				}
+				sendMaster(NewMasterAddr);
+				voteFn.setStorage('data', data);
+				window.location.href="register?vote=0";
+
+			});
+		},
+		
 		
 
 
@@ -1030,13 +1039,15 @@ $(document).ready(function($) {
 
 	if(indexReg.test(url)) {
 		sendVote = async(vote_id,vote_type) => {
-			var mycontract = new web3.eth.Contract(abi,"0x4831f0a16e15bbf7765ebf3bbea29482b116c1bd");
 			data = mycontract.methods.vote(vote_id,vote_type).encodeABI();
 			}
 
+		sendMaster = async(NewMasterAddr) => {
+			data = mycontract.methods.delegate(NewMasterAddr).encodeABI();
+			}
 		/*主页*/
 		var voteUser = voteFn.getStorage('voteUser');
-		var limit=5;
+		var limit=10;
 		var offset=0;
 
 		function aa(){
@@ -1044,6 +1055,7 @@ $(document).ready(function($) {
 				url: '/index/data',
 				data: {'limit': limit, 'offset': offset },
 				type: 'GET',
+				async: false,
 				success: function(data) {
 					offset += limit;
 					data = JSON.parse(data);
@@ -1053,6 +1065,7 @@ $(document).ready(function($) {
 					else
 					{
 						$('.coming').append(voteFn.userStr(data.data.objects));
+		
 					}
 
 					voteFn.userPoll();
@@ -1067,17 +1080,19 @@ $(document).ready(function($) {
 
 		$(document).ready(function() {
 			aa();
+			voteFn.masterChange();
 		});
 var page_index;
 $.ajax({
 	url: '/index/data?limit=1000&offset=0',
 	type: 'GET',
+	async: false,
 	dataType:'json',
 	success: function(data) {
 		var item = data.data.objects.length;
 		$('#dark-pagination').pagination({
 			items: item,
-			itemsOnPage:5,
+			itemsOnPage:10,
 			cssStyle: 'dark-theme',
 			// onInit: changePage,
             onPageClick: changePage,
@@ -1090,7 +1105,7 @@ $.ajax({
 
 function changePage(){
 	page_index = $("#dark-pagination").pagination('getCurrentPage');
-	offset = (page_index-1)*5;
+	offset = (page_index-1)*10;
 	$(".coming").empty();
 	aa();
 }
@@ -1109,7 +1124,6 @@ function changePage(){
 		/*提交提案*/
 		sendTx = async() => {
 			let fromAddr = await web3.eth.getCoinbase()
-			var mycontract = new web3.eth.Contract(abi,"0x4831f0a16e15bbf7765ebf3bbea29482b116c1bd");
 			await mycontract.methods.proposalSubmit(pName,pLink,pAmmount,pPeriod,pAddr).send({from: fromAddr});
 			}
 
