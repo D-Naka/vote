@@ -1,6 +1,6 @@
 const providerURL = 'http://52.74.3.64:9646'
 
-const contractAddr = '0x4831f0a16e15bbf7765ebf3bbea29482b116c1bd'
+const contractAddr = '0xf359d50442a09416f6b68e02ba846183aece5250'
 
 const controllerAddr = '0x9194a2F58EE5673B578c5577351dcD3bAE062B2d'
 

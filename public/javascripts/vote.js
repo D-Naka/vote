@@ -526,7 +526,7 @@ if (typeof web3_etz !== 'undefined') {
 	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
 	web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
-var mycontract = new web3.eth.Contract(abi,"0x4831f0a16e15bbf7765ebf3bbea29482b116c1bd");
+var mycontract = new web3.eth.Contract(abi,"0xf359d50442a09416f6b68e02ba846183aece5250");
 
 // ch_en = 0;
 
@@ -623,7 +623,7 @@ $(document).ready(function($) {
 	                + '</div>'
 					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"提案链接："+objs[i].proposal_link + '</p>'+'</a>'
 					+ '<p>' +"接收地址："+ objs[i].addr + '</p>'
-					+ '<p>' +"资助数量："+ objs[i].applyAmount  +" &nbsp  &nbsp  发放次数："+ objs[i].sendPeriod + '</p>'
+					+ '<p>' +"资助数量："+ Math.round(objs[i].applyAmount/(10**16))/100  +" ETZ &nbsp   &nbsp  发放次数："+ objs[i].sendPeriod + '</p>'
 					+ '<p>' +"投票期数： 第"+ objs[i].voteIndex +"期"+ '</p>'					
 	                + '</a>'
 	                + '</div>'
@@ -654,6 +654,10 @@ $(document).ready(function($) {
 			var str = '';
 			VoteIndex = objs[objs.length-1].voteIndex;	
 			document.getElementById("num").innerHTML = VoteIndex;
+
+			mycontract.methods.getContractBalance().call().then(function(result){
+				document.getElementById("numetz").innerHTML = result;
+			});
 			for(var i=0; i<objs.length; i++) {
 				str += '<li>'
 	                + '<div class="head">'
@@ -670,7 +674,7 @@ $(document).ready(function($) {
 	                + '</div>'
 					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"Proposal link："+objs[i].proposal_link + '</p>'+'</a>'
 					+ '<p>' +"Addr："+ objs[i].addr + '</p>'
-					+ '<p>' +"Funding amount："+ objs[i].applyAmount  +" &nbsp  &nbsp  Send times："+ objs[i].sendPeriod + '</p>'
+					+ '<p>' +"Funding amount："+ Math.round(objs[i].applyAmount/(10**16))/100  +"ETZ  &nbsp  &nbsp  Send times："+ objs[i].sendPeriod + '</p>'
 					+ '<p>' +"Voting periods： The"+ objs[i].voteIndex +"phase"+ '</p>'					
 	                + '</a>'
 	                + '</div>'
@@ -721,7 +725,7 @@ $(document).ready(function($) {
 	                + '</div>'
 					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"提案链接："+objs[i].proposal_link + '</p>'+'</a>'
 					+ '<p>' +"接收地址："+ objs[i].addr + '</p>'
-					+ '<p>' +"资助数量："+ objs[i].applyAmount  +" &nbsp  &nbsp  发放次数："+ objs[i].sendPeriod + '</p>'
+					+ '<p>' +"资助数量："+ Math.round(objs[i].applyAmount/(10**16))/100  +"ETZ  &nbsp  &nbsp  发放次数："+ objs[i].sendPeriod + '</p>'
 					+ '<p>' +"投票期数： 第"+ objs[i].voteIndex +"期"+ '</p>'					
 	                + '</a>'
 	                + '</div>'
@@ -771,7 +775,7 @@ $(document).ready(function($) {
 	                + '</div>'
 					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"Proposal link："+objs[i].proposal_link + '</p>'+'</a>'
 					+ '<p>' +"Addr："+ objs[i].addr + '</p>'
-					+ '<p>' +"Funding amount："+ objs[i].applyAmount  +" &nbsp  &nbsp  Send times："+ objs[i].sendPeriod + '</p>'
+					+ '<p>' +"Funding amount："+ Math.round(objs[i].applyAmount/(10**16))/100  +"ETZ  &nbsp  &nbsp  Send times："+ objs[i].sendPeriod + '</p>'
 					+ '<p>' +"Voting periods： The"+ objs[i].voteIndex +"phase"+ '</p>'					
 	                + '</a>'
 	                + '</div>'
@@ -923,6 +927,22 @@ $(document).ready(function($) {
 
 			});
 		},
+
+		masterChangeen: function() {
+			$('.entrust').off();
+			$('.entrust').click(function(event) {
+				var _this = this;
+				var NewMasterAddr = $('.wallet_add').val();
+				if((!NewMasterAddr)||(NewMasterAddr.length<40)) {
+					alert("Please input the entrust wallet access");
+					return false;
+				}
+				sendMaster(NewMasterAddr);
+				voteFn.setStorage('data', data);
+				window.location.href="registeren?vote=0";
+
+			});
+		},
 		
 		
 
@@ -992,7 +1012,7 @@ $(document).ready(function($) {
 				proposal_name: proposal_name,
 				proposal_link: proposal_link,
 				addr: addr,
-				applyAmount: applyAmount,
+				applyAmount: applyAmount*10**18,
 				sendPeriod: sendPeriod
 			}
 		},
@@ -1030,7 +1050,7 @@ $(document).ready(function($) {
 				proposal_name: proposal_name,
 				proposal_link: proposal_link,
 				addr: addr,
-				applyAmount: applyAmount,
+				applyAmount: applyAmount*10**18,
 				sendPeriod: sendPeriod
 			}
 		},
@@ -1080,7 +1100,13 @@ $(document).ready(function($) {
 
 		$(document).ready(function() {
 			aa();
-			voteFn.masterChange();
+			if(ch_en == 'en'){
+				voteFn.masterChangeen();
+			}
+			else{
+				voteFn.masterChange();
+			}
+			
 		});
 var page_index;
 $.ajax({
@@ -1152,6 +1178,7 @@ function changePage(){
 				return;
 			}
 
+			console.log(registerData.applyAmount*10**18);
 			//web3调用示例，register里面已经导入了1.0的web3且实例化了
 			sendTx()
 			pName = registerData.proposal_name;
