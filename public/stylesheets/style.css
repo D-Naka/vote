@@ -209,6 +209,10 @@ a {
     float: right;
 }
 
+.show_box{
+    text-align: center;
+}
+
 .show_box,.rule_box{
     background: #ffffff;
     padding: 20px;
@@ -397,6 +401,7 @@ a {
     float: right;
     width: 66px;
     font-size: 14px;
+    cursor: pointer;
 }
 .vote_box{
     overflow: hidden;
@@ -1003,7 +1008,8 @@ a {
     color: #fff;
     background-image: linear-gradient(0deg, #1f222c 0%, #393d4b 100%);
     margin: 20px auto 0;
-    margin-left: 100px;
+    border: none;
+    cursor: pointer;
 }
 
 
