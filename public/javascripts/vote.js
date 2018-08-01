@@ -26,33 +26,6 @@ abi=[
 		"inputs": [
 			{
 				"indexed": false,
-				"name": "voteNumYes",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumNo",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumAct",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "adopted",
-				"type": "bool"
-			}
-		],
-		"name": "vote_event",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
 				"name": "pname",
 				"type": "string"
 			},
@@ -131,6 +104,15 @@ abi=[
 	},
 	{
 		"constant": false,
+		"inputs": [],
+		"name": "startRefresh",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
 		"inputs": [
 			{
 				"name": "index",
@@ -146,6 +128,33 @@ abi=[
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "voteNumYes",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumNo",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumAct",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "adopted",
+				"type": "bool"
+			}
+		],
+		"name": "vote_event",
+		"type": "event"
 	},
 	{
 		"payable": true,
@@ -526,7 +535,7 @@ if (typeof web3_etz !== 'undefined') {
 	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
 	web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
-var mycontract = new web3.eth.Contract(abi,"0xf359d50442a09416f6b68e02ba846183aece5250");
+var mycontract = new web3.eth.Contract(abi,"0x284c67995952bb80ab90010fdbed776d428d129a");
 
 // ch_en = 0;
 
@@ -601,9 +610,9 @@ $(document).ready(function($) {
 			var str = '';
 			VoteIndex = objs[objs.length-1].voteIndex;	
 			document.getElementById("num").innerHTML = VoteIndex;
-
+			console.log("num"+VoteIndex);
 			mycontract.methods.getContractBalance().call().then(function(result){
-					document.getElementById("numetz").innerHTML = result;
+					document.getElementById("numetz").innerHTML = parseInt(result/(10**16))/100;
 			});
 			
 				
@@ -656,7 +665,7 @@ $(document).ready(function($) {
 			document.getElementById("num").innerHTML = VoteIndex;
 
 			mycontract.methods.getContractBalance().call().then(function(result){
-				document.getElementById("numetz").innerHTML = result;
+				document.getElementById("numetz").innerHTML = parseInt(result/(10**16))/100;
 			});
 			for(var i=0; i<objs.length; i++) {
 				str += '<li>'

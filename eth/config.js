@@ -1,6 +1,8 @@
-const providerURL = 'http://52.74.3.64:9646'
+const providerURL = 'http://35.180.86.237:9015'
+//const providerURL = 'http://52.74.3.64:9646'
 
-const contractAddr = '0xf359d50442a09416f6b68e02ba846183aece5250'
+
+const contractAddr = '0x284c67995952bb80ab90010fdbed776d428d129a'
 
 const controllerAddr = '0x9194a2F58EE5673B578c5577351dcD3bAE062B2d'
 
@@ -20,33 +22,6 @@ const abi = [
 			}
 		],
 		"name": "send_event",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "voteNumYes",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumNo",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumAct",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "adopted",
-				"type": "bool"
-			}
-		],
-		"name": "vote_event",
 		"type": "event"
 	},
 	{
@@ -132,6 +107,15 @@ const abi = [
 	},
 	{
 		"constant": false,
+		"inputs": [],
+		"name": "startRefresh",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
 		"inputs": [
 			{
 				"name": "index",
@@ -147,6 +131,33 @@ const abi = [
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "voteNumYes",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumNo",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumAct",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "adopted",
+				"type": "bool"
+			}
+		],
+		"name": "vote_event",
+		"type": "event"
 	},
 	{
 		"payable": true,
