@@ -119,18 +119,20 @@ let dealFn = {
 		return {
             "proposal_name": obj.proposal_name,
             "proposal_link": obj.proposal_link,
-            "addr": obj.addr,
             "applyAmount": obj.applyAmount,
             "sendPeriod": obj.sendPeriod,
-            "head_icon": obj.head_icon,
-            "id": obj.id,
-            "vote": obj.vote,
-            "rank": obj.rank,
-            "vote_times": ++obj.vote_times,
-            "vfriend": [],
-            "time": Date.parse(new Date())
+            "voteNumYes": obj.voteNumYes,
+            "voteNumNo": obj.voteNumNo,
+            "voteNumAct": obj.voteNumAct,
+            "adopted": obj.adopted,
+            "passed": obj.passed,
+			"addr": obj.addr,
+			"payedTimes": obj.payedTimes,
+            "proposal_index": obj.proposal_index,
+            "voteIndex": obj.voteIndex
         }
 	}
 }
 
 module.exports = dealFn;
+

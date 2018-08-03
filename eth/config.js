@@ -1,8 +1,8 @@
-const providerURL = 'http://35.180.86.237:9015'
+const providerURL = 'http://etzrpc.org:80'
 //const providerURL = 'http://52.74.3.64:9646'
 
 
-const contractAddr = '0x284c67995952bb80ab90010fdbed776d428d129a'
+const contractAddr = '0x02348b07cc558b695c967b60130b0b8a22df03fe'
 
 const controllerAddr = '0x9194a2F58EE5673B578c5577351dcD3bAE062B2d'
 
@@ -22,6 +22,52 @@ const abi = [
 			}
 		],
 		"name": "send_event",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "delegate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "pIndex",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumYes",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumNo",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumAct",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "adopted",
+				"type": "bool"
+			}
+		],
+		"name": "vote_event",
 		"type": "event"
 	},
 	{
@@ -65,20 +111,6 @@ const abi = [
 		"constant": false,
 		"inputs": [
 			{
-				"name": "addr",
-				"type": "address"
-			}
-		],
-		"name": "delegate",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
 				"name": "pname",
 				"type": "string"
 			},
@@ -115,6 +147,11 @@ const abi = [
 		"type": "function"
 	},
 	{
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
 		"constant": false,
 		"inputs": [
 			{
@@ -131,38 +168,6 @@ const abi = [
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "voteNumYes",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumNo",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumAct",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "adopted",
-				"type": "bool"
-			}
-		],
-		"name": "vote_event",
-		"type": "event"
-	},
-	{
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "fallback"
 	},
 	{
 		"constant": true,
@@ -278,8 +283,46 @@ const abi = [
 	},
 	{
 		"constant": true,
+		"inputs": [
+			{
+				"name": "pIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "getIndex",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
 		"inputs": [],
 		"name": "getProposalsNum",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "mapIndex",
 		"outputs": [
 			{
 				"name": "",

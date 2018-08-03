@@ -22,6 +22,52 @@ abi=[
 		"type": "event"
 	},
 	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "delegate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "pIndex",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumYes",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumNo",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumAct",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "adopted",
+				"type": "bool"
+			}
+		],
+		"name": "vote_event",
+		"type": "event"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -57,20 +103,6 @@ abi=[
 		],
 		"name": "submit_event",
 		"type": "event"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "addr",
-				"type": "address"
-			}
-		],
-		"name": "delegate",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
 	},
 	{
 		"constant": false,
@@ -112,6 +144,11 @@ abi=[
 		"type": "function"
 	},
 	{
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
 		"constant": false,
 		"inputs": [
 			{
@@ -128,38 +165,6 @@ abi=[
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "voteNumYes",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumNo",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumAct",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "adopted",
-				"type": "bool"
-			}
-		],
-		"name": "vote_event",
-		"type": "event"
-	},
-	{
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "fallback"
 	},
 	{
 		"constant": true,
@@ -275,8 +280,46 @@ abi=[
 	},
 	{
 		"constant": true,
+		"inputs": [
+			{
+				"name": "pIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "getIndex",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
 		"inputs": [],
 		"name": "getProposalsNum",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "mapIndex",
 		"outputs": [
 			{
 				"name": "",
@@ -535,7 +578,7 @@ if (typeof web3_etz !== 'undefined') {
 	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
 	web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
-var mycontract = new web3.eth.Contract(abi,"0x284c67995952bb80ab90010fdbed776d428d129a");
+var mycontract = new web3.eth.Contract(abi,"0x02348b07cc558b695c967b60130b0b8a22df03fe");
 
 // ch_en = 0;
 
@@ -612,11 +655,15 @@ $(document).ready(function($) {
 			document.getElementById("num").innerHTML = VoteIndex;
 			console.log("num"+VoteIndex);
 			mycontract.methods.getContractBalance().call().then(function(result){
+					console.log(result);
 					document.getElementById("numetz").innerHTML = parseInt(result/(10**16))/100;
 			});
-			
+
+			mycontract.methods.getIndex(1).call().then(function(result){
+				console.log("getIndex"+result);
+			});
 				
-			for(var i=0; i<objs.length; i++) {
+			for(var i=objs.length-1; i>=0; i--) {
 				str += '<li>'
 	                + '<div class="head">'
 	                + '<img src="' + "/images/boy.png" + '" alt="">'
@@ -667,7 +714,7 @@ $(document).ready(function($) {
 			mycontract.methods.getContractBalance().call().then(function(result){
 				document.getElementById("numetz").innerHTML = parseInt(result/(10**16))/100;
 			});
-			for(var i=0; i<objs.length; i++) {
+			for(var i=objs.length-1; i>=0; i--) {
 				str += '<li>'
 	                + '<div class="head">'
 	                + '<img src="' + "/images/boy.png" + '" alt="">'
@@ -899,10 +946,12 @@ $(document).ready(function($) {
 			$('.btn1').click(function(event) {
 				var _this = this;
 				var id = $(this).attr('id');
-				var vote_id = parseInt(id);
-				sendVote(vote_id,1);
-				voteFn.setStorage('data', data);
-				window.location.href="register?vote=0";
+				var vote_id = parseInt(id)-1;
+				mycontract.methods.getIndex(vote_id).call().then(function(result){
+					sendVote(result,1);
+					voteFn.setStorage('data', data);
+					window.location.href="register?vote=0";
+				});				
 
 			});
 		},
@@ -912,13 +961,12 @@ $(document).ready(function($) {
 			$('.btn2').click(function(event) {
 				var _this = this;
 				var id = $(this).attr('id');
-				var vote_id = parseInt(id);
-				sendVote(vote_id,2);
-				voteFn.setStorage('data', data);
-				window.location.href="register?vote=0";
-
-
-
+				var vote_id = parseInt(id)-1;
+				mycontract.methods.getIndex(vote_id).call().then(function(result){
+					sendVote(result,2);
+					voteFn.setStorage('data', data);
+					window.location.href="register?vote=0";
+				});	
 			});
 		},
 		masterChange: function() {
@@ -961,10 +1009,12 @@ $(document).ready(function($) {
 			$('.btn1').click(function(event) {
 				var _this = this;
 				var id = $(this).attr('id');
-				var vote_id = parseInt(id);
-				sendVote(vote_id,1);
-				voteFn.setStorage('data', data);
-				window.location.href="registeren?vote=0";
+				var vote_id = parseInt(id)-1;
+				mycontract.methods.getIndex(vote_id).call().then(function(result){
+					sendVote(result,1);
+					voteFn.setStorage('data', data);
+					window.location.href="registeren?vote=0";
+				});	
 
 			});
 		},
@@ -974,10 +1024,12 @@ $(document).ready(function($) {
 			$('.btn2').click(function(event) {
 				var _this = this;
 				var id = $(this).attr('id');
-				var vote_id = parseInt(id);
-				sendVote(vote_id,2);
-				voteFn.setStorage('data', data);
-				window.location.href="registeren?vote=0";
+				var vote_id = parseInt(id)-1;
+				mycontract.methods.getIndex(vote_id).call().then(function(result){
+					sendVote(result,2);
+					voteFn.setStorage('data', data);
+					window.location.href="registeren?vote=0";
+				});	
 
 
 
@@ -1159,7 +1211,7 @@ function changePage(){
 		/*提交提案*/
 		sendTx = async() => {
 			let fromAddr = await web3.eth.getCoinbase()
-			await mycontract.methods.proposalSubmit(pName,pLink,pAmmount,pPeriod,pAddr).send({from: fromAddr});
+			await mycontract.methods.proposalSubmit(pName,pLink,pAmmount,pPeriod,pAddr).send({from: fromAddr,value:10000000000000000000});
 			}
 
 		var rebtnFlag = true;

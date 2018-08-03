@@ -28,7 +28,6 @@ vote_contract.events.submit_event({
 }, function(error, event){
      console.log("error"+error);
      console.log(event.returnValues[0]); 
-   
     //读取提案信息
      let total = database.data.total;
      var proposal_name   = event.returnValues[0];
@@ -61,6 +60,52 @@ vote_contract.events.submit_event({
      });
 
 });
+
+
+vote_contract.events.vote_event({
+    fromBlock: 0,
+    toBlock:'latest'
+}, function(error, event){
+     console.log("voteYes"+event.returnValues[0]); 
+   
+    //读取提案信息
+     var pIndex       = event.returnValues[0];
+     var voteNumYes   = event.returnValues[1];
+     var voteNumNo    = event.returnValues[2];
+     console.log("voteNumYes",voteNumYes)
+     console.log("pIndex",pIndex)
+     voter = dealFn.getItem(parseInt(pIndex)+1, database.data.objects);
+     voter.voteNumYes=voteNumYes;
+     voter.voteNumNo =voteNumNo;
+     dealFn.writeFileData('database.json', database).then((msg) => {
+         console.log(msg);
+     }, (msg) => {
+         console.log(msg);
+     });
+});
+/*
+vote_contract.getPastEvents('vote_event', {
+    fromBlock: 0,
+    toBlock: 'latest'
+}, function(error, events){
+
+    var plen = events.length;
+    for(let i=0;i<plen;i++){
+        console.log("voteYes"+events[i].returnValues[0]); 
+        //读取提案信息
+        var voteNumYes   = events[i].returnValues[0];
+        var voteNumNo   = events[i].returnValues[1];
+        console.log("voteNumYes",voteNumYes)
+        voter = dealFn.getItem(8, database.data.objects);
+        voter.voteNumYes=voteNumYes;
+        dealFn.writeFileData('database.json', database).then((msg) => {
+            console.log(msg);
+        }, (msg) => {
+            console.log(msg);
+        });
+    }
+});*/
+
 
 vote_contract.getPastEvents('submit_event', {
     fromBlock: 0,
