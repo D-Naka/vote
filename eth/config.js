@@ -2,11 +2,12 @@ const providerURL = 'http://etzrpc.org:80'
 //const providerURL = 'http://52.74.3.64:9646'
 
 
-const contractAddr = '0x02348b07cc558b695c967b60130b0b8a22df03fe'
+const contractAddr = '0xcd65310de2a886b2067e8563d34b2ced2b7eb2d8'
 
 const controllerAddr = '0x9194a2F58EE5673B578c5577351dcD3bAE062B2d'
 
-const abi = [
+const abi = 
+[
 	{
 		"anonymous": false,
 		"inputs": [
@@ -43,38 +44,6 @@ const abi = [
 		"inputs": [
 			{
 				"indexed": false,
-				"name": "pIndex",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumYes",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumNo",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumAct",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "adopted",
-				"type": "bool"
-			}
-		],
-		"name": "vote_event",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
 				"name": "pname",
 				"type": "string"
 			},
@@ -105,6 +74,38 @@ const abi = [
 			}
 		],
 		"name": "submit_event",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "pIndex",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumYes",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumNo",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumAct",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "adopted",
+				"type": "bool"
+			}
+		],
+		"name": "vote_event",
 		"type": "event"
 	},
 	{
@@ -147,11 +148,6 @@ const abi = [
 		"type": "function"
 	},
 	{
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "fallback"
-	},
-	{
 		"constant": false,
 		"inputs": [
 			{
@@ -168,6 +164,11 @@ const abi = [
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "fallback"
 	},
 	{
 		"constant": true,
@@ -294,6 +295,25 @@ const abi = [
 			{
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "getMasterId",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes8"
 			}
 		],
 		"payable": false,
@@ -500,6 +520,34 @@ const abi = [
 			{
 				"name": "",
 				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "t1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "t2",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes8"
 			}
 		],
 		"payable": false,

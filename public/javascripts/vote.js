@@ -40,38 +40,6 @@ abi=[
 		"inputs": [
 			{
 				"indexed": false,
-				"name": "pIndex",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumYes",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumNo",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumAct",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "adopted",
-				"type": "bool"
-			}
-		],
-		"name": "vote_event",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
 				"name": "pname",
 				"type": "string"
 			},
@@ -102,6 +70,38 @@ abi=[
 			}
 		],
 		"name": "submit_event",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "pIndex",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumYes",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumNo",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumAct",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "adopted",
+				"type": "bool"
+			}
+		],
+		"name": "vote_event",
 		"type": "event"
 	},
 	{
@@ -144,11 +144,6 @@ abi=[
 		"type": "function"
 	},
 	{
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "fallback"
-	},
-	{
 		"constant": false,
 		"inputs": [
 			{
@@ -165,6 +160,11 @@ abi=[
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "fallback"
 	},
 	{
 		"constant": true,
@@ -291,6 +291,25 @@ abi=[
 			{
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "getMasterId",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes8"
 			}
 		],
 		"payable": false,
@@ -506,6 +525,34 @@ abi=[
 	{
 		"constant": true,
 		"inputs": [],
+		"name": "t1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "t2",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes8"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
 		"name": "VoteIndex",
 		"outputs": [
 			{
@@ -578,7 +625,7 @@ if (typeof web3_etz !== 'undefined') {
 	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
 	web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
-var mycontract = new web3.eth.Contract(abi,"0x02348b07cc558b695c967b60130b0b8a22df03fe");
+var mycontract = new web3.eth.Contract(abi,"0xcd65310de2a886b2067e8563d34b2ced2b7eb2d8");
 
 // ch_en = 0;
 
@@ -1211,7 +1258,7 @@ function changePage(){
 		/*提交提案*/
 		sendTx = async() => {
 			let fromAddr = await web3.eth.getCoinbase()
-			await mycontract.methods.proposalSubmit(pName,pLink,pAmmount,pPeriod,pAddr).send({from: fromAddr,value:10000000000000000000});
+			await mycontract.methods.proposalSubmit(pName,pLink,pAmmount,pPeriod,pAddr).send({from: fromAddr,value:1000000000000000000});
 			}
 
 		var rebtnFlag = true;
