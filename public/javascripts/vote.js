@@ -976,7 +976,6 @@ $(document).ready(function($) {
 				var _this = this;
 				var id = $(this).attr('id');
 				var vote_id = parseInt(id)-1;
-				mycontract.methods.getIndex(vote_id).call().then(function(result){
 				sendVote(vote_id,1);
 				voteFn.setStorage('data', data);
 				window.location.href="register?vote=0";			
