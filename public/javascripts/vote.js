@@ -1,4 +1,6 @@
 
+var aaa;
+
 document.write("<script language=javascript src='/javascripts/jquery.min.js'></script>");
 
 document.write("<script language=javascript src='/javascripts/jquery.simplePagination.js'></script>");
@@ -20,20 +22,6 @@ abi=[
 		],
 		"name": "send_event",
 		"type": "event"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "addr",
-				"type": "address"
-			}
-		],
-		"name": "delegate",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -71,6 +59,47 @@ abi=[
 		],
 		"name": "submit_event",
 		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "delegate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "startRefresh",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"name": "voteType",
+				"type": "uint256"
+			}
+		],
+		"name": "vote",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -135,33 +164,6 @@ abi=[
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [],
-		"name": "startRefresh",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "index",
-				"type": "uint256"
-			},
-			{
-				"name": "voteType",
-				"type": "uint256"
-			}
-		],
-		"name": "vote",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"payable": true,
 		"stateMutability": "payable",
 		"type": "fallback"
@@ -198,25 +200,6 @@ abi=[
 		"constant": true,
 		"inputs": [],
 		"name": "budgetAddedChain",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "cycleIndex",
 		"outputs": [
 			{
 				"name": "",
@@ -625,7 +608,7 @@ if (typeof web3_etz !== 'undefined') {
 	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
 	web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
-var mycontract = new web3.eth.Contract(abi,"0xcd65310de2a886b2067e8563d34b2ced2b7eb2d8");
+var mycontract = new web3.eth.Contract(abi,"0xa61e0ab598baa946df387fa3ab5171c405fbb95a");
 
 // ch_en = 0;
 
@@ -705,7 +688,6 @@ $(document).ready(function($) {
 					console.log(result);
 					document.getElementById("numetz").innerHTML = parseInt(result/(10**16))/100;
 			});
-
 			mycontract.methods.getIndex(1).call().then(function(result){
 				console.log("getIndex"+result);
 			});
@@ -995,10 +977,9 @@ $(document).ready(function($) {
 				var id = $(this).attr('id');
 				var vote_id = parseInt(id)-1;
 				mycontract.methods.getIndex(vote_id).call().then(function(result){
-					sendVote(result,1);
-					voteFn.setStorage('data', data);
-					window.location.href="register?vote=0";
-				});				
+				sendVote(vote_id,1);
+				voteFn.setStorage('data', data);
+				window.location.href="register?vote=0";			
 
 			});
 		},
@@ -1009,11 +990,9 @@ $(document).ready(function($) {
 				var _this = this;
 				var id = $(this).attr('id');
 				var vote_id = parseInt(id)-1;
-				mycontract.methods.getIndex(vote_id).call().then(function(result){
-					sendVote(result,2);
-					voteFn.setStorage('data', data);
-					window.location.href="register?vote=0";
-				});	
+				sendVote(vote_id,2);
+				voteFn.setStorage('data', data);
+				window.location.href="register?vote=0";
 			});
 		},
 		masterChange: function() {
@@ -1057,11 +1036,9 @@ $(document).ready(function($) {
 				var _this = this;
 				var id = $(this).attr('id');
 				var vote_id = parseInt(id)-1;
-				mycontract.methods.getIndex(vote_id).call().then(function(result){
-					sendVote(result,1);
+					sendVote(vote_id,1);
 					voteFn.setStorage('data', data);
 					window.location.href="registeren?vote=0";
-				});	
 
 			});
 		},
@@ -1072,12 +1049,9 @@ $(document).ready(function($) {
 				var _this = this;
 				var id = $(this).attr('id');
 				var vote_id = parseInt(id)-1;
-				mycontract.methods.getIndex(vote_id).call().then(function(result){
-					sendVote(result,2);
+					sendVote(vote_id,2);
 					voteFn.setStorage('data', data);
 					window.location.href="registeren?vote=0";
-				});	
-
 
 
 			});
