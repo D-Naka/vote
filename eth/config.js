@@ -2,7 +2,7 @@ const providerURL = 'http://etzrpc.org:80'
 //const providerURL = 'http://52.74.3.64:9646'
 
 
-const contractAddr = '0xa61e0ab598baa946df387fa3ab5171c405fbb95a'
+const contractAddr = '0x2f52bac1e95908e698638874c60a6f9fbd72fd2f'
 
 const controllerAddr = '0x9194a2F58EE5673B578c5577351dcD3bAE062B2d'
 

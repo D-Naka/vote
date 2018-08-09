@@ -275,6 +275,7 @@ exports.index_data = async(req, res) => {
                 total: database.data.total,
                 offset: offset,
                 limit: limit,
+                totalbalance:database.data.totalbalance,
                 objects: sendObjs
         }
     };

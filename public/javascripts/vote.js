@@ -1,6 +1,3 @@
-
-var aaa;
-
 document.write("<script language=javascript src='/javascripts/jquery.min.js'></script>");
 
 document.write("<script language=javascript src='/javascripts/jquery.simplePagination.js'></script>");
@@ -608,7 +605,7 @@ if (typeof web3_etz !== 'undefined') {
 	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
 	web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
-var mycontract = new web3.eth.Contract(abi,"0xa61e0ab598baa946df387fa3ab5171c405fbb95a");
+var mycontract = new web3.eth.Contract(abi,"0x2f52bac1e95908e698638874c60a6f9fbd72fd2f");
 
 // ch_en = 0;
 
@@ -684,10 +681,6 @@ $(document).ready(function($) {
 			VoteIndex = objs[objs.length-1].voteIndex;	
 			document.getElementById("num").innerHTML = VoteIndex;
 			console.log("num"+VoteIndex);
-			mycontract.methods.getContractBalance().call().then(function(result){
-					console.log(result);
-					document.getElementById("numetz").innerHTML = parseInt(result/(10**16))/100;
-			});
 			mycontract.methods.getIndex(1).call().then(function(result){
 				console.log("getIndex"+result);
 			});
@@ -739,10 +732,6 @@ $(document).ready(function($) {
 			var str = '';
 			VoteIndex = objs[objs.length-1].voteIndex;	
 			document.getElementById("num").innerHTML = VoteIndex;
-
-			mycontract.methods.getContractBalance().call().then(function(result){
-				document.getElementById("numetz").innerHTML = parseInt(result/(10**16))/100;
-			});
 			for(var i=objs.length-1; i>=0; i--) {
 				str += '<li>'
 	                + '<div class="head">'
@@ -1138,7 +1127,8 @@ $(document).ready(function($) {
 
 	};
 
-	if(indexReg.test(url)) {
+	console.log(url);
+	if(indexReg.test(url)|| url == "http://etzvote.com/" || url == "http://www.etzvote.com/") {
 		sendVote = async(vote_id,vote_type) => {
 			data = mycontract.methods.vote(vote_id,vote_type).encodeABI();
 			}
@@ -1160,6 +1150,7 @@ $(document).ready(function($) {
 				success: function(data) {
 					offset += limit;
 					data = JSON.parse(data);
+					document.getElementById("numetz").innerHTML = parseInt(data.data.totalbalance)/100;
 					if(ch_en == 'en'){
 						$('.coming').append(voteFn.userStr_en(data.data.objects));
 					}
