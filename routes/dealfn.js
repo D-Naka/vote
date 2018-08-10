@@ -120,14 +120,13 @@ let dealFn = {
             "proposal_name": obj.proposal_name,
             "proposal_link": obj.proposal_link,
             "applyAmount": obj.applyAmount,
-            "sendPeriod": obj.sendPeriod,
             "voteNumYes": obj.voteNumYes,
             "voteNumNo": obj.voteNumNo,
             "voteNumAct": obj.voteNumAct,
             "adopted": obj.adopted,
             "passed": obj.passed,
 			"addr": obj.addr,
-			"payedTimes": obj.payedTimes,
+			"sended": obj.sended,
             "proposal_index": obj.proposal_index,
             "voteIndex": obj.voteIndex
         }

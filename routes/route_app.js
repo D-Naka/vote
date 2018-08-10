@@ -21,7 +21,7 @@ vote_contract.methods.getProposalsNum().call().then(function(result){
     console.log(result)
     Proposal_num = result;
 });
-var data =vote_contract.methods.proposalSubmit("x1" ,"p1", 2, 1, "0x9194a2F58EE5673B578c5577351dcD3bAE062B2d").encodeABI();
+var data =vote_contract.methods.proposalSubmit("x1" ,"p1", 2, "0x9194a2F58EE5673B578c5577351dcD3bAE062B2d").encodeABI();
 data =vote_contract.methods.vote(1,1).encodeABI();
 
 
@@ -49,14 +49,22 @@ function  myfunc(Interval){
                 var proposal_name   = result.name;
                 var proposal_link   = result.link;
                 var applyAmount     = result.applyAmount;
-                var sendPeriod      = result.sendPeriod;
                 var addr            = result.addr;
                 var voteIndex       = VoteIndex;
+                var sended;
+                if(result.sended == true)
+                {
+                    sended = "已发放";
+                }
+                else
+                {
+                    sended = "未发放";
+                }
                 registerData1={
                     proposal_name: proposal_name,
                     proposal_link: proposal_link,
                     applyAmount:applyAmount,
-                    sendPeriod: sendPeriod,
+                    sended: sended,
                     voteNumYes: 0,
                     voteNumNo:0,
                     voteNumAct:0,
@@ -86,14 +94,23 @@ function  myfunc(Interval){
         }
         vote_contract.methods.proposals(cycle_num).call().then(function(result){      
                 //读取提案信息
-                var proposal_name       = result.name;
                 var voteNumYes   = result.voteNumYes;
                 var voteNumNo    = result.voteNumNo;
+                var sended;
+                if(result.sended == true)
+                {
+                    sended = "已发放";
+                }
+                else
+                {
+                    sended = "未发放";
+                }
                 console.log("cycle_num"+cycle_num);
                 console.log("voteNumYes"+voteNumYes);
                 voter = dealFn.getItem(cycle_num, database.data.objects);
                 voter.voteNumYes=voteNumYes;
                 voter.voteNumNo =voteNumNo;
+                voter.sended =sended;
                 database.data.totalbalance = totalBalance;
                 dealFn.writeFileData('database.json', database).then((msg) => {
                     console.log(msg);
@@ -326,10 +343,9 @@ exports.register_data = (req, res) => {
     let proposal_name = registerData.proposal_name;
     let proposal_link = registerData.proposal_link;
     let applyAmount = parseInt(registerData.applyAmount);
-    let sendPeriod = parseInt(registerData.sendPeriod);
     let addr = registerData.addr;
             
-    data_command =vote_contract.methods.proposalSubmit(proposal_name ,proposal_link, applyAmount,sendPeriod,addr).encodeABI();  
+    data_command =vote_contract.methods.proposalSubmit(proposal_name ,proposal_link, applyAmount,addr).encodeABI();  
  
 };
 

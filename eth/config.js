@@ -2,107 +2,12 @@ const providerURL = 'http://etzrpc.org:80'
 //const providerURL = 'http://52.74.3.64:9646'
 
 
-const contractAddr = '0x2f52bac1e95908e698638874c60a6f9fbd72fd2f'
+const contractAddr = '0xe706482807f4f6bd160e27c559191e85ab14be5a'
 
 const controllerAddr = '0x9194a2F58EE5673B578c5577351dcD3bAE062B2d'
 
 const abi = 
 [
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "pIndex",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "remainTimes",
-				"type": "uint256"
-			}
-		],
-		"name": "send_event",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "pname",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "plink",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "papplyAmount",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "psendPeriod",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "paddr",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "VoteIndex",
-				"type": "uint256"
-			}
-		],
-		"name": "submit_event",
-		"type": "event"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "addr",
-				"type": "address"
-			}
-		],
-		"name": "delegate",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "startRefresh",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "index",
-				"type": "uint256"
-			},
-			{
-				"name": "voteType",
-				"type": "uint256"
-			}
-		],
-		"name": "vote",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
 	{
 		"anonymous": false,
 		"inputs": [
@@ -139,6 +44,20 @@ const abi =
 		"constant": false,
 		"inputs": [
 			{
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "delegate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
 				"name": "pname",
 				"type": "string"
 			},
@@ -151,10 +70,6 @@ const abi =
 				"type": "uint256"
 			},
 			{
-				"name": "psendPeriod",
-				"type": "uint256"
-			},
-			{
 				"name": "paddr",
 				"type": "address"
 			}
@@ -164,6 +79,65 @@ const abi =
 		"payable": true,
 		"stateMutability": "payable",
 		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "startRefresh",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"name": "voteType",
+				"type": "uint256"
+			}
+		],
+		"name": "vote",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "pname",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "plink",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "papplyAmount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "paddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "VoteIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "submit_event",
+		"type": "event"
 	},
 	{
 		"payable": true,
@@ -399,10 +373,6 @@ const abi =
 				"type": "uint256"
 			},
 			{
-				"name": "sendPeriod",
-				"type": "uint256"
-			},
-			{
 				"name": "voteNumYes",
 				"type": "uint256"
 			},
@@ -427,11 +397,11 @@ const abi =
 				"type": "address"
 			},
 			{
-				"name": "remainTimes",
-				"type": "uint256"
+				"name": "sended",
+				"type": "bool"
 			},
 			{
-				"name": "eachAmount",
+				"name": "blockStart",
 				"type": "uint256"
 			}
 		],
@@ -454,10 +424,6 @@ const abi =
 				"type": "address"
 			},
 			{
-				"name": "remainTimes",
-				"type": "uint256"
-			},
-			{
 				"name": "eachAmount",
 				"type": "uint256"
 			},
@@ -466,7 +432,11 @@ const abi =
 				"type": "bool"
 			},
 			{
-				"name": "voteIndex",
+				"name": "sended",
+				"type": "bool"
+			},
+			{
+				"name": "pIndex",
 				"type": "uint256"
 			}
 		],
@@ -501,34 +471,6 @@ const abi =
 			{
 				"name": "",
 				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "t1",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "t2",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bytes8"
 			}
 		],
 		"payable": false,

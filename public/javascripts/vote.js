@@ -13,48 +13,26 @@ abi=[
 			},
 			{
 				"indexed": false,
-				"name": "remainTimes",
+				"name": "voteNumYes",
 				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumNo",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "voteNumAct",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "adopted",
+				"type": "bool"
 			}
 		],
-		"name": "send_event",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "pname",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "plink",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "papplyAmount",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "psendPeriod",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "paddr",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "VoteIndex",
-				"type": "uint256"
-			}
-		],
-		"name": "submit_event",
+		"name": "vote_event",
 		"type": "event"
 	},
 	{
@@ -69,6 +47,32 @@ abi=[
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "pname",
+				"type": "string"
+			},
+			{
+				"name": "plink",
+				"type": "string"
+			},
+			{
+				"name": "papplyAmount",
+				"type": "uint256"
+			},
+			{
+				"name": "paddr",
+				"type": "address"
+			}
+		],
+		"name": "proposalSubmit",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -103,62 +107,32 @@ abi=[
 		"inputs": [
 			{
 				"indexed": false,
-				"name": "pIndex",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumYes",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumNo",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "voteNumAct",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "adopted",
-				"type": "bool"
-			}
-		],
-		"name": "vote_event",
-		"type": "event"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
 				"name": "pname",
 				"type": "string"
 			},
 			{
+				"indexed": false,
 				"name": "plink",
 				"type": "string"
 			},
 			{
+				"indexed": false,
 				"name": "papplyAmount",
 				"type": "uint256"
 			},
 			{
-				"name": "psendPeriod",
-				"type": "uint256"
-			},
-			{
+				"indexed": false,
 				"name": "paddr",
 				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "VoteIndex",
+				"type": "uint256"
 			}
 		],
-		"name": "proposalSubmit",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
+		"name": "submit_event",
+		"type": "event"
 	},
 	{
 		"payable": true,
@@ -394,10 +368,6 @@ abi=[
 				"type": "uint256"
 			},
 			{
-				"name": "sendPeriod",
-				"type": "uint256"
-			},
-			{
 				"name": "voteNumYes",
 				"type": "uint256"
 			},
@@ -422,11 +392,11 @@ abi=[
 				"type": "address"
 			},
 			{
-				"name": "remainTimes",
-				"type": "uint256"
+				"name": "sended",
+				"type": "bool"
 			},
 			{
-				"name": "eachAmount",
+				"name": "blockStart",
 				"type": "uint256"
 			}
 		],
@@ -449,10 +419,6 @@ abi=[
 				"type": "address"
 			},
 			{
-				"name": "remainTimes",
-				"type": "uint256"
-			},
-			{
 				"name": "eachAmount",
 				"type": "uint256"
 			},
@@ -461,7 +427,11 @@ abi=[
 				"type": "bool"
 			},
 			{
-				"name": "voteIndex",
+				"name": "sended",
+				"type": "bool"
+			},
+			{
+				"name": "pIndex",
 				"type": "uint256"
 			}
 		],
@@ -496,34 +466,6 @@ abi=[
 			{
 				"name": "",
 				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "t1",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "t2",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bytes8"
 			}
 		],
 		"payable": false,
@@ -595,6 +537,7 @@ abi=[
 	}
 ];
 VoteIndex = 0;
+var proposal_len;
 
 if (typeof web3_etz !== 'undefined') {
 	// Use Mist/MetaMask's provider
@@ -605,7 +548,7 @@ if (typeof web3_etz !== 'undefined') {
 	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
 	web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
-var mycontract = new web3.eth.Contract(abi,"0x2f52bac1e95908e698638874c60a6f9fbd72fd2f");
+var mycontract = new web3.eth.Contract(abi,"0xe706482807f4f6bd160e27c559191e85ab14be5a");
 
 // ch_en = 0;
 
@@ -701,7 +644,7 @@ $(document).ready(function($) {
 	                + '</div>'
 					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"提案链接："+objs[i].proposal_link + '</p>'+'</a>'
 					+ '<p>' +"接收地址："+ objs[i].addr + '</p>'
-					+ '<p>' +"资助数量："+ Math.round(objs[i].applyAmount/(10**16))/100  +" ETZ &nbsp   &nbsp  发放次数："+ objs[i].sendPeriod + '</p>'
+					+ '<p>' +"资助数量："+ Math.round(objs[i].applyAmount/(10**16))/100  +" ETZ &nbsp   &nbsp  是否已发放："+ objs[i].sended + '</p>'
 					+ '<p>' +"投票期数： 第"+ objs[i].voteIndex +"期"+ '</p>'					
 	                + '</a>'
 	                + '</div>'
@@ -748,7 +691,7 @@ $(document).ready(function($) {
 	                + '</div>'
 					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"Proposal link："+objs[i].proposal_link + '</p>'+'</a>'
 					+ '<p>' +"Addr："+ objs[i].addr + '</p>'
-					+ '<p>' +"Funding amount："+ Math.round(objs[i].applyAmount/(10**16))/100  +"ETZ  &nbsp  &nbsp  Send times："+ objs[i].sendPeriod + '</p>'
+					+ '<p>' +"Funding amount："+ Math.round(objs[i].applyAmount/(10**16))/100  +"ETZ  &nbsp  &nbsp  Send times："+ objs[i].sended + '</p>'
 					+ '<p>' +"Voting periods： The"+ objs[i].voteIndex +"phase"+ '</p>'					
 	                + '</a>'
 	                + '</div>'
@@ -799,7 +742,7 @@ $(document).ready(function($) {
 	                + '</div>'
 					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"提案链接："+objs[i].proposal_link + '</p>'+'</a>'
 					+ '<p>' +"接收地址："+ objs[i].addr + '</p>'
-					+ '<p>' +"资助数量："+ Math.round(objs[i].applyAmount/(10**16))/100  +"ETZ  &nbsp  &nbsp  发放次数："+ objs[i].sendPeriod + '</p>'
+					+ '<p>' +"资助数量："+ Math.round(objs[i].applyAmount/(10**16))/100  +"ETZ  &nbsp  &nbsp  是否发放："+ objs[i].sended + '</p>'
 					+ '<p>' +"投票期数： 第"+ objs[i].voteIndex +"期"+ '</p>'					
 	                + '</a>'
 	                + '</div>'
@@ -849,7 +792,7 @@ $(document).ready(function($) {
 	                + '</div>'
 					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"Proposal link："+objs[i].proposal_link + '</p>'+'</a>'
 					+ '<p>' +"Addr："+ objs[i].addr + '</p>'
-					+ '<p>' +"Funding amount："+ Math.round(objs[i].applyAmount/(10**16))/100  +"ETZ  &nbsp  &nbsp  Send times："+ objs[i].sendPeriod + '</p>'
+					+ '<p>' +"Funding amount："+ Math.round(objs[i].applyAmount/(10**16))/100  +"ETZ  &nbsp  &nbsp  Send times："+ objs[i].sended + '</p>'
 					+ '<p>' +"Voting periods： The"+ objs[i].voteIndex +"phase"+ '</p>'					
 	                + '</a>'
 	                + '</div>'
@@ -1055,7 +998,6 @@ $(document).ready(function($) {
 			var proposal_link = $('.proposal_link').val();
 			var addr 	  	= $('.addr').val();
 			var applyAmount    = $('.applyAmount').val();
-			var sendPeriod     = $('.sendPeriod').val();
 
 				if(!proposal_name) {
 					alert("请填写提案名称");
@@ -1073,17 +1015,12 @@ $(document).ready(function($) {
 					alert("请填写资助数量");
 					return false;
 				}
-				if(!sendPeriod) {
-					alert("请填写资助发放次数");
-					return false;
-				}
 			
 			return {
 				proposal_name: proposal_name,
 				proposal_link: proposal_link,
 				addr: addr,
 				applyAmount: applyAmount*10**18,
-				sendPeriod: sendPeriod
 			}
 		},
 
@@ -1092,7 +1029,6 @@ $(document).ready(function($) {
 			var proposal_link = $('.proposal_link').val();
 			var addr 	  	= $('.addr').val();
 			var applyAmount    = $('.applyAmount').val();
-			var sendPeriod     = $('.sendPeriod').val();
 	
 			var ch_en=GetQueryString('language');
 
@@ -1111,17 +1047,12 @@ $(document).ready(function($) {
 				if(!applyAmount) {
 					alert("Please enter the funding amount");
 					return false;
-				}
-				if(!sendPeriod) {
-					alert("Please enter the send times");
-					return false;
-				}			
+				}		
 			return {
 				proposal_name: proposal_name,
 				proposal_link: proposal_link,
 				addr: addr,
 				applyAmount: applyAmount*10**18,
-				sendPeriod: sendPeriod
 			}
 		},
 
@@ -1136,11 +1067,22 @@ $(document).ready(function($) {
 		sendMaster = async(NewMasterAddr) => {
 			data = mycontract.methods.delegate(NewMasterAddr).encodeABI();
 			}
+
+		$.ajax({
+			url: '/index/data?limit=1000&offset=0',
+			type: 'GET',
+			async: false,
+			dataType:'json',
+			success: function(data) {
+				proposal_len = data.data.objects.length;
+			}
+		});
+
 		/*主页*/
 		var voteUser = voteFn.getStorage('voteUser');
 		var limit=10;
 		var offset=0;
-
+		offset = proposal_len-limit;
 		function aa(){
 			$.ajax({
 				url: '/index/data',
@@ -1148,7 +1090,7 @@ $(document).ready(function($) {
 				type: 'GET',
 				async: false,
 				success: function(data) {
-					offset += limit;
+					//offset += limit;
 					data = JSON.parse(data);
 					document.getElementById("numetz").innerHTML = parseInt(data.data.totalbalance)/100;
 					if(ch_en == 'en'){
@@ -1203,7 +1145,18 @@ $.ajax({
 
 function changePage(){
 	page_index = $("#dark-pagination").pagination('getCurrentPage');
-	offset = (page_index-1)*10;
+	//offset = (page_index-1)*10;
+	offset = proposal_len-page_index*10;
+	if(offset<0)
+	{
+		limit = 10+offset;
+		offset=0;
+	}
+	else
+	{
+		limit =10;
+	}
+	console.log("offset+limit",offset,limit)
 	$(".coming").empty();
 	aa();
 }
@@ -1222,7 +1175,7 @@ function changePage(){
 		/*提交提案*/
 		sendTx = async() => {
 			let fromAddr = await web3.eth.getCoinbase()
-			await mycontract.methods.proposalSubmit(pName,pLink,pAmmount,pPeriod,pAddr).send({from: fromAddr,value:1000000000000000000});
+			await mycontract.methods.proposalSubmit(pName,pLink,pAmmount,pAddr).send({from: fromAddr,value:10000000000000000000});
 			}
 
 		var rebtnFlag = true;
@@ -1256,11 +1209,7 @@ function changePage(){
 			pName = registerData.proposal_name;
 			pLink = registerData.proposal_link;
 			pAmmount =parseInt(registerData.applyAmount);
-			pPeriod = parseInt(registerData.sendPeriod);
 			pAddr = registerData.addr;
-			// mycontract.proposalSubmit.sendTransaction(pName,pLink,pAmmount,pPeriod,pAddr,function(){
-			// 	mycontract.methods.proposalSubmit().encodeABI()
-			// })
 			return;
 			$.ajax({
 				url: '/index',
@@ -1320,6 +1269,7 @@ function changePage(){
 		$.ajax({
 			url: '/all/detail/data?id=' + id,
 			type: 'GET',
+
 			success: function(data) {
 				data = JSON.parse(data);
 				if(data.errno == 0){
