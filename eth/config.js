@@ -2,7 +2,7 @@ const providerURL = 'http://etzrpc.org:80'
 //const providerURL = 'http://52.74.3.64:9646'
 
 
-const contractAddr = '0xe706482807f4f6bd160e27c559191e85ab14be5a'
+const contractAddr = '0x4761977f757e3031350612d55bb891c8144a414b'
 
 const controllerAddr = '0x9194a2F58EE5673B578c5577351dcD3bAE062B2d'
 
@@ -90,24 +90,6 @@ const abi =
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "index",
-				"type": "uint256"
-			},
-			{
-				"name": "voteType",
-				"type": "uint256"
-			}
-		],
-		"name": "vote",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -138,6 +120,24 @@ const abi =
 		],
 		"name": "submit_event",
 		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"name": "voteType",
+				"type": "uint256"
+			}
+		],
+		"name": "vote",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"payable": true,
@@ -226,6 +226,20 @@ const abi =
 	{
 		"constant": true,
 		"inputs": [],
+		"name": "getbudget",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
 		"name": "getContractBalance",
 		"outputs": [
 			{
@@ -269,6 +283,20 @@ const abi =
 			{
 				"name": "",
 				"type": "bytes8"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getPayed",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"payable": false,

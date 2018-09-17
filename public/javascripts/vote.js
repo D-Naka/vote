@@ -85,24 +85,6 @@ abi=[
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "index",
-				"type": "uint256"
-			},
-			{
-				"name": "voteType",
-				"type": "uint256"
-			}
-		],
-		"name": "vote",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -133,6 +115,24 @@ abi=[
 		],
 		"name": "submit_event",
 		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"name": "voteType",
+				"type": "uint256"
+			}
+		],
+		"name": "vote",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"payable": true,
@@ -221,6 +221,20 @@ abi=[
 	{
 		"constant": true,
 		"inputs": [],
+		"name": "getbudget",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
 		"name": "getContractBalance",
 		"outputs": [
 			{
@@ -264,6 +278,20 @@ abi=[
 			{
 				"name": "",
 				"type": "bytes8"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getPayed",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -536,8 +564,9 @@ abi=[
 		"type": "function"
 	}
 ];
-VoteIndex = 0;
+var VoteIndex = 0;
 var proposal_len;
+var gproposal_num;
 
 if (typeof web3_etz !== 'undefined') {
 	// Use Mist/MetaMask's provider
@@ -548,7 +577,7 @@ if (typeof web3_etz !== 'undefined') {
 	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
 	web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
-var mycontract = new web3.eth.Contract(abi,"0xe706482807f4f6bd160e27c559191e85ab14be5a");
+var mycontract = new web3.eth.Contract(abi,"0x4761977f757e3031350612d55bb891c8144a414b");
 
 // ch_en = 0;
 
@@ -621,12 +650,13 @@ $(document).ready(function($) {
 		 */
 		userStr: function(objs) {
 			var str = '';
-			VoteIndex = objs[objs.length-1].voteIndex;	
-			document.getElementById("num").innerHTML = VoteIndex;
-			console.log("num"+VoteIndex);
+			//VoteIndex = objs[objs.length-1].voteIndex;	
+			//document.getElementById("num").innerHTML = VoteIndex;
+			//console.log("num"+VoteIndex);
 			mycontract.methods.getIndex(1).call().then(function(result){
 				console.log("getIndex"+result);
 			});
+
 				
 			for(var i=objs.length-1; i>=0; i--) {
 				str += '<li>'
@@ -641,16 +671,18 @@ $(document).ready(function($) {
 	                + '<span>' + objs[i].proposal_name + '</span>'
 	                + '<span>|</span>'
 	                + '<span>编号#' + objs[i].proposal_index + '</span>'
-	                + '</div>'
-					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"提案链接："+objs[i].proposal_link + '</p>'+'</a>'
-					+ '<p>' +"接收地址："+ objs[i].addr + '</p>'
-					+ '<p>' +"资助数量："+ Math.round(objs[i].applyAmount/(10**16))/100  +" ETZ &nbsp   &nbsp  是否已发放："+ objs[i].sended + '</p>'
+					+ '</div>'
+					+ '<p>' +"提案简介："+ '</p>'
+
+					+'<p>' +objs[i].proposal_link + '</p>'
+					+ '<p>' +"账户地址："+ objs[i].addr + '</p>'
+					+ '<p>' +"申请预算："+ Math.round(objs[i].applyAmount/(10**16))/100  +" ETZ &nbsp   &nbsp  是否已发放："+ objs[i].sended + '</p>'
 					+ '<p>' +"投票期数： 第"+ objs[i].voteIndex +"期"+ '</p>'					
 	                + '</a>'
 	                + '</div>'
 					
 					+ '<div class="up">'
-					+ '<div class="vote_box">'
+					+ '<div class="vote_box vote_box_left">'
 	                + '<div class="vote vote_num">'
 	                + '<span>' + objs[i].voteNumYes + '票</span>'
 					+ '</div>'
@@ -658,7 +690,7 @@ $(document).ready(function($) {
 	                + '赞成'
 					+ '</div>'
 					+ '</div>'
-					+ '<div class="vote_box">'
+					+ '<div class="vote_box vote_box_right">'
 					+ '<div class="vote vote_num">'
 	                + '<span>' + objs[i].voteNumNo + '票</span>'
 					+ '</div>'
@@ -689,15 +721,17 @@ $(document).ready(function($) {
 	                + '<span>|</span>'
 	                + '<span>Number#' + objs[i].proposal_index + '</span>'
 	                + '</div>'
-					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"Proposal link："+objs[i].proposal_link + '</p>'+'</a>'
+					+ '<p>' +"Proposal abstract："+ '</p>'
+					+'<p>' +objs[i].proposal_link + '</p>'
+
 					+ '<p>' +"Addr："+ objs[i].addr + '</p>'
 					+ '<p>' +"Funding amount："+ Math.round(objs[i].applyAmount/(10**16))/100  +"ETZ  &nbsp  &nbsp  Send times："+ objs[i].sended + '</p>'
-					+ '<p>' +"Voting periods： The"+ objs[i].voteIndex +"phase"+ '</p>'					
+					+ '<p>' +"Voting periods： The &nbsp"+ objs[i].voteIndex +" phase"+ '</p>'					
 	                + '</a>'
 	                + '</div>'
 					
 					+ '<div class="up">'
-					+ '<div class="vote_box">'
+					+ '<div class="vote_box vote_box_left ">'
 	                + '<div class="vote vote_num">'
 	                + '<span>' + objs[i].voteNumYes + '&nbsp votes</span>'
 					+ '</div>'
@@ -705,7 +739,7 @@ $(document).ready(function($) {
 	                + 'Agree'
 					+ '</div>'
 					+ '</div>'
-					+ '<div class="vote_box">'
+					+ '<div class="vote_box vote_box_right">'
 					+ '<div class="vote vote_num">'
 	                + '<span>' + objs[i].voteNumNo + '&nbsp votes</span>'
 					+ '</div>'
@@ -740,9 +774,9 @@ $(document).ready(function($) {
 	                + '<span>|</span>'
 	                + '<span>编号#' + objs[i].proposal_index + '</span>'
 	                + '</div>'
-					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"提案链接："+objs[i].proposal_link + '</p>'+'</a>'
-					+ '<p>' +"接收地址："+ objs[i].addr + '</p>'
-					+ '<p>' +"资助数量："+ Math.round(objs[i].applyAmount/(10**16))/100  +"ETZ  &nbsp  &nbsp  是否发放："+ objs[i].sended + '</p>'
+					+'<a href="'+objs[i].proposal_link+'" target="_blank">'+ '<p>' +"提案简介："+objs[i].proposal_link + '</p>'+'</a>'
+					+ '<p>' +"账户地址："+ objs[i].addr + '</p>'
+					+ '<p>' +"申请预算："+ Math.round(objs[i].applyAmount/(10**16))/100  +"ETZ  &nbsp  &nbsp  是否发放："+ objs[i].sended + '</p>'
 					+ '<p>' +"投票期数： 第"+ objs[i].voteIndex +"期"+ '</p>'					
 	                + '</a>'
 	                + '</div>'
@@ -1004,7 +1038,7 @@ $(document).ready(function($) {
 					return false;
 				}
 				if(!proposal_link) {
-					alert("请填写提案链接地址");
+					alert("请填写提案简介");
 					return false;
 				}
 				if(!addr) {
@@ -1012,7 +1046,7 @@ $(document).ready(function($) {
 					return false;
 				}
 				if(!applyAmount) {
-					alert("请填写资助数量");
+					alert("请填写申请预算");
 					return false;
 				}
 			
@@ -1020,7 +1054,7 @@ $(document).ready(function($) {
 				proposal_name: proposal_name,
 				proposal_link: proposal_link,
 				addr: addr,
-				applyAmount: applyAmount*10**18,
+				applyAmount: applyAmount,
 			}
 		},
 
@@ -1052,14 +1086,14 @@ $(document).ready(function($) {
 				proposal_name: proposal_name,
 				proposal_link: proposal_link,
 				addr: addr,
-				applyAmount: applyAmount*10**18,
+				applyAmount: applyAmount,
 			}
 		},
 
 	};
 
 	console.log(url);
-	if(indexReg.test(url)|| url == "http://etzvote.com/" || url == "http://www.etzvote.com/") {
+	if(indexReg.test(url)|| url == "http://etzvote.com/" || url == "http://www.etzvote.com/"|| url == "https://etzvote.com/"|| url == "https://etzvote.com/") {
 		sendVote = async(vote_id,vote_type) => {
 			data = mycontract.methods.vote(vote_id,vote_type).encodeABI();
 			}
@@ -1067,6 +1101,16 @@ $(document).ready(function($) {
 		sendMaster = async(NewMasterAddr) => {
 			data = mycontract.methods.delegate(NewMasterAddr).encodeABI();
 			}
+
+		mycontract.methods.getProposalsNum().call().then(function(result){
+				gproposal_num = result;
+				document.getElementById("gproposal_num").innerHTML = gproposal_num;
+		});
+		
+		mycontract.methods.VoteIndex().call().then(function(result){
+			VoteIndex = result;
+			document.getElementById("num").innerHTML = result;
+		});
 
 		$.ajax({
 			url: '/index/data?limit=1000&offset=0',
@@ -1172,11 +1216,6 @@ function changePage(){
 	} else if(registerReg.test(url)) {
 		var data  = voteFn.getStorage('data');
 		document.getElementById('txta').value = data;  //设置textarea的值  
-		/*提交提案*/
-		sendTx = async() => {
-			let fromAddr = await web3.eth.getCoinbase()
-			await mycontract.methods.proposalSubmit(pName,pLink,pAmmount,pAddr).send({from: fromAddr,value:10000000000000000000});
-			}
 
 		var rebtnFlag = true;
 
@@ -1203,13 +1242,22 @@ function changePage(){
 				return;
 			}
 
-			console.log(registerData.applyAmount*10**18);
+			console.log("applyamount",registerData.applyAmount);
 			//web3调用示例，register里面已经导入了1.0的web3且实例化了
-			sendTx()
+
 			pName = registerData.proposal_name;
 			pLink = registerData.proposal_link;
-			pAmmount =parseInt(registerData.applyAmount);
+			pAmmount = (parseInt(registerData.applyAmount)*10**18).toLocaleString().replace(/,/g, '');
+
+			console.log("applyamount1",pAmmount);
+
 			pAddr = registerData.addr;
+			sendTx1 = async() => {
+				let fromAddr = await web3.eth.getCoinbase()
+				await mycontract.methods.proposalSubmit(pName,pLink,pAmmount,pAddr).send({from: fromAddr,value:10000000000000000000});
+				}
+			sendTx1()
+			
 			return;
 			$.ajax({
 				url: '/index',

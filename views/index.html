@@ -41,20 +41,33 @@
 		</div>
 		<div class="lists">
 				<div class="coming-box">
-						<ul class="coming">
-						</ul>
-						<div class="pagination-holder black clearfix">
-							<ul id="dark-pagination" class="pagination"></ul>						
+					<div class="data_show">
+						<div class="data_title">
+							<h4>本期可用预算</h4>
+							<p><span id="numetz"></span> &nbsp ETZ</p>
 						</div>
+						<div class="data_title">
+							<h4>总计提案个数</h4>
+							<p><span id="gproposal_num"></span>&nbsp 个</p>
+						</div>
+						<div class="data_title">
+							<h4>上期发放总量</h4>
+							<p><span id="numetz"></span> 0 ETZ </p>
+						</div>
+					</div>
+					<ul class="coming">
+					</ul>
+					<div class="pagination-holder black clearfix">
+						<ul id="dark-pagination" class="pagination"></ul>
+					</div>
 				</div>
 				<div class="right_box">
 						<div class="rule_box">
 							<h4>社区治理规则</h4>
 							<p>
-							<h5>社区治理提案论坛地址：</h5><a target="_blank" style="color: #999999" href="http://remix.etherzero.org/forum/"> http://remix.etherzero.org/forum/ </a>
-							<br/><br/><h5>社区治理合约地址：</h5><a target="_blank" style="color: #999999" href="https://explorer.etherzero.org/addr/0xe706482807f4f6bd160e27c559191e85ab14be5a"> 0xe706482807f4f6bd160e27c559191e85ab14be5a </a>
-							<br/><br/><h5>主节点合约地址：</h5><a target="_blank" style="color: #999999" href="https://explorer.etherzero.org/addr/0x000000000000000000000000000000000000000a"> 0x000000000000000000000000000000000000000a </a>
-							<br/><br/><h5>当前投票期数：</h5>第<span id="num"></span>
+							<h5>社区治理提案论坛地址：</h5><a target="_blank" style="color: #999999" href="http://forums.etzvote.com/"> http://forums.etzvote.com/ </a>
+							<br/><br/><h5>社区治理合约地址：</h5><a target="_blank" style="color: #999999" href="https://etzscan.com/addr/0x4761977f757e3031350612d55bb891c8144a414b"> 0x4761977f757e3031350612d55bb891c8144a414b </a>
+							<br/><br/><h5>当前投票数：</h5>第<span id="num"></span>
 							<!-- <script type="text/javascript"> VoteIndex </script>	 -->
 							期
 							<br/><br/><h5>提案奖励：</h5>每120万个区块为一个提案的投票周期。每提交一个提案需要消耗10个ETZ，这部分ETZ也被作为提案奖励累积。
@@ -66,10 +79,10 @@
 						</div>
 	
 						<div class="show_box">
-							<div class="num_box">
+							<!--div class="num_box">
 								<h2>&nbsp 奖励池余额：</h2>
 								<div><h5><span id="numetz"> </span></h5> <h8>ETZ</h8></div>
-							</div>
+							</div-->
 							<input type="text" class="reinput wallet_add" placeholder="请输入被委托的钱包地址" />
 							<a href="#">
 								<button class="entrust">主节点委托</button>
@@ -125,7 +138,7 @@ $(".header-nav ul li").unbind("mouseenter");
 					
 				}
 			});
-		});
+		});     
 </script>
 
 <script src="/javascripts/zepto.min.js"></script>

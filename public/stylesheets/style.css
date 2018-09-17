@@ -217,6 +217,7 @@ a {
     background: #ffffff;
     padding: 20px;
     margin: 20px auto;
+    word-break: break-all;
 }
 
 .show_box .num_box{
@@ -260,6 +261,7 @@ a {
     border-radius: 50%;
     overflow: hidden;
     position: relative;
+    float: left;
 }
 
 .head span {
@@ -285,9 +287,9 @@ a {
 
 .descr {
     /* width: 100%; */
+    width: calc( 100% - 80px);
     color: #999;
-    margin-left: 15px;
-    float: left;
+    float: right;
     /* padding-right: 137px; */
 }
 
@@ -347,9 +349,11 @@ a {
 }
 
 .up {
-    float: right;
+    float: left;
     display: inline-block;
     font-size: 0;
+    margin-left: 80px;
+    width: calc(100% - 80px);
 }
 
 .up i {
@@ -405,7 +409,13 @@ a {
 }
 .vote_box{
     overflow: hidden;
-    margin: 20% auto;
+    margin: 20px auto;
+}
+.vote_box_left{
+	float: left;
+}
+.vote_box_right{
+	float: right;
 }
 
 /* .tada {
@@ -1010,6 +1020,33 @@ a {
     margin: 20px auto 0;
     border: none;
     cursor: pointer;
+}
+.data_show{
+	height: 120px;
+	width: 100%;
+	margin: 20px auto 0;
+	overflow: hidden;
+}
+.data_show div{
+	height: 120px;
+	width: 30%;
+	margin: 0 auto;
+	background: #fff;
+	overflow: hidden;
+	float: left;
+}
+.data_show div:nth-child(2){
+	margin: 0 5%;
+}
+.data_title h4{
+	text-align: center;
+    font-size: 16px;
+    margin: 35px auto 10px;
+}
+.data_title p{
+	text-align: center;
+    font-size: 14px;
+    margin: 0 auto;
 }
 
 

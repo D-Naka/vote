@@ -27,6 +27,22 @@ data =vote_contract.methods.vote(1,1).encodeABI();
 
 function  myfunc(Interval){
 
+    // getProposals = async() => {
+  
+    //     await vote_contract.methods.getProposalsNum().call().then(function(result){
+    //         Proposal_num = result;
+    //     });
+    //     await vote_contract.methods.VoteIndex().call().then(function(result){
+    //         VoteIndex = result;
+    //     });
+    //     await vote_contract.methods.getContractBalance().call().then(function(result){
+    //         totalBalance = parseInt(result/(10**16));
+    //     });
+
+    // }
+    // getProposals();
+
+
     vote_contract.methods.getProposalsNum().call().then(function(result){
         Proposal_num = result;
     });
@@ -37,8 +53,9 @@ function  myfunc(Interval){
         totalBalance = parseInt(result/(10**16));
     });
 
+
     console.log(Proposal_num);
-    console.log(database.data.total);
+    //console.log(database.data.total);
     console.log("totalBalance"+totalBalance);
     if(Proposal_num>database.data.total)
     {
@@ -105,8 +122,8 @@ function  myfunc(Interval){
                 {
                     sended = "未发放";
                 }
-                console.log("cycle_num"+cycle_num);
-                console.log("voteNumYes"+voteNumYes);
+                console.log("cycle_num "+cycle_num);
+                //console.log("voteNumYes"+voteNumYes);
                 voter = dealFn.getItem(cycle_num, database.data.objects);
                 voter.voteNumYes=voteNumYes;
                 voter.voteNumNo =voteNumNo;
@@ -122,126 +139,7 @@ function  myfunc(Interval){
     }
 
 }
-var myInterval=setInterval(myfunc,5000,"Interval");
-
-
-
-
-// vote_contract.events.submit_event({
-//     fromBlock: 0,
-//     toBlock:'latest'
-// }, function(error, event){
-//      console.log("error"+error);
-//      console.log("NewProposal"); 
-//      console.log(event.returnValues[0]); 
-//     //读取提案信息
-//      let total = database.data.total;
-//      var proposal_name   = event.returnValues[0];
-//      var proposal_link   = event.returnValues[1];
-//      var applyAmount     = event.returnValues[2];
-//      var sendPeriod      = event.returnValues[3];
-//      var addr            = event.returnValues[4];
-//      var voteIndex            = event.returnValues[5];
-//      registerData1={
-//          proposal_name: proposal_name,
-//          proposal_link: proposal_link,
-//          applyAmount:applyAmount,
-//          sendPeriod: sendPeriod,
-//          voteNumYes: 0,
-//          voteNumNo:0,
-//          voteNumAct:0,
-//          adopted: false,
-//          passed: false,
-//          addr:addr,
-//          payedTimes:0,
-//          proposal_index:total+1,
-//          voteIndex:voteIndex
-//      }
-//      database.data.total += 1;
-//      database.data.objects.push(registerData1);
-//      dealFn.writeFileData('database.json', database).then((msg) => {
-//          console.log(msg);
-//      }, (msg) => {
-//          console.log(msg);
-//      });
-
-// });
-
-
-// vote_contract.events.vote_event({
-//     fromBlock: 0,
-//     toBlock:'latest'
-// }, function(error, event){
-//      console.log("NewVote"); 
-//      console.log("voteYes"+event.returnValues[0]); 
-   
-//     //读取提案信息
-//      var pIndex       = event.returnValues[0];
-//      var voteNumYes   = event.returnValues[1];
-//      var voteNumNo    = event.returnValues[2];
-//      console.log("voteNumYes",voteNumYes)
-//      console.log("pIndex",pIndex)
-//      voter = dealFn.getItem(parseInt(pIndex)+1, database.data.objects);
-//      voter.voteNumYes=voteNumYes;
-//      voter.voteNumNo =voteNumNo;
-//      dealFn.writeFileData('database.json', database).then((msg) => {
-//          console.log(msg);
-//      }, (msg) => {
-//          console.log(msg);
-//      });
-// });
-
-
-// vote_contract.getPastEvents('submit_event', {
-//     fromBlock: 0,
-//     toBlock: 'latest'
-// }, function(error, events){ 
-//     console.log("length"+events.length);
-//     console.log(events[0].returnValues[0]); 
-
-//     //读取提案信息
-//     let total = database.data.total;
-//     var plen = events.length;
-//     if (total < plen){
-
-//         for(let i=total;i<plen;i++)
-//         {
-//             var proposal_name   = events[i].returnValues[0];
-//             var proposal_link   = events[i].returnValues[1];
-//             var applyAmount     = events[i].returnValues[2];
-//             var sendPeriod      = events[i].returnValues[3];
-//             var addr            = events[i].returnValues[4];
-//             var voteIndex       = events[i].returnValues[5];
-//             registerData1={
-//                 proposal_name: proposal_name,
-//                 proposal_link: proposal_link,
-//                 applyAmount:applyAmount,
-//                 sendPeriod: sendPeriod,
-//                 voteNumYes: 0,
-//                 voteNumNo:0,
-//                 voteNumAct:0,
-//                 adopted: false,
-//                 passed: false,
-//                 addr:addr,
-//                 payedTimes:0,
-//                 proposal_index:i+1 ,
-//                 voteIndex:voteIndex       
-//             }
-//             console.log(registerData1);
-//             database.data.total += 1;
-//             database.data.objects.push(registerData1);
-//             dealFn.writeFileData('database.json', database).then((msg) => {
-//                 console.log(msg);
-//             }, (msg) => {
-//                 console.log(msg);
-//             });
-//         }
-        
-//     }
-    
-
-// });
-
+var myInterval=setInterval(myfunc.bind(this),5000,"Interval");
 
 
 

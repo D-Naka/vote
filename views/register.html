@@ -99,14 +99,15 @@
 					<h4>创建提案</h4>
 				</div>
 				<div class="create_con">
-					<p class="create_con_info">在提案创建页面，输入提案详情，点击“创建提案”按钮后，将生成data数据，然后调用MetaMask可以发起交易创建一个提案，完成调用运行智能合约，这一过程需要支付10个ETZ。</p>
+					<p class="create_con_info">在提案创建页面，输入提案详情，点击“创建提案”按钮后，将生成data数据，然后调用GoETZ钱包可以发起交易创建一个提案，完成调用运行智能合约，这一过程需要支付10个ETZ。</p>
 					<li>
 						<p>提案名称</p>
 						<input type="text" class="reinput proposal_name"/>
 					</li>
 					<li>
-						<p>提案链接地址</p>
-						<input type="text"  class="reinput proposal_link"/>
+						<p>提案简介</p>
+						<textarea class="reinput proposal_link" style="width: 100%; height: 150px; margin:0 auto;"></textarea>
+						<!-- <input type="text"  class="reinput proposal_link"/> -->
 					</li>
 					<li>
 						<p>支付地址</p>
@@ -114,7 +115,7 @@
 					</li>
 					<li style="overflow: hidden;">
 						<div>
-							<p>资助数量</p>
+							<p>申请预算（ETZ）</p>
 							<input type="text"  class="reinput applyAmount" maxlength="8" />
 						</div>
 					</li>
@@ -131,9 +132,9 @@
 					<h4>钱包命令</h4>
 				</div>
 				<div class="command_con">
-					<p>将命令内容粘贴到以太零钱包附加data中，发送交易，即可进行投票或者主节点委托。</p>
+					<p>用任何以太零钱包向合约地址0x4761977f757e3031350612d55bb891c8144a414b发送零交易，将生成的命令内容粘贴到附加data中，即可进行投票或者主节点委托。</p>
 					
-					<textarea id="txta" style="width: 80%; height: 150px; margin:0 auto;">test</textarea>     
+					<textarea id="txta" style="width: 80%; height: 150px; margin:0 auto;"></textarea>     
 					<!--script type="text/javascript">     
 						var txt;      
 						txt = document.getElementById('txta').value; //获取textarea的值    
