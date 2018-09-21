@@ -141,9 +141,28 @@
 						document.write (txt);     
 						document.getElementById('txta').value = 222;  //设置textarea的值            
 					</script-->
-
-
 					<div style="width: 80% ;text-align: center;"><a href="index"><button>返回首页</button></a></div>
+
+					<h4>投票教程：</h4>
+					<div class="tutorial">
+						<p>符合主节点的地址，在主节点上线一个投票周期（120万个block）后可以进行投票。一个主节点每个投票周期只能投一票，只能投当期的提案。如果要对某一个提案进行投票，点击该提案下面的赞成或反对按钮，将会生成投票命令的data：</p>
+						<img src="/images/register.png" width="80%" />
+					</div>
+					<div class="tutorial">
+						<p>用主节点账户的地址登陆任意以太零钱包，用该钱包地址向合约地址0x4761977f757e3031350612d55bb891c8144a414b 发送零交易，将上述生成的命令数据拷贝到附属的data中。在发送投票提交页面，点击NEXT发送交易，就可以完成投票，下面分别展示三种钱包的投票交易页面.</p>
+						<p>GoETZ钱包的发送投票提交页面：</p>
+						<img src="/images/app.png" width="40%" />
+					</div>
+					<div class="tutorial">
+						<p>网页版钱包的发送投票提交页面：</p>
+						<img src="/images/sendtokens.png" width="60%" />
+					</div>
+					<div class="tutorial">
+						<p>手机版钱包的发送投票提交页面：</p>
+						<img src="/images/send.jpg" width="35%" />
+					</div>
+					
+
 					<!-- <h4>交易ID：</h4>
 					<p>粘贴生成的事务标识以移至下一步。</p>
 					<textarea class="comand_textarea2" onpaste="paste()"></textarea> -->

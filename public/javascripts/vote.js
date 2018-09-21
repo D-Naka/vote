@@ -656,7 +656,7 @@ $(document).ready(function($) {
 			mycontract.methods.getIndex(1).call().then(function(result){
 				console.log("getIndex"+result);
 			});
-
+			//console.log("objs.length",objs)
 				
 			for(var i=objs.length-1; i>=0; i--) {
 				str += '<li>'
@@ -1127,6 +1127,7 @@ $(document).ready(function($) {
 		var limit=10;
 		var offset=0;
 		offset = proposal_len-limit;
+		if (offset <0){offset = 0;}	
 		function aa(){
 			$.ajax({
 				url: '/index/data',
@@ -1135,6 +1136,7 @@ $(document).ready(function($) {
 				async: false,
 				success: function(data) {
 					//offset += limit;
+					//console.log("data",data);
 					data = JSON.parse(data);
 					document.getElementById("numetz").innerHTML = parseInt(data.data.totalbalance)/100;
 					if(ch_en == 'en'){
@@ -1142,6 +1144,7 @@ $(document).ready(function($) {
 					}
 					else
 					{
+						//console.log("limit offset",limit,offset)
 						$('.coming').append(voteFn.userStr(data.data.objects));
 		
 					}

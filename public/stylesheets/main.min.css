@@ -434,3 +434,6 @@ a:hover {
     width: 2.4rem;
 }
 }
+
+.tutorial{ margin: 0.2rem auto; text-align: center;}
+.tutorial p{ text-align: left;}
