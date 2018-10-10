@@ -68,7 +68,7 @@ function  myfunc(Interval){
                 var applyAmount     = result.applyAmount;
                 var addr            = result.addr;
                 var voteIndex       = VoteIndex;
-                var sended;
+                var sended          = result.sended;
                 if(result.sended == true)
                 {
                     sended = "已发放";

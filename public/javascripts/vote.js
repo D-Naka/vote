@@ -567,6 +567,7 @@ abi=[
 var VoteIndex = 0;
 var proposal_len;
 var gproposal_num;
+var blockStart;
 
 if (typeof web3_etz !== 'undefined') {
 	// Use Mist/MetaMask's provider
@@ -657,8 +658,27 @@ $(document).ready(function($) {
 				console.log("getIndex"+result);
 			});
 			//console.log("objs.length",objs)
+			var Indexstatus = "";
+			var Sendedstatus ="";
 				
 			for(var i=objs.length-1; i>=0; i--) {
+
+				if (objs[i].voteIndex == objs[objs.length-1].voteIndex)
+				{
+					Indexstatus = "开放";
+				}	
+				else
+				{
+					Indexstatus = "关闭";
+				}
+				if(objs[i].sended == "已发放")
+                {
+                    Sendedstatus = "_已发放";
+                }
+                else
+                {
+                    Sendedstatus = "_未发放";
+                }
 				str += '<li>'
 	                + '<div class="head">'
 	                + '<img src="' + "/images/boy.png" + '" alt="">'
@@ -676,7 +696,7 @@ $(document).ready(function($) {
 
 					+'<p>' +objs[i].proposal_link + '</p>'
 					+ '<p>' +"账户地址："+ objs[i].addr + '</p>'
-					+ '<p>' +"申请预算："+ Math.round(objs[i].applyAmount/(10**16))/100  +" ETZ &nbsp   &nbsp  是否已发放："+ objs[i].sended + '</p>'
+					+ '<p>' +"申请预算："+ Math.round(objs[i].applyAmount/(10**16))/100  +" ETZ &nbsp   &nbsp  状态："+Indexstatus+ Sendedstatus + '</p>'
 					+ '<p>' +"投票期数： 第"+ objs[i].voteIndex +"期"+ '</p>'					
 	                + '</a>'
 	                + '</div>'
@@ -705,9 +725,28 @@ $(document).ready(function($) {
 		},
 		userStr_en: function(objs) {
 			var str = '';
+			var Indexstatus = "";
+			var Sendedstatus ="";
 			VoteIndex = objs[objs.length-1].voteIndex;	
 			document.getElementById("num").innerHTML = VoteIndex;
 			for(var i=objs.length-1; i>=0; i--) {
+				
+				if (objs[i].voteIndex == objs[objs.length-1].voteIndex)
+				{
+					Indexstatus = "Open";
+				}	
+				else
+				{
+					Indexstatus = "Closed";
+				}
+				if(objs[i].sended == "已发放")
+                {
+                    Sendedstatus = "_Issued";
+                }
+                else
+                {
+                    Sendedstatus = "_Unissued";
+                }
 				str += '<li>'
 	                + '<div class="head">'
 	                + '<img src="' + "/images/boy.png" + '" alt="">'
@@ -725,7 +764,7 @@ $(document).ready(function($) {
 					+'<p>' +objs[i].proposal_link + '</p>'
 
 					+ '<p>' +"Addr："+ objs[i].addr + '</p>'
-					+ '<p>' +"Funding amount："+ Math.round(objs[i].applyAmount/(10**16))/100  +"ETZ  &nbsp  &nbsp  Send times："+ objs[i].sended + '</p>'
+					+ '<p>' +"Funding amount："+ Math.round(objs[i].applyAmount/(10**16))/100  +"ETZ  &nbsp  &nbsp  Status："+Indexstatus+ Sendedstatus + '</p>'
 					+ '<p>' +"Voting periods： The &nbsp"+ objs[i].voteIndex +" phase"+ '</p>'					
 	                + '</a>'
 	                + '</div>'
@@ -1104,7 +1143,13 @@ $(document).ready(function($) {
 
 		mycontract.methods.getProposalsNum().call().then(function(result){
 				gproposal_num = result;
-				document.getElementById("gproposal_num").innerHTML = gproposal_num;
+				document.getElementById("gproposal_num").innerHTML =gproposal_num;
+				
+		});
+
+		mycontract.methods.blockStart().call().then(function(result){
+			blockStart = result;
+			document.getElementById("blockStart").innerHTML = parseInt(blockStart)+1200000;
 		});
 		
 		mycontract.methods.VoteIndex().call().then(function(result){
@@ -1227,10 +1272,10 @@ function changePage(){
 		});
 	$('.rebtn').click(function(event) {
 
-			if(!rebtnFlag) {
-				return
-			}
-			rebtnFlag = false;
+			//if(!rebtnFlag) {
+				//return
+			//}
+			//rebtnFlag = false;
 			console.log(ch_en);	
 			if (ch_en == 'en')
 			{
@@ -1259,6 +1304,14 @@ function changePage(){
 				let fromAddr = await web3.eth.getCoinbase()
 				await mycontract.methods.proposalSubmit(pName,pLink,pAmmount,pAddr).send({from: fromAddr,value:10000000000000000000});
 				}
+			// console.log("aaa",web3_etz.eth.defaultAccount)
+			signedIn = web3_etz.eth.defaultAccount ? true : false
+			if(!signedIn)
+			{
+				alert("You are not signed into GoETZ.")
+				//return
+			}
+
 			sendTx1()
 			
 			return;
