@@ -596,11 +596,13 @@ function GetQueryString(name)
      if(r!=null)return  unescape(r[2]); return null;
 }
 
+
 // ch_en = 1;
 $(document).ready(function($) {
 	var url = window.location.href,
 		indexReg = /index/,
 		registerReg = /register/,
+		commandrReg = /command/,
 		searchReg = /search/,
 		detailReg = /detail/,
 		limit = 10,
@@ -662,8 +664,9 @@ $(document).ready(function($) {
 			var Sendedstatus ="";
 				
 			for(var i=objs.length-1; i>=0; i--) {
-
-				if (objs[i].voteIndex == objs[objs.length-1].voteIndex)
+				console.log("VoteIndex",VoteIndex ==4 );
+				
+				if (objs[i].voteIndex ==VoteIndex)
 				{
 					Indexstatus = "开放";
 				}	
@@ -727,11 +730,11 @@ $(document).ready(function($) {
 			var str = '';
 			var Indexstatus = "";
 			var Sendedstatus ="";
-			VoteIndex = objs[objs.length-1].voteIndex;	
+			//VoteIndex = objs[objs.length-1].voteIndex;	
 			document.getElementById("num").innerHTML = VoteIndex;
 			for(var i=objs.length-1; i>=0; i--) {
 				
-				if (objs[i].voteIndex == objs[objs.length-1].voteIndex)
+				if (objs[i].voteIndex ==VoteIndex)
 				{
 					Indexstatus = "Open";
 				}	
@@ -983,7 +986,7 @@ $(document).ready(function($) {
 				var vote_id = parseInt(id)-1;
 				sendVote(vote_id,1);
 				voteFn.setStorage('data', data);
-				window.location.href="register?vote=0";			
+				window.location.href="command";			
 
 			});
 		},
@@ -996,7 +999,7 @@ $(document).ready(function($) {
 				var vote_id = parseInt(id)-1;
 				sendVote(vote_id,2);
 				voteFn.setStorage('data', data);
-				window.location.href="register?vote=0";
+				window.location.href="command";
 			});
 		},
 		masterChange: function() {
@@ -1010,7 +1013,7 @@ $(document).ready(function($) {
 				}
 				sendMaster(NewMasterAddr);
 				voteFn.setStorage('data', data);
-				window.location.href="register?vote=0";
+				window.location.href="command";
 
 			});
 		},
@@ -1026,7 +1029,7 @@ $(document).ready(function($) {
 				}
 				sendMaster(NewMasterAddr);
 				voteFn.setStorage('data', data);
-				window.location.href="registeren?vote=0";
+				window.location.href="commanden";
 
 			});
 		},
@@ -1042,7 +1045,7 @@ $(document).ready(function($) {
 				var vote_id = parseInt(id)-1;
 					sendVote(vote_id,1);
 					voteFn.setStorage('data', data);
-					window.location.href="registeren?vote=0";
+					window.location.href="commanden";
 
 			});
 		},
@@ -1055,7 +1058,7 @@ $(document).ready(function($) {
 				var vote_id = parseInt(id)-1;
 					sendVote(vote_id,2);
 					voteFn.setStorage('data', data);
-					window.location.href="registeren?vote=0";
+					window.location.href="commanden";
 
 
 			});
@@ -1157,6 +1160,7 @@ $(document).ready(function($) {
 			document.getElementById("num").innerHTML = result;
 		});
 
+
 		$.ajax({
 			url: '/index/data?limit=1000&offset=0',
 			type: 'GET',
@@ -1184,6 +1188,7 @@ $(document).ready(function($) {
 					//console.log("data",data);
 					data = JSON.parse(data);
 					document.getElementById("numetz").innerHTML = parseInt(data.data.totalbalance)/100;
+					VoteIndex = data.data.VoteIndex;
 					if(ch_en == 'en'){
 						$('.coming').append(voteFn.userStr_en(data.data.objects));
 					}
@@ -1261,10 +1266,12 @@ function changePage(){
 			window.location = seaechUrl;
 		});
 
-	} else if(registerReg.test(url)) {
-		var data  = voteFn.getStorage('data');
-		document.getElementById('txta').value = data;  //设置textarea的值  
-
+	}else if(commandrReg.test(url)) {
+			var data  = voteFn.getStorage('data');
+		//console.log("dd",data)
+		document.getElementById('txta').value = data;  //设置textarea的值  	
+	}
+	 else if(registerReg.test(url)) {
 		var rebtnFlag = true;
 
 	$('.gender input').click(function(event) {

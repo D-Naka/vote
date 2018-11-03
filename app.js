@@ -35,6 +35,8 @@ app.get('/indexen', routes.indexen);
 app.get(/\/detail/, routes.detail);  
 app.get('/register', routes.register);  
 app.get('/registeren', routes.registeren);  
+app.get('/command', routes.command);  
+app.get('/commanden', routes.commanden); 
 app.get('/search', routes.search); 
 app.get('/rule', routes.rule);
 

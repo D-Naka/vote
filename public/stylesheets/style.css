@@ -1076,7 +1076,7 @@ a {
     }
 }
 
-@media screen and (max-width:760px) {
+@media screen and (max-width:767px) {
     .search input{
         font-size: 14px;
     }
@@ -1090,14 +1090,25 @@ a {
     /* .vote_box:nth-child(2){
         float: right;
     } */
-    .up{
-        width: 100%;
-    }
+    
     .descr {
         padding: 0;
         width: 75%;
     }
     .descr p{
         width: 100%;
+    }
+    /* .up{
+        width: 100%;
+    } */
+    .vote_num{
+        float: none;
+        margin: 0 auto;
+    }
+    .btn_vote{
+        float: none;
+    }
+    .data_title h4{
+        margin: 15px auto 10px;
     }
 }

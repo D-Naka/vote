@@ -93,6 +93,7 @@ function  myfunc(Interval){
                     voteIndex:voteIndex
                 }
                 database.data.total += 1;
+                database.data.VoteIndex = VoteIndex;
                 database.data.objects.push(registerData1);
                 dealFn.writeFileData('database.json', database).then((msg) => {
                     console.log(msg);
@@ -129,6 +130,7 @@ function  myfunc(Interval){
                 voter.voteNumNo =voteNumNo;
                 voter.sended =sended;
                 database.data.totalbalance = totalBalance;
+                database.data.VoteIndex = VoteIndex;
                 dealFn.writeFileData('database.json', database).then((msg) => {
                     console.log(msg);
                 }, (msg) => {
@@ -170,6 +172,14 @@ exports.registeren = (req, res) => {
     res.render('registeren');
 };
 
+exports.command = (req, res) => {
+    res.render('command');
+};
+
+exports.commanden = (req, res) => {
+    res.render('commanden');
+};
+
 exports.search = (req, res) => {
     res.render('search');
 };
@@ -188,6 +198,7 @@ exports.index_data = async(req, res) => {
             msg: 'success',
             data: {
                 total: database.data.total,
+                VoteIndex:database.data.VoteIndex,
                 offset: offset,
                 limit: limit,
                 totalbalance:database.data.totalbalance,

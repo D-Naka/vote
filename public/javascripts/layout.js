@@ -1,35 +1,35 @@
-function create(){
-	$('#create_con').css("display", "block");
-	$('#command_con').css("display", "none");
-	$('#info_con').css("display", "none");
-	$('#list_con').css("display", "none");
-	$('.con_left li').removeClass('active');
-	$('#create').parent('li').addClass('active');
-};
-function command(){
-	$('#create_con').css("display", "none");
-	$('#command_con').css("display", "block");
-	$('#info_con').css("display", "none");
-	$('#list_con').css("display", "none");
-	$('.con_left li').removeClass('active');
-	$('#command').parent('li').addClass('active');
-};
-function info(){
-	$('#create_con').css("display", "none");
-	$('#command_con').css("display", "none");
-	$('#info_con').css("display", "block");
-	$('#list_con').css("display", "none");
-	$('.con_left li').removeClass('active');
-	$('#info').parent('li').addClass('active');
-};
-function list(){
-	$('#create_con').css("display", "none");
-	$('#command_con').css("display", "none");
-	$('#info_con').css("display", "none");
-	$('#list_con').css("display", "block");
-	$('.con_left li').removeClass('active');
-	$('#list').parent('li').addClass('active');
-};
+// function create(){
+// 	$('#create_con').css("display", "block");
+// 	$('#command_con').css("display", "none");
+// 	$('#info_con').css("display", "none");
+// 	$('#list_con').css("display", "none");
+// 	$('.con_left li').removeClass('active');
+// 	$('#create').parent('li').addClass('active');
+// };
+// function command(){
+// 	$('#create_con').css("display", "none");
+// 	$('#command_con').css("display", "block");
+// 	$('#info_con').css("display", "none");
+// 	$('#list_con').css("display", "none");
+// 	$('.con_left li').removeClass('active');
+// 	$('#command').parent('li').addClass('active');
+// };
+// function info(){
+// 	$('#create_con').css("display", "none");
+// 	$('#command_con').css("display", "none");
+// 	$('#info_con').css("display", "block");
+// 	$('#list_con').css("display", "none");
+// 	$('.con_left li').removeClass('active');
+// 	$('#info').parent('li').addClass('active');
+// };
+// function list(){
+// 	$('#create_con').css("display", "none");
+// 	$('#command_con').css("display", "none");
+// 	$('#info_con').css("display", "none");
+// 	$('#list_con').css("display", "block");
+// 	$('.con_left li').removeClass('active');
+// 	$('#list').parent('li').addClass('active');
+// };
 
 $('.con_left li').click(function(e) {
 	$('.con_left li').removeClass('active');
